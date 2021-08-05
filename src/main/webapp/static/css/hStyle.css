@@ -1,0 +1,127 @@
+.form-horizontal{
+    background-color: #fff;
+    font-family: 'Roboto', sans-serif;
+    width: 70%;
+    padding: 40px 40px 0;
+    margin: 90px 430px;
+    box-shadow: 2px 2px 10px #808080;
+    position: relative;
+}
+
+.form-horizontal .heading{
+    /*color: #8F94FB;*/
+    color: #e1791a;
+    font-size: 35px;
+    font-weight: 600;
+    text-align: center;
+    text-transform: capitalize;
+    margin: 0 0 20px 0;
+
+}
+
+.form-horizontal .form-group{
+    margin: 0 auto 20px;
+    position: relative;
+}
+.form-horizontal .form-group:nth-child(5){ margin: 0 auto 10px; }
+.form-horizontal .form-group>i{
+    color: #238aa9;
+    font-size: 20px;
+    position: absolute;
+    left: 5px;
+    top: 13px;
+}
+
+
+.form-horizontal .form-control{
+    color: #808080;
+    background-color: transparent;
+    font-size: 16px;
+    font-weight: 600;
+    height: 45px;
+    padding: 10px 8px 10px 30px;
+    box-shadow: none;
+    border: 0 solid rgba(0,0,0,0.2);
+    border-bottom: 2px solid rgba(0,0,0,0.2);
+    border-radius: 0;
+    display: block;
+}
+.form-control::placeholder{
+    color: rgba(0,0,0,0.2);
+    font-size: 15px;
+}
+.form-horizontal .form-control:focus{
+    color: #e1791a;
+    box-shadow: none;
+    border-bottom-color: #e1791a;
+}
+.form-horizontal .signUp{
+    color:rgb(251,241,233);
+    font-family: 'Roboto', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    alignment: center;
+    outline: none;
+    text-decoration: none;
+}
+
+.form-horizontal .span-text{
+    font-size: 14px;
+    font-weight: 600;
+}
+.form-horizontal .signUp:hover{
+    color: #928f94;
+}
+
+.form-horizontal .btn{
+    color: #fff;
+    background-color: #e1791a;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    width: 50%;
+    padding: 10px;
+    margin-top: 30px;
+    margin-left: 90px;
+    margin-bottom: 30px;
+    border: none;
+    display: block;
+    transition: all 0.3s ease;
+}
+.form-horizontal .btn:focus,
+.form-horizontal .btn:hover{
+    background-color: #e1791a;
+    text-shadow: 0 0 5px #555;
+    box-shadow: -3px -1px 5px rgba(0,0,0,0.3);
+}
+.form-horizontal .form-footer{
+    background-color:#e1791a;
+    text-align: center;
+    padding: 10px 0;
+    margin: 0 -40px;
+}
+.form-horizontal .form-footer span{
+    color: #fff;
+    font-weight: 600;
+    margin: 0 15px 0 0;
+    display: inline-block;
+}
+
+
+@media only screen and (max-width:576px){
+    .form-horizontal{
+        text-align: center;
+        width: 100%;
+        padding: 20px 20px 0;
+        margin: 0;
+        box-shadow: 2px 2px 10px #808080;
+    }
+    .form-horizontal:before{ display: none; }
+    .form-horizontal .form-footer{ margin: 0 -20px; }
+    .form-horizontal .form-footer span{
+        display: block;
+        margin: 0 0 5px;
+    }
+    .form-horizontal .form-footer .social{ display: block; }
+}
