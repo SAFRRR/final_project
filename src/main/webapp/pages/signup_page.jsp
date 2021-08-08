@@ -51,7 +51,6 @@
                                    pattern="${attribute_regexp_email}" required>
                         </div>
 
-                        <%--Username--%>
                         <div class="form-group">
                             <i class="fa fa-user"></i>
                             <input class="form-control" type="text" id="form-signUp-login" name="username"
@@ -59,7 +58,6 @@
                                    pattern="${attribute_regexp_username}" required>
                         </div>
 
-<%--                        First name & last name--%>
                         <div class="form-group">
                             <i class="fas fa-id-card"></i>
                             <input class="form-control" type="text" id="form-signUp-name" name="firstName"
