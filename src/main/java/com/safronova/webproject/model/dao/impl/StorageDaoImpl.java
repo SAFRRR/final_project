@@ -4,6 +4,7 @@ import com.safronova.webproject.exception.DaoException;
 import com.safronova.webproject.model.dao.StorageDao;
 import com.safronova.webproject.model.entity.Storage;
 import com.safronova.webproject.model.pool.ConnectionPool;
+import static com.safronova.webproject.model.dao.ColumnName.*;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,32 +21,31 @@ public class StorageDaoImpl implements StorageDao {
     private StorageDaoImpl() {}
 
     private static final String SELECT_STORAGE_BY_DESSERT =
-            "SELECT storage_id, storage_count " +
-                    "FROM storage st " +
-                    "JOIN flower fl ON fl.id = st.flowers_id " +
-                    "WHERE (flowers_id = ?)";
-
+            "SELECT st_id, st_count " +
+                    "FROM storages " +
+                    "JOIN desserts ON desserts.d_id = storages.st_dessert_id " +
+                    "WHERE (st_dessert_id = ?)";
 
     private static final String INSERT_STORAGE_SQL =
-            "INSERT INTO storage (storage_count, flowers_id) " +
+            "INSERT INTO storages (st_count, st_dessert_id)" +
                     "VALUES (?,?)";
 
     private static final String SET_STORAGE_COUNT =
-            "UPDATE storage " +
-                    "SET storage_count = ? " +
-                    "WHERE storage_id = ?";
+            "UPDATE storages " +
+                    "SET st_count = ? " +
+                    "WHERE st_id = ?";
 
     private static final String SET_STORAGE_COUNT_BY_DESSERT =
-            "UPDATE storage " +
-                    "SET storage_count = ? " +
-                    "WHERE flowers_id = ?";
+            "UPDATE storages " +
+                    "SET st_count = ? " +
+                    "WHERE st_dessert_id = ?";
 
 
     @Override
     public Storage findByDessertId(Integer dessertId) throws DaoException {
         Storage storage = new Storage();
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_STORAGE_BY_FLOWER)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_STORAGE_BY_DESSERT)) {
             statement.setInt(FindStorageIndex.ID, dessertId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
@@ -53,7 +53,7 @@ public class StorageDaoImpl implements StorageDao {
                 storage.setCount(resultSet.getInt(STORAGE_COUNT));
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle StorageDao.findByFlowerId request", e);
+            throw new DaoException("Can't handle StorageDao.findByDessertId request", e);
         }
         return storage;
     }
@@ -75,7 +75,7 @@ public class StorageDaoImpl implements StorageDao {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_STORAGE_SQL)) {
             statement.setInt(InserStorage.COUNT, storage.getCount());
-            statement.setInt(InserStorage.FLOWER_ID, storage.getFlower().getId());
+            statement.setInt(InserStorage.DESSERT_ID, storage.getDessert().getId());
             statement.execute();
         } catch (SQLException e) {
             throw new DaoException("Can't handle StorageDao.insertStorage request", e);
@@ -83,14 +83,14 @@ public class StorageDaoImpl implements StorageDao {
     }
 
     @Override
-    public void updateStorageByFlower(Integer dessertId, Integer count) throws DaoException {
+    public void updateStorageByDessert(Integer dessertId, Integer count) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SET_STORAGE_COUNT_BY_FLOWER)) {
+             PreparedStatement statement = connection.prepareStatement(SET_STORAGE_COUNT_BY_DESSERT)) {
             statement.setInt(SetStorageIndex.COUNT, count);
-            statement.setInt(SetStorageIndex.ID, flowerId);
+            statement.setInt(SetStorageIndex.ID, dessertId);
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle StorageDao.updateStorageByFlower request", e);
+            throw new DaoException("Can't handle StorageDao.updateStorageByDessert request", e);
         }
     }
 
@@ -105,7 +105,7 @@ public class StorageDaoImpl implements StorageDao {
 
     private static class InserStorage {
         private static final int COUNT = 1;
-        private static final int FLOWER_ID = 2;
+        private static final int DESSERT_ID = 2;
     }
 
 }

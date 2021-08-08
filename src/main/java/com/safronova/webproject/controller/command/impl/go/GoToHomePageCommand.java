@@ -8,8 +8,7 @@ import jakarta.servlet.http.HttpServletRequest;
 
 public class GoToHomePageCommand implements Command {
     @Override
-    public Router execute(HttpServletRequest req) {
-        Router router = new Router(PagePath.ABOUT_PAGE, RouterType.REDIRECT);
-        return router;
+    public Router execute(HttpServletRequest request) {
+        return new Router(PagePath.HOME_PAGE, RouterType.REDIRECT);
     }
 }

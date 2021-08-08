@@ -45,7 +45,7 @@ public class OrderDessert {
         return dessert;
     }
 
-    public void setFlower(Dessert dessert) {
+    public void setDessert(Dessert dessert) {
         this.dessert = dessert;
     }
 
@@ -75,12 +75,12 @@ public class OrderDessert {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("OrderFlower{");
+        final StringBuilder sb = new StringBuilder("OrderDessert{");
         sb.append("id=").append(id);
         sb.append(", count=").append(count);
         sb.append(", subTotal=").append(subTotal);
         sb.append(", order=").append(order);
-        sb.append(", flower=").append(dessert);
+        sb.append(", dessert=").append(dessert);
         sb.append('}');
         return sb.toString();
     }

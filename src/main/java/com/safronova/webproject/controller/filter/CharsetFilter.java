@@ -5,7 +5,7 @@ import jakarta.servlet.annotation.WebFilter;
 import jakarta.servlet.annotation.WebInitParam;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = {"/Controller"}, initParams = {
+@WebFilter(urlPatterns = {"/controller"}, initParams = {
         @WebInitParam(name = "characterEncoding", value = "UTF-8", description = "Encoding Param")})
 public class CharsetFilter implements Filter {
     private String encoding;

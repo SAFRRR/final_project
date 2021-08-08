@@ -22,10 +22,8 @@ class ConnectionFactory {
         String driverName = null;
         try (InputStream inputStream = ConnectionFactory.class.getClassLoader().getResourceAsStream(DB_PROPERTIES_NAME)){
             properties.load(inputStream);
-            //register driver
             driverName = properties.getProperty(DB_DRIVER_NAME_PROPERTY);
             Class.forName(driverName);
-            //take db url
             DB_URL = properties.getProperty(DB_URL_PROPERTY);
         } catch (IOException e) {
             logger.fatal("Unable to read database properties", e);

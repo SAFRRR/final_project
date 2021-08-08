@@ -1,13 +1,7 @@
 package com.safronova.webproject.model.dao;
 
 
-import com.safronova.webproject.model.dao.impl.BasketDaoImpl;
-import com.safronova.webproject.model.dao.impl.OrderDaoImpl;
-import com.safronova.webproject.model.dao.impl.StorageDaoImpl;
-import com.safronova.webproject.model.dao.impl.UserDaoImpl;
-import com.safronova.webproject.model.entity.BasketDessert;
-import com.safronova.webproject.model.entity.Dessert;
-import com.safronova.webproject.model.entity.OrderDessert;
+import com.safronova.webproject.model.dao.impl.*;
 
 public class DaoProvider {
     private static final DaoProvider instance = new DaoProvider();
@@ -24,9 +18,9 @@ public class DaoProvider {
 
     private static final OrderDao orderDao = OrderDaoImpl.getInstance();
 
-    private static final BasketDessertDao basketDessertDao = BasketFlowerDaoImpl.getInstance();
+    private static final BasketDessertDao basketDessertDao = BasketDessertDaoImpl.getInstance();
 
-    private static final OrderDessertDao orderDessertDao = OrderFlowerDaoImpl.getInstance();
+    private static final OrderDessertDao orderDessertDao = OrderDessertDaoImpl.getInstance();
 
     private DaoProvider() {}
 

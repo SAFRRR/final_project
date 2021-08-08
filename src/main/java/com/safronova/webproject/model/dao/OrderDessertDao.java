@@ -6,7 +6,7 @@ import com.safronova.webproject.model.entity.OrderDessert;
 import java.util.List;
 
 public interface OrderDessertDao {
-    void saveOrderFlower(OrderDessert orderDessert) throws DaoException;
+    void saveOrderDessert(OrderDessert orderDessert) throws DaoException;
 
     List<OrderDessert> findByOrder(Integer id) throws DaoException;
 }

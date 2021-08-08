@@ -20,7 +20,6 @@ public class ConnectionPool {
     private BlockingQueue<ProxyConnection> usedConnections;
 
     private ConnectionPool(){
-        //initialize pool
         freeConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         usedConnections = new LinkedBlockingDeque<>(DEFAULT_POOL_SIZE);
         for (int i = 0; i < DEFAULT_POOL_SIZE; i++) {
@@ -53,10 +52,7 @@ public class ConnectionPool {
             proxyConnection = freeConnections.take();
             usedConnections.put(proxyConnection);
         } catch (InterruptedException e) {
-            //set interrupt flag
-            // set the flag back to <code>true
-            logger.warn("Process was interrupted", e);
-            logger.error("Caught an exception", e);
+            logger.error("Process was interrupted", e);
             Thread.currentThread().interrupt();
         }
         return proxyConnection;

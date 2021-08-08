@@ -71,7 +71,7 @@ public class Dessert {
         this.dessertImage = dessertImage;
     }
 
-    public DessertType getDessertrType() {
+    public DessertType getDessertType() {
         return dessertType;
     }
 
@@ -121,14 +121,13 @@ public class Dessert {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("Flower{");
+        final StringBuilder sb = new StringBuilder("Dessert{");
         sb.append("id=").append(id);
         sb.append(", name='").append(name).append('\'');
         sb.append(", description='").append(description).append('\'');
         sb.append(", price=").append(price);
-        sb.append(", soil=").append(weight);
-        sb.append(", flowerImage='").append(dessertImage).append('\'');
-        sb.append(", flowerType=").append(dessertType);
+        sb.append(", dessertImage='").append(dessertImage).append('\'');
+        sb.append(", dessertType=").append(dessertType);
         sb.append(", storage=").append(storage);
         sb.append('}');
         return sb.toString();

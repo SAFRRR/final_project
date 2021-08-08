@@ -5,11 +5,9 @@ import com.safronova.webproject.model.dao.OrderDao;
 import com.safronova.webproject.model.entity.Order;
 import com.safronova.webproject.model.entity.Status;
 import com.safronova.webproject.model.pool.ConnectionPool;
+import static com.safronova.webproject.model.dao.ColumnName.*;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,27 +21,28 @@ public class OrderDaoImpl implements OrderDao {
     private OrderDaoImpl() {}
 
     private static final String INSERT_ORDER_SQL =
-            "INSERT INTO orders (status_order, date_delivery, user_id, total_cost, time_order, address, date_order, cash) " +
+            "INSERT INTO orders (o_status, o_date_delivery, o_user_id, o_total_cost, o_time, o_address, o_date_order, o_cash)" +
                     "VALUES (?,?,?,?,?,?,?,?)";
 
     private static final String SELECT_ORDER_BY_USER_SQL =
-            "SELECT id, status_order, date_order, total_cost " +
-                    "FROM orders" +
-                    " WHERE orders.user_id = ?";
+            "SELECT o_id, o_status, o_date_order, o_total_cost " +
+                    "FROM orders " +
+                    "WHERE orders.o_user_id = ?";
+
 
     private static final String SELECT_ORDERS_SQL =
-            "SELECT id, address, cash, date_delivery, date_order, status_order" +
+            "SELECT o_id, o_address, o_cash, o_date_delivery, o_date_order, o_status "+
                     "FROM orders";
 
     private static final String SELECT_ORDER_BY_ID_SQL =
-            "SELECT id, status_order, total_cost " +
-                    "FROM orders" +
-                    " WHERE id = ?";
+            "SELECT o_id, o_status, o_total_cost " +
+                    "FROM orders " +
+                    "WHERE o_id = ?";
 
     private static final String UPDATE_STATUS_SQL =
             "UPDATE orders " +
-                    "SET status_order = ? " +
-                    "WHERE id = ?";
+                    "SET o_status = ? " +
+                    "WHERE o_id = ?";
 
 
     @Override

@@ -4,6 +4,8 @@ import com.safronova.webproject.exception.DaoException;
 import com.safronova.webproject.model.dao.BasketDao;
 import com.safronova.webproject.model.entity.Basket;
 import com.safronova.webproject.model.pool.ConnectionPool;
+import static com.safronova.webproject.model.dao.ColumnName.BASKET_ID;
+import static com.safronova.webproject.model.dao.ColumnName.BASKET_TOTAL_COST;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -20,24 +22,24 @@ public class BasketDaoImpl implements BasketDao {
     private BasketDaoImpl() {}
 
     private static final String FIND_BASKET_BY_USER =
-            "SELECT id, user_id_foreign, total_cost " +
-                    "FROM basket b " +
-                    "JOIN users u ON b.user_id_foreign = u.user_id " +
-                    "WHERE (user_id_foreign = ?)";
+            "SELECT b_id, b_total_cost, b_user_id " +
+                    "FROM baskets " +
+                    "JOIN users ON baskets.b_user_id = users.u_id " +
+                    "WHERE (b_user_id = ?)";
 
     private static final String FIND_BASKET_BY_ID =
-            "SELECT id, total_cost " +
-                    "FROM basket b " +
-                    "WHERE (id = ?)";
+            "SELECT b_id, b_total_cost " +
+                    "FROM baskets " +
+                    "WHERE (b_id = ?)";
 
     private static final String INSERT_BASKET_SQL =
-            "INSERT INTO basket (user_id_foreign) " +
+            "INSERT INTO baskets (b_user_id) " +
                     "VALUE (?)";
 
     private static final String SET_TOTAL_COST =
-            "UPDATE basket " +
-                    "SET total_cost = ? " +
-                    "WHERE id = ?";
+            "UPDATE baskets " +
+                    "SET b_total_cost = ? " +
+                    "WHERE b_id = ?";
 
 
     @Override

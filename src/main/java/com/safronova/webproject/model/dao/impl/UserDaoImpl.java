@@ -8,7 +8,9 @@ import com.safronova.webproject.model.entity.SignInData;
 import com.safronova.webproject.model.entity.SignUpData;
 import com.safronova.webproject.model.entity.User;
 import com.safronova.webproject.model.pool.ConnectionPool;
+import com.safronova.webproject.model.util.PasswordEncryptor;
 
+import static com.safronova.webproject.model.dao.ColumnName.*;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,24 +29,24 @@ public class UserDaoImpl implements UserDao {
 
 
     private static final String SIGNUP_SQL =
-            "INSERT INTO users " +
-                    "(username, password, email, user_role, first_name, last_name, address, phone)" +
+            "INSERT INTO users (u_login, u_password, u_email, u_role, u_name, u_surname, u_address, u_phone)"+
                     " VALUES (?,?,?,?,?,?,?,?)";
 
+
     private static final String GET_USER_BY_EMAIL_SQL =
-            "SELECT user_id, email, username, password, user_role, first_name, last_name, address, phone" +
-                    " FROM Users users " +
-                    "WHERE (email = ?)";
+            "SELECT u_id, u_email, u_login, u_password, u_role, u_name, u_surname, u_address, u_phone "+
+                    "FROM users " +
+                    "WHERE u_email = ?";
 
     private static final String SET_PASSWORD_BY_ID_SQL =
-            "UPDATE Users " +
-                    "SET password = ?" +
-                    " WHERE user_id = ?";
+            "UPDATE users " +
+                    "SET u_password = ?" +
+                    " WHERE u_id = ?";
 
     private static final String UPDATE_USER_BY_ID_SQL =
-            "UPDATE Users " +
-                    "SET username = ?, password = ?, first_name = ?, last_name = ?, address = ?, phone = ? " +
-                    "WHERE user_id = ?";
+            "UPDATE users " +
+                    "SET u_login = ?, u_password = ?, u_name = ?, u_surname = ?, u_address = ?, u_phone = ? " +
+                    "WHERE u_id = ?";
 
 
 
@@ -99,7 +101,7 @@ public class UserDaoImpl implements UserDao {
 
     @Override
     public ResultCode signUp(SignUpData signUpData) throws DaoException {
-        final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
+        final String passwordEncryptor =  PasswordEncryptor.getInstance().getHash(signUpData.getPassword());
         final String ROLE_USER = String.valueOf(Role.USER);
         final int DUBLICATE_EMAIL_ERROR_CODE = 1062;
 
@@ -107,7 +109,7 @@ public class UserDaoImpl implements UserDao {
              PreparedStatement statement = connection.prepareStatement(SIGNUP_SQL)) {
             statement.setString(UserDaoImpl.SignUpIndex.USERNAME, signUpData.getUsername());
             statement.setString(UserDaoImpl.SignUpIndex.EMAIL, signUpData.getEmail());
-            statement.setString(UserDaoImpl.SignUpIndex.PASSWORD, passwordEncryptor.getHash(signUpData.getPassword()));
+            statement.setString(UserDaoImpl.SignUpIndex.PASSWORD, passwordEncryptor);
             statement.setString(UserDaoImpl.SignUpIndex.ROLE, ROLE_USER);
             statement.setString(UserDaoImpl.SignUpIndex.FIRST_NAME, signUpData.getFirstName());
             statement.setString(UserDaoImpl.SignUpIndex.LAST_NAME, signUpData.getLastName());

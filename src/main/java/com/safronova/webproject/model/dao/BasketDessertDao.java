@@ -7,7 +7,7 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface BasketDessertDao {
-    void addItemToBasket(Integer id, Integer flowerId, Integer count, BigDecimal subTotal) throws DaoException;
+    void addItemToBasket(Integer id, Integer dessertId, Integer count, BigDecimal subTotal) throws DaoException;
 
     List<BasketDessert> findByBasketId(Integer id) throws DaoException;
 

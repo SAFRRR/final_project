@@ -62,7 +62,7 @@ public class Storage {
         final StringBuilder sb = new StringBuilder("Storage{");
         sb.append("id=").append(id);
         sb.append(", count=").append(count);
-        sb.append(", flower=").append(dessert);
+        sb.append(", dessert=").append(dessert);
         sb.append('}');
         return sb.toString();
     }

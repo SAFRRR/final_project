@@ -12,10 +12,9 @@ public class DessertValidator {
     private static final String REGEXP_DESSERT_DESCRIPTION = properties.getProperty("regexp.dessert.description");
     private static final String REGEXP_DESSERT_PRICE = properties.getProperty("regexp.dessert.price");
     private static final String REGEXP_DESSERT_QUANTITY = properties.getProperty("regexp.dessert.quantity");
-    private static final String REGEXP_FLOWER_LIGHT = properties.getProperty("regexp.flower.light");
-    private static final String REGEXP_FLOWER_WATERING = properties.getProperty("regexp.flower.watering");
+    private static final String REGEXP_DESSERT_WEIGHT = properties.getProperty("regexp.dessert.weight");
 
-    public static boolean validateData(String nameDessert, String description, String price, String soil, String watering, String light) {
+    public static boolean validateData(String nameDessert, String description, String price,  String weight) {
         if (!validateName(nameDessert)) {
             return false;
         }
@@ -25,13 +24,7 @@ public class DessertValidator {
         if (!validatePrice(price)) {
             return false;
         }
-        if (!validateSoil(soil)) {
-            return false;
-        }
-        if (!validateWatering(watering)) {
-            return false;
-        }
-        return validateLight(light);
+        return validateWeight(weight);
     }
 
 
@@ -47,12 +40,8 @@ public class DessertValidator {
         return isMatchFounded(price, REGEXP_DESSERT_PRICE);
     }
 
-    public static boolean validateLight(String light) {
-        return isMatchFounded(light, REGEXP_FLOWER_LIGHT);
-    }
-
-    public static boolean validateWatering(String watering) {
-        return isMatchFounded(watering, REGEXP_FLOWER_WATERING);
+    public static boolean validateWeight(String weight) {
+        return isMatchFounded(weight, REGEXP_DESSERT_WEIGHT);
     }
 
     public static boolean validateDessertTypeId(String dessertTypeId) {
@@ -71,12 +60,4 @@ public class DessertValidator {
         return text != null && text.matches(regex);
     }
 
-    public static boolean validateSoil(String soil) {
-        try {
-            Soil.valueOf(soil);
-        } catch (IllegalArgumentException e) {
-            return false;
-        }
-        return true;
-    }
 }

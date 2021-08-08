@@ -3,6 +3,7 @@ package com.safronova.webproject.controller;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -14,6 +15,7 @@ import java.io.IOException;
 
 
 @MultipartConfig
+@WebServlet(name = "controller", urlPatterns = { "/controller" })
 public class Controller extends HttpServlet {
     private static final Logger logger = LogManager.getLogger();
     private final CommandProvider COMMAND_PROVIDER = CommandProvider.getInstance();

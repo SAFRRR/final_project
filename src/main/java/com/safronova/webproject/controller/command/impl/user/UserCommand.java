@@ -11,16 +11,16 @@ public abstract class UserCommand implements Command {
 
     @Override
     public final Router execute(HttpServletRequest request) {
-        return checkUser(request);
+        return verifyUser(request);
     }
 
-    private Router checkUser(HttpServletRequest request) {
+    private Router verifyUser(HttpServletRequest request) {
         if (request.getSession().getAttribute(RequestAttribute.USER) == null) {
             request.setAttribute(RequestAttribute.MESSAGE, true);
-            Router router = new Router(PagePath.GO_TO_LOGIN_PAGE, RouterType.FORWARD);
+            Router router = new Router(PagePath.GO_TO_SIGNIN_PAGE, RouterType.FORWARD);
             return router;
         } else {
-            return process(request);
+            return handle(request);
         }
     }
 

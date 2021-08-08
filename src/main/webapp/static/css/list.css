@@ -1,0 +1,12 @@
+.pagination-wrapper {
+    display: flex;
+    justify-content: center;
+}
+
+.select-form {
+    padding-bottom: 30px;
+}
+
+.dessert-item-custom {
+    padding-bottom: 10px;
+}

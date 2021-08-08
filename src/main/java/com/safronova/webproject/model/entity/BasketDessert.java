@@ -75,7 +75,7 @@ public class BasketDessert {
 
     @Override
     public String toString() {
-        final StringBuilder sb = new StringBuilder("BasketFlower{");
+        final StringBuilder sb = new StringBuilder("BasketDessert{");
         sb.append("id=").append(id);
         sb.append(", count=").append(count);
         sb.append(", subTotal=").append(subTotal);

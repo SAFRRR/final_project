@@ -7,6 +7,7 @@ import com.safronova.webproject.model.entity.DessertCategory;
 import com.safronova.webproject.model.entity.DessertType;
 import com.safronova.webproject.model.entity.Storage;
 import com.safronova.webproject.model.pool.ConnectionPool;
+import static com.safronova.webproject.model.dao.ColumnName.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -22,73 +23,73 @@ public class DessertDaoImpl implements DessertDao {
     private DessertDaoImpl() {
     }
 
-    private static final String SELECT_ALL_FLOWER_SQL =
-            "SELECT id, name, description, price, flower_image " +
-                    "FROM flower";
+    private static final String SELECT_ALL_DESSERT_SQL =
+            "SELECT d_id, d_name, d_description, d_price, d_image " +
+                    "FROM desserts";
 
-    private static final String SELECT_ALL_FLOWER_LIST_SQL =
-            "SELECT id, name, description, price, flower_image, soil, origin, light, watering, type_id, category, type_description, storage_count " +
-                    "FROM flower flowers " +
-                    "JOIN flower_type type ON flowers.flower_type_id = type.type_id " +
-                    "JOIN storage s ON flowers.id = s.flowers_id ";
+    private static final String SELECT_ALL_DESSERT_LIST_SQL =
+            "SELECT d_id, d_name, d_description, d_price, d_weight, d_image, dt_id, dt_category, dt_description, st_count "+
+                    "FROM desserts "+
+                    "JOIN dessert_types ON desserts.d_dessert_type_id = dessert_types.dt_id " +
+                    "JOIN storages ON desserts.d_id = storages.st_dessert_id";
 
-    private static final String FIND_FLOWER_BY_CATEGORY =
-            "SELECT id, name, description, price, flower_image " +
-                    "FROM flower flowers " +
-                    "JOIN flower_type type ON flowers.flower_type_id = type.type_id " +
-                    "WHERE (flower_type_id = ?)";
 
-    private static final String FIND_FLOWER_BY_ID =
-            "SELECT id, name, description, price, flower_image, soil, origin, light, watering, type_id, category, type_description, storage_count " +
-                    "FROM flower flowers " +
-                    "JOIN flower_type type ON flowers.flower_type_id = type.type_id " +
-                    "JOIN storage s ON flowers.id = s.flowers_id " +
-                    "WHERE (id = ?)";
+    private static final String FIND_DESSERT_BY_CATEGORY =
+            "SELECT d_id, d_name, d_description, d_price, d_image "+
+                    "FROM desserts " +
+                    "JOIN dessert_types ON desserts.d_dessert_type_id = dessert_types.dt_id "+
+                    "WHERE (d_dessert_type_id = ?)";
 
-    private static final String INSERT_FLOWER_SQL =
-            "INSERT INTO flower (name, description, price, soil, origin, light, flower_type_id, watering) " +
-                    "VALUES (?,?,?,?,?,?,?,?)";
+    private static final String FIND_DESSERT_BY_ID =
+            "SELECT d_id, d_name, d_description, d_price, d_weight, d_image, dt_id, dt_category, dt_description, st_count "+
+                    "FROM desserts "+
+                    "JOIN dessert_types ON desserts.d_dessert_type_id = dessert_types.dt_id "+
+                    "JOIN storages ON desserts.d_id = storages.st_dessert_id "+
+                    "WHERE (d_id = ?)";
+
+
+    private static final String INSERT_DESSERT_SQL =
+            "INSERT INTO desserts (d_name, d_description, d_price, d_weight, d_dessert_type_id)"+
+                    "VALUES (?,?,?,?,?)";
 
     private static final String SET_IMAGE_SQL =
-            "UPDATE flower " +
-                    "SET flower_image = ? " +
-                    "WHERE id = ?";
+            "UPDATE desserts "+
+                    "SET d_image = ?"+
+                    "WHERE d_id = ?";
 
-    private static final String UPDATE_FLOWER_SQL =
-            "UPDATE flower " +
-                    "SET name = ?, description = ?, price = ?, soil = ?, origin = ?, light = ?, flower_type_id = ?, watering = ? " +
-                    "WHERE id = ?";
+    private static final String UPDATE_DESSERT_SQL =
+            "UPDATE desserts "+
+                    "SET d_name = ?, d_description = ?, d_price = ?, d_weight = ?, d_dessert_type_id = ? "+
+                    "WHERE d_id =?";
 
-    private static final String DELETE_FLOWER_SQL =
-            "DELETE FROM flower " +
-                    "WHERE id = ?";
+    private static final String DELETE_DESSERT_SQL =
+            "DELETE FROM desserts "+
+                    "WHERE d_id = ?";
 
 
     @Override
-    public Dessert createFlower(Dessert dessert) throws DaoException {
+    public Dessert createDessert(Dessert dessert) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(INSERT_FLOWER_SQL, Statement.RETURN_GENERATED_KEYS)) {
-            statement.setString(FlowerDaoImpl.FlowerIndex.NAME, flower.getName());
-            statement.setString(FlowerDaoImpl.FlowerIndex.DESCRIPTION, flower.getDescription());
-            statement.setDouble(FlowerDaoImpl.FlowerIndex.PRICE, flower.getPrice());
-            statement.setString(FlowerDaoImpl.FlowerIndex.SOIL, String.valueOf(flower.getSoil()));
-            statement.setString(FlowerDaoImpl.FlowerIndex.ORIGIN, flower.getOriginCountry());
-            statement.setBoolean(FlowerDaoImpl.FlowerIndex.LIGHT, flower.isLight());
-            statement.setInt(FlowerDaoImpl.FlowerIndex.TYPE_ID, flower.getFlowerType().getId());
-            statement.setInt(FlowerDaoImpl.FlowerIndex.WATERING, flower.getWatering());
+             PreparedStatement statement = connection.prepareStatement(INSERT_DESSERT_SQL, Statement.RETURN_GENERATED_KEYS)) {
+            statement.setString(DessertDaoImpl.DessertIndex.NAME, dessert.getName());
+            statement.setString(DessertDaoImpl.DessertIndex.DESCRIPTION,dessert.getDescription());
+            statement.setBigDecimal(DessertDaoImpl.DessertIndex.PRICE, dessert.getPrice());
+            statement.setInt(DessertDaoImpl.DessertIndex.WEIGHT, dessert.getWeight());
+            statement.setInt(DessertDaoImpl.DessertIndex.TYPE_ID, dessert.getDessertType().getId());
+
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
-                throw new DaoException("Creating flower failed, no rows affected.");
+                throw new DaoException("Creating dessert failed, no rows affected.");
             }
             try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     dessert.setId(generatedKeys.getInt(1));
                 } else {
-                    throw new DaoException("Creating flower failed, no ID obtained.");
+                    throw new DaoException("Creating dessert failed, no ID obtained.");
                 }
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.createFlower request", e);
+            throw new DaoException("Can't handle DessertDao.createDessert request", e);
         }
         return dessert;
     }
@@ -98,18 +99,18 @@ public class DessertDaoImpl implements DessertDao {
         List<Dessert> dessertList = new ArrayList<>();
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              Statement statement = connection.createStatement()) {
-            ResultSet resultSet = statement.executeQuery(SELECT_ALL_FLOWER_SQL);
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_DESSERT_SQL);
             while (resultSet.next()) {
                 Dessert dessert = new Dessert();
-                dessert.setId(resultSet.getInt(FLOWER_ID));
-                dessert.setName(resultSet.getString(FLOWER_NAME));
-                dessert.setDescription(resultSet.getString(FLOWER_DESCRIPTION));
-                dessert.setPrice(resultSet.getDouble(FLOWER_PRICE));
-                dessert.setDessertImage(resultSet.getString(FLOWER_IMAGE));
+                dessert.setId(resultSet.getInt(DESSERT_ID));
+                dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setDescription(resultSet.getString(DESSERT_DESCRIPTION));
+                dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
+                dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
                 dessertList.add(dessert);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.findAll request", e);
+            throw new DaoException("Can't handle DessertDao.findAll request", e);
         }
         return dessertList;
     }
@@ -118,20 +119,20 @@ public class DessertDaoImpl implements DessertDao {
     public List<Dessert> findByCategory(String category) throws DaoException {
         List<Dessert> dessertList = new ArrayList<>();
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_FLOWER_BY_CATEGORY)) {
-            statement.setString(FindFlowerIndex.INDEX, category);
+             PreparedStatement statement = connection.prepareStatement(FIND_DESSERT_BY_CATEGORY)) {
+            statement.setString(FindDessertIndex.INDEX, category);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Dessert dessert = new Dessert();
-                dessert.setId(resultSet.getInt(FLOWER_ID));
-                dessert.setName(resultSet.getString(FLOWER_NAME));
-                dessert.setDescription(resultSet.getString(FLOWER_DESCRIPTION));
-                dessert.setPrice(resultSet.getDouble(FLOWER_PRICE));
-                dessert.setFlowerImage(resultSet.getString(FLOWER_IMAGE));
-                dessertList.add(dessertr);
+                dessert.setId(resultSet.getInt(DESSERT_ID));
+                dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setDescription(resultSet.getString(DESSERT_DESCRIPTION));
+                dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
+                dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
+                dessertList.add(dessert);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.findByCategory request", e);
+            throw new DaoException("Can't handle DessertDao.findByCategory request", e);
         }
         return dessertList;
     }
@@ -140,32 +141,28 @@ public class DessertDaoImpl implements DessertDao {
     public Dessert findById(Integer dessertId) throws DaoException {
         Dessert dessert = new Dessert();
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_FLOWER_BY_ID)) {
-            statement.setInt(FindFlowerIndex.INDEX, flowerId);
+             PreparedStatement statement = connection.prepareStatement(FIND_DESSERT_BY_ID)) {
+            statement.setInt(FindDessertIndex.INDEX, dessertId);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
-                dessert.setId(resultSet.getInt(FLOWER_ID));
-                dessert.setName(resultSet.getString(FLOWER_NAME));
-                dessert.setDescription(resultSet.getString(FLOWER_DESCRIPTION));
-                dessert.setPrice(resultSet.getDouble(FLOWER_PRICE));
-                dessert.setFlowerImage(resultSet.getString(FLOWER_IMAGE));
-                dessert.setOriginCountry(resultSet.getString(FLOWER_COUNTRY));
-                dessert.setLight(resultSet.getBoolean(FLOWER_LIGHT));
-                dessert.setWatering(resultSet.getInt(FLOWER_WATERING));
+                dessert.setId(resultSet.getInt(DESSERT_ID));
+                dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setDescription(resultSet.getString(DESSERT_DESCRIPTION));
+                dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
+                dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
+                dessert.setWeight(resultSet.getInt(DESSERT_WEIGHT));
                 DessertType dessertType = new DessertType();
-                dessertType.setId(resultSet.getInt(FLOWER_TYPE_ID));
-                DessertCategory dessertCategory = DessertCategory.valueOf(resultSet.getString(FLOWER_TYPE_CATEGORY));
+                dessertType.setId(resultSet.getInt(DESSERT_TYPE_ID));
+                DessertCategory dessertCategory = DessertCategory.valueOf(resultSet.getString(DESSERT_TYPE_CATEGORY));
                 dessertType.setCategory(dessertCategory);
-                dessertType.setDescription(resultSet.getString(FLOWER_TYPE_DESCRIPTION));
-                dessert.setFlowerType(flowerType);
-                Soil soil = Soil.valueOf(resultSet.getString(SOIL));
-                dessert.setSoil(soil);
+                dessertType.setDescription(resultSet.getString(DESSERT_TYPE_DESCRIPTION));
+                dessert.setDessertType(dessertType);
                 Storage storage = new Storage();
                 storage.setCount(resultSet.getInt(STORAGE_COUNT));
                 dessert.setStorage(storage);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.findById request", e);
+            throw new DaoException("Can't handle DessertDao.findById request", e);
         }
         return dessert;
     }
@@ -174,11 +171,11 @@ public class DessertDaoImpl implements DessertDao {
     public void updateDessertImage(Dessert dbDessert) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SET_IMAGE_SQL)) {
-            statement.setString(DessertDaoImpl.UpdateImageIndex.IMAGE, dbFlower.getFlowerImage());
-            statement.setInt(DessertDaoImpl.UpdateImageIndex.ID, dbFlower.getId());
+            statement.setString(DessertDaoImpl.UpdateImageIndex.IMAGE, dbDessert.getDessertImage());
+            statement.setInt(DessertDaoImpl.UpdateImageIndex.ID, dbDessert.getId());
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.updateFlowerImage request", e);
+            throw new DaoException("Can't handle DessertDao.updateDessertImage request", e);
         }
     }
 
@@ -186,33 +183,29 @@ public class DessertDaoImpl implements DessertDao {
     public List<Dessert> findAllDessertList() throws DaoException {
         List<Dessert> dessertList = new ArrayList<>();
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_FLOWER_LIST_SQL)) {
+             PreparedStatement statement = connection.prepareStatement(SELECT_ALL_DESSERT_LIST_SQL)) {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 Dessert dessert = new Dessert();
-                dessert.setId(resultSet.getInt(FLOWER_ID));
-                dessert.setName(resultSet.getString(FLOWER_NAME));
-                dessert.setDescription(resultSet.getString(FLOWER_DESCRIPTION));
-                dessert.setPrice(resultSet.getDouble(FLOWER_PRICE));
-                dessert.setDessertImage(resultSet.getString(FLOWER_IMAGE));
-                dessert.setOriginCountry(resultSet.getString(FLOWER_COUNTRY));
-                dessert.setLight(resultSet.getBoolean(FLOWER_LIGHT));
-                dessert.setWatering(resultSet.getInt(FLOWER_WATERING));
+                dessert.setId(resultSet.getInt(DESSERT_ID));
+                dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setDescription(resultSet.getString(DESSERT_DESCRIPTION));
+                dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
+                dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
+                dessert.setWeight(resultSet.getInt(DESSERT_WEIGHT));
                 DessertType dessertType = new DessertType();
-                dessertType.setId(resultSet.getInt(FLOWER_TYPE_ID));
-                DessertCategory dessertCategory = DessertCategory.valueOf(resultSet.getString(FLOWER_TYPE_CATEGORY));
+                dessertType.setId(resultSet.getInt(DESSERT_TYPE_ID));
+                DessertCategory dessertCategory = DessertCategory.valueOf(resultSet.getString(DESSERT_TYPE_CATEGORY));
                 dessertType.setCategory(dessertCategory);
-                dessertType.setDescription(resultSet.getString(FLOWER_TYPE_DESCRIPTION));
+                dessertType.setDescription(resultSet.getString(DESSERT_TYPE_DESCRIPTION));
                 dessert.setDessertType(dessertType);
-                Soil soil = Soil.valueOf(resultSet.getString(SOIL));
-                dessert.setSoil(soil);
                 Storage storage = new Storage();
                 storage.setCount(resultSet.getInt(STORAGE_COUNT));
                 dessert.setStorage(storage);
                 dessertList.add(dessert);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.findAllFlowerList request", e);
+            throw new DaoException("Can't handle DessertDao.findAllDessertList request", e);
         }
         return dessertList;
     }
@@ -220,30 +213,27 @@ public class DessertDaoImpl implements DessertDao {
     @Override
     public void updateDessert(Integer id, Dessert  dessert) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(UPDATE_FLOWER_SQL)) {
-            statement.setString(DessertDaoImpl.FlowerIndex.NAME, dessert.getName());
-            statement.setString(DessertDaoImpl.FlowerIndex.DESCRIPTION, dessert.getDescription());
-            statement.setDouble(DessertDaoImpl.FlowerIndex.PRICE, dessert.getPrice());
-            statement.setString(DessertDaoImpl.FlowerIndex.SOIL, String.valueOf(dessert.getSoil()));
-            statement.setString(DessertDaoImpl.FlowerIndex.ORIGIN, dessert.getOriginCountry());
-            statement.setBoolean(DessertDaoImpl.FlowerIndex.LIGHT, dessert.isLight());
-            statement.setInt(DessertDaoImpl.FlowerIndex.TYPE_ID, dessert.getFlowerType().getId());
-            statement.setInt(DessertDaoImpl.FlowerIndex.WATERING, dessert.getWatering());
-            statement.setInt(DessertDaoImpl.FlowerIndex.ID, id);
+             PreparedStatement statement = connection.prepareStatement(UPDATE_DESSERT_SQL)) {
+            statement.setString(DessertDaoImpl.DessertIndex.NAME, dessert.getName());
+            statement.setString(DessertDaoImpl.DessertIndex.DESCRIPTION, dessert.getDescription());
+            statement.setBigDecimal(DessertDaoImpl.DessertIndex.PRICE, dessert.getPrice());
+            statement.setInt(DessertDaoImpl.DessertIndex.WEIGHT, dessert.getWeight());
+            statement.setInt(DessertDaoImpl.DessertIndex.TYPE_ID, dessert.getDessertType().getId());
+            statement.setInt(DessertDaoImpl.DessertIndex.ID, id);
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.updateFlower request", e);
+            throw new DaoException("Can't handle DessertDao.updateDessert request", e);
         }
     }
 
     @Override
     public void deleteById(Integer id) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(DELETE_FLOWER_SQL)) {
-            statement.setInt(DessertDaoImpl.FindFlowerIndex.INDEX, id);
+             PreparedStatement statement = connection.prepareStatement(DELETE_DESSERT_SQL)) {
+            statement.setInt(DessertDaoImpl.FindDessertIndex.INDEX, id);
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle FlowerDao.deleteById request", e);
+            throw new DaoException("Can't handle DessertDao.deleteById request", e);
         }
     }
 
@@ -251,26 +241,19 @@ public class DessertDaoImpl implements DessertDao {
         private static final int INDEX = 1;
     }
 
-    /**
-     * Static class that contains parameter indexes for updating flower image
-     */
+
     private static class UpdateImageIndex {
         private static final int IMAGE = 1;
         private static final int ID = 2;
     }
 
-    /**
-     * Static class that contains parameter indexes for inserting flower data
-     */
+
     private static class DessertIndex {
         private static final int NAME = 1;
         private static final int DESCRIPTION = 2;
         private static final int PRICE = 3;
-        private static final int SOIL = 4;
-        private static final int ORIGIN = 5;
-        private static final int LIGHT = 6;
-        private static final int TYPE_ID = 7;
-        private static final int WATERING = 8;
-        private static final int ID = 9;
+        private static final int WEIGHT = 4;
+        private static final int TYPE_ID = 5;
+        private static final int ID = 6;
     }
 }

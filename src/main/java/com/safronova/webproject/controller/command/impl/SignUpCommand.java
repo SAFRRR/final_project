@@ -3,7 +3,12 @@ package com.safronova.webproject.controller.command.impl;
 import com.safronova.webproject.controller.command.*;
 import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.exception.ServiceException;
+import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.SignUpData;
+import com.safronova.webproject.model.service.ServiceProvider;
+import com.safronova.webproject.model.service.UserService;
+import com.safronova.webproject.model.util.MailSender;
+import com.safronova.webproject.model.util.PasswordEncryptor;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -40,7 +45,7 @@ public class SignUpCommand implements Command {
                     request.setAttribute(RequestAttribute.EMAIL_SENT, true);
                     break;
             }
-            router = new Router(PagePath.GO_TO_LOGIN_PAGE, RouterType.FORWARD);
+            router = new Router(PagePath.GO_TO_SIGNIN_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at SignUpServlet", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
@@ -50,3 +55,4 @@ public class SignUpCommand implements Command {
 
     }
 }
+
