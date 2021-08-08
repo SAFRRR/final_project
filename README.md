@@ -20,4 +20,5 @@ Admin approves the application and client can check status of order in his profi
   + Delete item
   + Edit items
   + Change status of an order
+  
 ![alt text](https://user-images.githubusercontent.com/13458725/128642789-5f7804e4-9145-480b-88c3-1441c2f5aaf5.jpg)
