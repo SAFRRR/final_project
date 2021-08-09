@@ -11,7 +11,7 @@ public final class RequestAttribute {
     public static final String USER = "user";
     public static final String EMAIL_NOT_EXISTS = "emailNotExists";
     public static final String ORDER = "order";
-    public static final String ORDER_DESSERT = "orderFlowerList";
+    public static final String ORDER_DESSERT = "orderDessertList";
     public static final String DESSERT = "dessert";
     public static final String STORAGE = "storage";
     public static final String DESSERT_TYPE = "dessertTypeSelected";
@@ -25,7 +25,7 @@ public final class RequestAttribute {
     public static final String WRONG_PASSWORD = "currentPasswordNotEquals";
     public static final String DESSERT_ID = "dessertId";
     public static final String NOT_ENOUGH = "notEnoughStorage";
-    public static final String ADD_SUCCESS = "addFlowerSuccess";
+    public static final String ADD_SUCCESS = "addDessertSuccess";
     public static final String ACTIVE_EDIT = "activeEdit";
     public static final String BASKET_DESSERT_LIST = "basketDessertList";
     public static final String BASKET = "basket";
