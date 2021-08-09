@@ -35,7 +35,7 @@
         <div class="row">
             <div class="col-xs-3">
                 <a href="${pageContext.request.contextPath}/controller?command=go_to_item_page_command" >${locale_continue_shopping}</a><br/>
-                <img style="height: 313px;" class="img-responsive page-dessert" src="./static/images${dessert.dessertImage}"/>
+                <img style="height: 313px;" class="img-responsive page-dessert" src="./static/images/${dessert.dessertImage}"/>
             </div>
 
             <div class="col-xs-9">

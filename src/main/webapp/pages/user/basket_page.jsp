@@ -33,13 +33,12 @@
 
                 <a href="${pageContext.request.contextPath}/controller?command=go_to_item_page_command">${locale_continue_shopping}</a>
 
-                <span>${basketDessertList.id} bd id</span>
-                <span>>${basket.id} b id</span>
+<%--                <span>${basketDessertList.id}</span>--%>
+<%--                <span>${basket.id} b id</span>--%>
 
                 <form action="controller" method="post">
                     <input type="hidden" name="command" value="go_to_check_out_page_command">
                     <input type="hidden" name="id" value="${basket.id}">
-
                     <button class="btn btn-default" type="submit">${locale_order_check}</button>
                 </form>
 
@@ -76,16 +75,15 @@
                     <div class="row">
 
                         <div class="col-xs-2">
-                            <img style="width: 100px" class="img-responsive dessert"
-                                 src="./static/images${basketDessert.dessert.dessertImage}">
+                            <img style="width: 200px" class="img-responsive dessert" src="./static/images/${basketDessert.dessert.dessertImage}">
                         </div>
 
                         <div class="col-xs-6">
                             <div class="center-block">
                                 <h4>${basketDessert.dessert.name}</h4>
 
-                                <h5 style="color: orangered; font-size: large">BYN<span
-                                        style="<c:if test="${basketDessert.dessert.storage.count} == 0">text-decoration: line-through</c:if>">${basketDessert.dessert.price}</span>
+                                <h5 style="color: orangered; font-size: large"><span
+                                        style="<c:if test="${basketDessert.dessert.storage.count} == 0">text-decoration: line-through</c:if>">${basketDessert.dessert.price} BYN</span>
                                 </h5>
 
                                     <%--                                <c:if test="${basketDessert.dessert.storage.count >= 11}">--%>
@@ -104,11 +102,7 @@
                                     <%--                                </c:if>--%>
 
 
-                                <form action="controller" method="post">
-                                    <input type="hidden" name="command" value="remove_dessert_command"/>
-                                    <input type="hidden" name="basketDessertId" value="${basketDessert.id}"/>
-                                    <button class="btn btn-info" type="submit">${locale_operation_delete}</button>
-                                </form>
+
 
 
 
@@ -123,11 +117,21 @@
 
                                 <input hidden="hidden" name="id" value="${basketDessert.id}"/>
 
+                                <input id="count" style="width: 100px" name="count" type="number" min="1" max="${basketDessert.dessert.storage.count}"
+                                       <c:if test="${basketDessert.dessert.storage.count==0}">disabled</c:if>
+                                       class="form-control basketDessertCount" value="${basketDessert.count}"/>
 
-                                <input id="count" name="count" type="number" min="1" <c:if test="${basketDessert.dessert.storage.count==0}">disabled</c:if> class="form-control basketDessertCount" value="${basketDessert.count}"/>
-                                <button style="display: none;" id="update-item-${basketDessert.id}" type="submit" class="btn btn-warning btn-xs">${locale_common_update}</button>
+                                <button style="display: inline-block;" id="update-item-${basketDessert.id}"
+                                        type="submit" class="btn btn-warning btn-xs">${locale_common_update}</button>
+                            </form>
+
+                            <form action="controller" method="post">
+                                <input type="hidden" name="command" value="remove_dessert_command"/>
+                                <input type="hidden" name="basketDessertId" value="${basketDessert.id}"/>
+                                <button class="btn btn-info" type="submit">${locale_operation_delete}</button>
                             </form>
                         </div>
+
 
 
 
@@ -149,12 +153,13 @@
 </body>
 </html>
 
-<script>
-    $(document).ready(function () {
-        $(".basketDessertCount").on('change', function () {
-            const id = this.id;
-            console.log(id);
-            $('#update-item-' + id).css('display', 'inline-block');
-        });
-    });
-</script>
+
+<%--<script>--%>
+<%--    $(document).ready(function () {--%>
+<%--        $(".basketDessertCount").on('change', function () {--%>
+<%--            const id = this.id;--%>
+<%--            console.log(id);--%>
+<%--            $('#update-item-' + id).css('display', 'inline-block');--%>
+<%--        });--%>
+<%--    });--%>
+<%--</script>--%>

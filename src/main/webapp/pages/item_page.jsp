@@ -55,7 +55,7 @@
                                 <div class=" dessert-item-custom">
                                     <div class="col-xs-3" >
                                         <img class="img-responsive"
-                                           src="./static/images${dessert.dessertImage}" style="height: 313px;"/>
+                                           src="./static/images/${dessert.dessertImage}" style="height: 313px;"/>
                                     </div>
                                     <div class="col-xs-9">
                                         <h4>${dessert.name}</h4>

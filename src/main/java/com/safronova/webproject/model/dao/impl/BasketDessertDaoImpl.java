@@ -27,9 +27,11 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
     private BasketDessertDaoImpl() {}
 
     private static final String SELECT_BY_ID_SQL =
-            "SELECT bd_dessert_id, bd_count, bd_sub_total " +
+            "SELECT bd_id, bd_count, bd_sub_total " +
                     "FROM basket_desserts " +
                     "WHERE (bd_id = ?)";
+
+
 
     private static final String SELECT_ITEMS_BY_BASKET_ID_SQL =
             "SELECT bd_id, bd_basket_id, bd_dessert_id, bd_count, bd_sub_total, d_image, d_name, d_price, st_count "+
@@ -49,7 +51,7 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
 
     private static final String SET_COUNT_SQL =
             "UPDATE basket_desserts " +
-                    "SET bd_count =?" +
+                    "SET bd_count =? " +
                     "WHERE bd_id = ?";
 
     private static final String DELETE_ITEM_SQL =

@@ -24,13 +24,13 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
     private OrderDessertDaoImpl() {}
 
     private static final String INSERT_ORDER_DESSERT_SQL =
-            "INSERT INTO order_desserts (od_dessert_id, od_count, od_order_id, od_sub_total)"+
+            "INSERT INTO ordered_desserts (od_dessert_id, od_count, od_order_id, od_sub_total) "+
                     "VALUES (?,?,?,?)";
 
     private static final String SELECT_ORDER_DESSERT_SQL =
-            "SELECT d_name, d_price, od_count, od_sub_total"+
-                    "FROM order_desserts"+
-                    "JOIN desserts ON oorder_desserts.od_dessert_id = desserts.d_id"+
+            "SELECT d_name, d_price, od_count, od_sub_total "+
+                    "FROM ordered_desserts "+
+                    "JOIN desserts ON ordered_desserts.od_dessert_id = desserts.d_id "+
                     "WHERE od_order_id = ?";
 
     @Override
