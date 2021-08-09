@@ -61,7 +61,7 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
                 dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
                 orderDessert.setCount(resultSet.getInt(ORDER_DESSERT_COUNT));
                 orderDessert.setSubTotal(resultSet.getBigDecimal(ORDER_DESSERT_SUB_TOTAL));
-                orderDessert.setFlower(dessert);
+                orderDessert.setDessert(dessert);
                 orderDessertList.add(orderDessert);
             }
         } catch (SQLException e) {
