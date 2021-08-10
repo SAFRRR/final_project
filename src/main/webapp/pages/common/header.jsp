@@ -108,10 +108,10 @@
 
 
                 <c:if test="${user.role == 'ADMIN'}">
-                    <li class="nav-item">
-                        <a class="nav-link" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_basket_page_command"><i class="fas fa-lg fa-shopping-basket"></i>${locale_main_basket_title}</a>
-                            <%--           Controller?command=go_to_basket_page_command             --%>
-                    </li>
+<%--                    <li class="nav-item">--%>
+<%--                        <a class="nav-link" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_basket_page_command"><i class="fas fa-lg fa-shopping-basket"></i>${locale_main_basket_title}</a>--%>
+<%--                            &lt;%&ndash;           Controller?command=go_to_basket_page_command             &ndash;%&gt;--%>
+<%--                    </li>--%>
 
 
 
