@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
 
 <c:if test="${not empty sessionScope.locale}">
@@ -26,74 +27,54 @@
 <jsp:include page="common/header.jsp"/>
 
 <div class="container">
-    <form action="controller" method="post">
+
+    <form class="form-horizontal" action="controller" method="post" style="width: 500px; margin-top: 10px; margin-left: 400px;margin-right: 20px; " >
         <input type="hidden" name="command" value="add_dessert_to_basket_command">
         <input hidden="hidden" name="dessertId" value="${dessert.id}"/>
         <input hidden="hidden" name="dessertPrice" value="${dessert.price}"/>
         <input hidden="hidden" name="storageAmount" value="${storage.count}"/>
 
-        <div class="row">
-            <div class="col-xs-3">
-                <a href="${pageContext.request.contextPath}/controller?command=go_to_item_page_command" >${locale_continue_shopping}</a><br/>
-                <img style="height: 313px;" class="img-responsive page-dessert" src="./static/images/${dessert.dessertImage}"/>
+
+        <img style="height: 313px; margin-left:50px;" class="img-responsive page-dessert" src="./static/images/${dessert.dessertImage}"/>
+
+        <c:if test="${addDessertSuccess}">
+            <div class="alert alert-success">An item has been added to your shopping basket</div>
+        </c:if>
+        <c:if test="${notEnoughStorage}">
+            <div class="alert alert-warning">Oooops, some of the products don't have enough count in storage.
+                Please update product quantity
             </div>
-
-            <div class="col-xs-9">
-                <c:if test="${addDessertSuccess}">
-                    <div class="alert alert-success">An item has been added to your shopping basket</div>
-                </c:if>
-                <c:if test="${notEnoughStorage}">
-                    <div class="alert alert-warning">Oooops, some of the products don't have enough count in storage.
-                        Please update product quantity
-                    </div>
-                </c:if>
+        </c:if>
 
 
+        <h4 style="text-align: center; margin-top: 15px">${dessert.name}</h4>
 
-                <p>${dessert.name}</p>
-                <p><strong>${locale_dessert_weight} </strong><span>${dessert.weight}gm</span></p>
-                <p>${dessert.description}</p>
+        <p style="width: 413px; text-align: center;">${fn:substring(dessert.description, 0, 500)}</p>
 
-                <div class="row">
-                    <div class="col-xs-7">
-                        <div class="panel panel-default" style="border-width: 5px; margin-top: 20px;">
-                            <div class="panel-body">
-                                <div class="row">
-                                    <div class="col-xs-6">
-                                        <h4>${locale_price_name} <span style="color: darkorange;">Br<span>${dessert.price}</span></span></h4>
+        <p style="text-align: center;"><span >${dessert.weight} gm</span><span>${dessert.price} BYN<span></p>
 
-                                        <span>${locale_order_amount}</span>
-                                        <input required type="number" step="1"
-                                               class="form-control" name="amount" min="1"
-                                               placeholder="${locale_order_amount}"/>
-                                    </div>
+        <input required type="number" step="1"
+                   class="form-control" name="amount" min="1"
+                   max="${storage.count}"
+                   placeholder="${locale_order_amount}"/>
 
-                                    <div class="col-xs-6">
-                                        <c:if test="${storage.count >= 11}">
-                                            <h4 style="color: green">${locale_storage_dessert}</h4>
-                                        </c:if>
-                                        <c:if test="${storage.count < 11 && storage.count > 0}">
-                                            <h4 style="color: green">
-                                                <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
-                                            </h4>
-                                        </c:if>
-                                        <c:if test="${storage.count==0}">
-                                            <h4 style="color: darkred">${locale_dessert_unavailable}</h4>
-                                        </c:if>
-                                        <button type="submit" class="btn btn-outline-light"
-                                                style="color: black; border: 1px solid black; padding: 10px 40px 10px 40px;">${locale_basket_add}</button>
-                                    </div>
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+        <c:if test="${storage.count >= 11}">
+            <h4 style="color: green">${locale_storage_dessert}</h4>
+        </c:if>
+        <c:if test="${storage.count < 11 && storage.count > 0}">
+            <p style="color: red">
+                <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
+            </p>
+        </c:if>
+        <c:if test="${storage.count==0}">
+            <h4 style="color: darkred">${locale_dessert_unavailable}</h4>
+        </c:if>
+        <button type="submit"  class="btn btn-default">${locale_basket_add}</button>
 
-            </div>
-        </div>
+        <div class="form-footer" style="padding-top: 1px"></div>
     </form>
+
 </div>
 </body>
 </html>
-
