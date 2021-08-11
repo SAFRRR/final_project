@@ -12,6 +12,7 @@ public final class RequestAttribute {
     public static final String EMAIL_NOT_EXISTS = "emailNotExists";
     public static final String ORDER = "order";
     public static final String ORDER_DESSERT = "orderDessertList";
+
     public static final String DESSERT = "dessert";
     public static final String STORAGE = "storage";
     public static final String DESSERT_TYPE = "dessertTypeSelected";
@@ -34,6 +35,7 @@ public final class RequestAttribute {
     public static final String REGEXP_USERNAME = "attribute_regexp_username";
     public static final String REGEXP_PASSWORD = "attribute_regexp_password";
     public static final String REGEXP_FIO = "attribute_regexp_fio";
+    public static final String REGEXP_ADDRESS = "attribute_regexp_address";
     public static final String REGEXP_PHONE = "attribute_regexp_phone_number";
     public static final String REGEXP_EMAIL = "attribute_regexp_email";
     public static final String ACTIVE_LOGIN = "activeLogin";

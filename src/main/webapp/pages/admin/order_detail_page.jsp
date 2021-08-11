@@ -26,7 +26,7 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
 <div class="table-responsive">
-    <form action="controller" method="post">
+    <form class="form-horizontal" style="margin-left: 200px;" action="controller" method="post">
         <input type="hidden" name="command" value="change_order_status_command"/>
         <input type="hidden" name="orderId" value="${order.id}"/>
         <div class="container">
@@ -52,7 +52,7 @@
                     </c:forEach>
                     <tr>
                         <td>
-                            <label class="col-md-5 control-label">${locale_order_status}</label>
+                            <label >${locale_order_status}</label>
                             <select required name="statusOrder" class="form-control">
                                 <option disabled="disabled">${locale_order_status}</option>
                                 <option value="APPROVED"
@@ -74,9 +74,12 @@
                 </table>
             </div>
             <br/>
-            <button class="btn btn-success" type="submit">${locale_main_save}</button>
+            <button class="btn btn-success" style=" margin-left: 400px; width: 100px;" type="submit">${locale_main_save}</button>
+            <div class="form-footer" style="opacity:0;">
+              </div>
         </div>
     </form>
 </div>
 </body>
 </html>
+

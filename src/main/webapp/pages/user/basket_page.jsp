@@ -59,7 +59,7 @@
     </c:forEach>
     </div>
 
-    <form class="form-horizontal" style="width: 500px; height:80px; margin-top: 5px; margin-left: 48px;margin-right: 20px; " >
+    <form class="form-horizontal" style="width: 500px; height:80px; margin-top: 5px; margin-left: 48px;margin-right: 20px;">
             <h4 style="float: left; margin-top: -15px"><strong style="font-size: large">${locale_total_price}</strong>
                 <span style="color: orangered; font-size: large"><span>${basket.totalCost}</span>BYN&nbsp;&nbsp;</span></h4>
         <form action="controller" method="post">

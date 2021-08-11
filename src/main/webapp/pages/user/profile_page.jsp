@@ -20,37 +20,28 @@
 <fmt:message key="signup.signin" var="signup_signin_value"/>
 <fmt:message key="signup.current.password" var="signup_current_password_value"/>
 <fmt:message key="signup.new.password" var="signup_new_password_value"/>
+<fmt:message key="password.feedbackInvalidPasswordsAreNotEqual" var="signup_password_notequal_value"/>
 <fmt:message key="signup.new.password.confirm" var="signup_new_password_confirm_value"/>
 <fmt:message key="profile.save.changes" var="profile_save_changes_value"/>
 <fmt:message key="profile.settings" var="profile_settings_value"/>
 
-<%--<fmt:message key="profile.username" var="locale_profile_username"/>--%>
 
 <!DOCTYPE html>
 <!doctype html>
 <html lang="en">
 <body>
 <jsp:include page="../common/header.jsp"/>
-
 <div class="container">
-
-
     <div class="form-bg">
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-
-
                     <form id="form-signIn" class="form-horizontal" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post" novalidate >
                         <input type="hidden" name="command" value="settings_edit_command">
-
-<%--                        <c:if test="${updateUserInfo}">&ndash;%&gt;--%>
-    <%--                        <div class="bg-info">User Info Updated</div>--%>
-    <%--                    </c:if>--%>
-                        <div class="heading" style="margin: 0 0 0 0;">${profile_settings_value}</div>
+                        <div class="heading" style="margin-top: -20px">${profile_settings_value}</div>
 
                         <div class="form-group">
-                                <input class="form-control" type="text" id="firstName" name="firstName"
+                                <input class="form-control" style="margin-top: -10px" type="text" id="firstName" name="firstName"
                                        placeholder="${signup_name_value}"
                                    pattern="${attribute_regexp_fio}" value="${user.firstName}"/>
                         </div>
@@ -88,12 +79,12 @@
                         </div>
 
                         <div class="form-group">
-<%--                            <c:if test="${passwordNotEquals}">--%>
-<%--                                <div class="alert alert-danger">Please enter equal passwords in both--%>
-<%--                                    fields--%>
-<%--                                </div>--%>
-<%--                            </c:if>--%>
-<%--                            <label for="newPassword">${locale_user_new_password}</label>--%>
+                            <c:if test="${passwordNotEquals}">
+                                <div class="alert alert-danger">${signup_password_notequal_value}
+                                    fields
+                                </div>
+                            </c:if>
+
                             <input type="password" class="form-control" id="newPassword"
                                    placeholder="${signup_new_password_value}"
                                    name="newPassword" pattern="${attribute_regexp_password}"/>
@@ -105,12 +96,9 @@
                                    name="confirmPassword" pattern="${attribute_regexp_password}"/>
                         </div>
 
-                        <button type="submit" class="btn btn-default">${profile_save_changes_value}</button>
+                        <button type="submit" style="width: 200px;" class="btn btn-default">${profile_save_changes_value}</button>
                         <div class="form-footer">
-<%--                            <span class="span-text">${signup_span_value}</span>--%>
-<%--                            <a href="#" onclick="signUpPage.openSignInPage()" class="signUp">${signup_signin_value}</a>--%>
                         </div>
-
                     </form>
                 </div>
             </div>

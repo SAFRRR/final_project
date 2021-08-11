@@ -35,7 +35,7 @@
                     <c:if test="${duplicateEmail}">
                         <div class="alert alert-warning">${signup_error_email_value}</div>
                     </c:if>
-                    <form class="form-horizontal" style="margin-top: 50px" action="${pageContext.request.contextPath}/controller" method="post"  id="form-signUp" novalidate> <%-- <form id="form-register" class="needs-validation" novalidate>--%>
+                    <form class="form-horizontal" style="margin-top: 50px" action="${pageContext.request.contextPath}/controller" method="post"  id="form-signUp">
                         <input type="hidden" name="command" value="sign_up_command"/>
                         <div class="heading">${signup_title_value}</div>
                         <div class="form-group">
@@ -71,12 +71,14 @@
                         <div class="form-group">
                             <i class="fas fa-map-marker-alt"></i>
                             <input class="form-control" type="text" id="form-signUp-address" name="address"
-                                   placeholder="${signup_address_value}">
+                                   placeholder="${signup_address_value}"
+                                   pattern="${attribute_regexp_address}"
+                                   required>
                         </div>
                         <button type="submit"  class="btn btn-default">${signup_submit_value}</button>
                         <div class="form-footer">
                             <span class="span-text">${signup_span_value}</span>
-                            <a hhref="${pageContext.request.contextPath}/controller?command=go_to_signin_page_command"  class="signUp">${signup_signin_value}</a>
+                            <a href="${pageContext.request.contextPath}/controller?command=go_to_signin_page_command" class="signUp">${signup_signin_value}</a>
                         </div>
                     </form>
                 </div>

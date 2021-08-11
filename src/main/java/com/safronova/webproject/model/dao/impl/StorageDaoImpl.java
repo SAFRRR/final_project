@@ -27,7 +27,7 @@ public class StorageDaoImpl implements StorageDao {
                     "WHERE (st_dessert_id = ?)";
 
     private static final String INSERT_STORAGE_SQL =
-            "INSERT INTO storages (st_count, st_dessert_id)" +
+            "INSERT INTO storages (st_count, st_dessert_id) " +
                     "VALUES (?,?)";
 
     private static final String SET_STORAGE_COUNT =
