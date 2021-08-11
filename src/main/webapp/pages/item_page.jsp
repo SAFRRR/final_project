@@ -23,9 +23,9 @@
 <body >
 <jsp:include page="common/header.jsp"/>
 
-    <div class="row" style="  margin-top: 20px;" >
+    <div class="row" style="  margin-top: 20px; color: #e1791a; margin-left: 650px" >
             <h2 class="section-headline">
-                <span>Category</span>
+                <span>${dessertTypeSelected.description}</span>
             </h2>
     </div>
     <div class="container" style=" display: flex; flex-direction: row; flex-wrap: wrap;  align-items: center; justify-content: center;">

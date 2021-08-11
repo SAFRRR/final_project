@@ -16,11 +16,9 @@
 <html lang="en">
 <body>
 <jsp:include page="common/header.jsp"/>
-
-<img class="home-image" src="../static/images/bakery1.jpg" style="height: 500px; margin-left: 60px; margin-top: 55px; float: left; ">
-<p style="margin-top: 47px; margin-left: 970px; margin-right: 30px; text-align: justify;font-family: 'Roboto', sans-serif;  font-size: 24px">${locale_main_intro}</p>
-<p style="margin-top: 15px; margin-left: 970px; margin-right: 30px; text-align: justify; font-family: 'Roboto', sans-serif; font-weight: 500; font-size: 24px">${locale_main_intro_second}</p>
-
+<img class="home-image" src="../static/images/bakery1.jpg" alt="">
+<p class="home-intro" style="margin-top: 90px;">${locale_main_intro}</p>
+<p class="home-intro" style="margin-top: 15px;">${locale_main_intro_second}</p>
 <jsp:include page="common/footer.jsp"/>
 </body>
 </html>
