@@ -2,9 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <body>
-
-<a class="navbar-brand" href="${pageContext.request.contextPath}/controller?command=go_to_home_page_command"><svg height="55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 441.64 403.36" style="enable-background:new 0 0 441.64 403.36;" xml:space="preserve">
-	        <style type="text/css">.st0{fill: #e1791a;}</style><g>
+<a class="navbar-brand" href="${pageContext.request.contextPath}/controller?command=go_to_home_page_command"><svg height="55" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 441.64 403.36" style="enable-background:new 0 0 441.64 403.36;" xml:space="preserve"><style type="text/css">.st0{fill: #e1791a;}</style><g>
     <path class="st0" d="M185.42,305.24c-19.85,3.96-39.47,8.41-59.3,11.68c-19.29,3.18-38.72,6.12-58.21,7.41
 		            c-23.13,1.52-35.5-10.78-35.42-33.77c0.03-8.95-0.92-16.56-7.41-23.8c-6.42-7.16-4.26-16.27-1.13-24.73
 		        c2.86-7.72,6.57-15.31,8.12-23.3c2.54-13.03,0.16-24.4-11.75-33.58c-12.4-9.55-11.8-35.75-3.47-48.26
@@ -381,7 +379,6 @@
     </g>
 </g>
 </svg>
-
 </a>
 </body>
 </html>
