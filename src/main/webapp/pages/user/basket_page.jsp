@@ -27,8 +27,6 @@
 
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
-
-
     <div class="container2" style=" display: flex; flex-direction: row; flex-wrap: wrap;  align-items: center; justify-content: center;">
 
     <c:forEach items="${basketDessertList}" var="basketDessert">
@@ -39,8 +37,7 @@
             <button type="submit" style="margin-left: 243px"  class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
         </form>
         <form class="form-horizontal" style="width: 280px; height:500px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;margin-right: 20px; " >
-<%--            <input hidden="hidden" name="id" value="${basketDessert.id}"/>--%>
-            <img style="width: 200px" class="img-responsive dessert" src="./static/images/${basketDessert.dessert.dessertImage}">
+           <img style="width: 200px" class="img-responsive dessert" src="./static/images/${basketDessert.dessert.dessertImage}">
             <h4 style="text-align: center; margin-top: 15px">${basketDessert.dessert.name}</h4>
             <p style="text-align: center;margin-top: 10px">${basketDessert.dessert.price} BYN</p>
             <c:if test="${basketDessert.dessert.storage.count < 11 && basketDessert.dessert.storage.count > 0}">
@@ -59,13 +56,10 @@
             </form>
         </form>
         </div>
-
     </c:forEach>
-
-
     </div>
 
-    <form class="form-horizontal" style="width: 420px; height:80px; margin-top: 5px; margin-left: 48px;margin-right: 20px; " >
+    <form class="form-horizontal" style="width: 500px; height:80px; margin-top: 5px; margin-left: 48px;margin-right: 20px; " >
             <h4 style="float: left; margin-top: -15px"><strong style="font-size: large">${locale_total_price}</strong>
                 <span style="color: orangered; font-size: large"><span>${basket.totalCost}</span>BYN&nbsp;&nbsp;</span></h4>
         <form action="controller" method="post">
@@ -77,7 +71,7 @@
     </form>
 
 
-        </div>
-        </body>
-        </html>
+</div>
+</body>
+</html>
 

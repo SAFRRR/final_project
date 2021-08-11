@@ -86,12 +86,26 @@
                 </div>
 
                 <!--Upload image-->
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="image">${locale_dessert_image}</label>
-                    <div class="col-md-8">
-                        <input id="image" type="file" name="image"/>
-                    </div>
+                <div class="example-1" style="padding:1em;margin:1em">
+                    <div class="form-group">
+                        <label class="label" style="width:120px;border:2px dashed grey;border-radius:5px;display:block;padding:1.2em;transition:border 300ms ease;cursor:pointer;text-align:center">
+<%--                            <i class="fas fa-paperclip" style="display:block;font-size:42px;padding-bottom:16px"></i>--%>
+<%--                            <span class="title">Add file</span>--%>
+<%--                    <label class="col-md-2 control-label" for="image">${locale_dessert_image}</label>--%>
+<%--                    <div class="col-md-8">--%>
+                            <input style="outline:0;opacity:0;pointer-events:none;user-select:none" id="image" type="file" name="image"/>
+                        </label>
                 </div>
+                </div>
+
+
+
+<%--                .example-1 .label:hover{border:2px solid #000}--%>
+<%--                .example-1 .label:hover i,.example-1 .label:hover .title{color:#000}--%>
+
+
+
+
 
                 <div class="form-group" style="margin-left: 150px">
                         <button type="submit" class="btn btn-success">${locale_add_item}</button>

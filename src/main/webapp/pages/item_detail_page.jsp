@@ -51,7 +51,8 @@
 
         <p style="width: 413px; text-align: center;">${fn:substring(dessert.description, 0, 500)}</p>
 
-        <p style="text-align: center;"><span >${dessert.weight} gm</span><span>${dessert.price} BYN<span></p>
+        <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
+
 
         <input required type="number" step="1"
                    class="form-control" name="amount" min="1"
