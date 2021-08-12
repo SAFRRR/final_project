@@ -26,9 +26,6 @@
                 <div class="col-md-offset-3 col-md-6">
                     <form id="form-signIn" class="form-horizontal" action="${pageContext.request.contextPath}/controller" method="post">
                         <input type="hidden" name="command" value="sign_in_command">
-                        <c:if test="${wrongData}">
-                            <div class="alert alert-danger">signin_error_value</div>
-                        </c:if>
 
                         <div class="heading">${signin_title_value}</div>
                         <div class="form-group">
@@ -46,6 +43,10 @@
                                    pattern="${attribute_regexp_password}"
                                    required>
                         </div>
+
+                        <c:if test="${wrongData}">
+                            <p style="color: red">${signin_error_value}</p>
+                        </c:if>
 
                         <button type="submit" class="btn btn-default">${signin_submit_value}</button>
 

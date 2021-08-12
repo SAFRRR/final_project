@@ -20,6 +20,7 @@ public final class PagePath {
     public static final String ORDER_ALL_INFO_PAGE = "pages/admin/order_all_info_page.jsp";
     public static final String ORDER_DETAIL_PAGE = "pages/admin/order_detail_page.jsp";
     public static final String GO_TO_SIGNIN_PAGE = "controller?command=go_to_signin_page_command";
+    public static final String GO_TO_SIGNUP_PAGE = "controller?command=go_to_signup_page_command";
     public static final String GO_TO_PROFILE_PAGE = "controller?command=go_to_profile_page_command";
     public static final String GO_TO_ORDER_LIST = "controller?command=go_to_orders_page_command";
     public static final String GO_TO_DESSERT_LIST = "controller?command=go_to_dessert_list_page_command";

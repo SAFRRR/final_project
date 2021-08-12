@@ -91,8 +91,10 @@ public class UserDaoImpl implements UserDao {
                 user.setLastName(resultSet.getString(USERS_LAST_NAME));
                 user.setAddress(resultSet.getString(USERS_ADDRESS));
                 user.setPhone(resultSet.getString(USERS_PHONE));
+                optionalUser = Optional.of(user);
+            }else {
+                return Optional.empty();
             }
-            optionalUser = Optional.of(user);
         } catch (SQLException e) {
             throw new DaoException("Can't handle UserDao.signIn request", e);
         }

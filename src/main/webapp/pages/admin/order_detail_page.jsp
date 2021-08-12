@@ -30,11 +30,12 @@
         <input type="hidden" name="command" value="change_order_status_command"/>
         <input type="hidden" name="orderId" value="${order.id}"/>
         <div class="container">
-            <h3><strong>${locale_order_sum}</strong></h3>
+<%--            <h3><strong>${locale_order_sum}</strong></h3>--%>
+            <div class="heading">${locale_order_sum}</div>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover table-striped">
                     <thead>
-                    <tr>
+                    <tr style="color:  #e1791a;">
                         <td><strong>${locale_item_name}</strong></td>
                         <td class="text-center"><strong>${locale_dessert_price}</strong></td>
                         <td class="text-center"><strong>${locale_item_quantity}</strong></td>
@@ -74,7 +75,7 @@
                 </table>
             </div>
             <br/>
-            <button class="btn btn-success" style=" margin-left: 400px; width: 100px;" type="submit">${locale_main_save}</button>
+            <button class="btn btn-success" style=" margin-left: 400px; width: 150px;" type="submit">${locale_main_save}</button>
             <div class="form-footer" style="opacity:0;">
               </div>
         </div>

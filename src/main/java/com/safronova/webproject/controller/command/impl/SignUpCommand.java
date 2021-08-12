@@ -45,7 +45,7 @@ public class SignUpCommand implements Command {
                     request.setAttribute(RequestAttribute.EMAIL_SENT, true);
                     break;
             }
-            router = new Router(PagePath.GO_TO_SIGNIN_PAGE, RouterType.FORWARD);
+            router = new Router(PagePath.GO_TO_SIGNUP_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at SignUpServlet", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);

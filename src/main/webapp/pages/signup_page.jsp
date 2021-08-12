@@ -32,10 +32,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <c:if test="${duplicateEmail}">
-                        <div class="alert alert-warning">${signup_error_email_value}</div>
-                    </c:if>
-                    <form class="form-horizontal" style="margin-top: 50px" action="${pageContext.request.contextPath}/controller" method="post"  id="form-signUp">
+                    <form class="form-horizontal" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post"  id="form-signUp">
                         <input type="hidden" name="command" value="sign_up_command"/>
                         <div class="heading">${signup_title_value}</div>
                         <div class="form-group">
@@ -75,6 +72,9 @@
                                    pattern="${attribute_regexp_address}"
                                    required>
                         </div>
+                        <c:if test="${duplicateEmail}">
+                            <p style="color: red">${signup_error_email_value}</p>
+                        </c:if>
                         <button type="submit"  class="btn btn-default">${signup_submit_value}</button>
                         <div class="form-footer">
                             <span class="span-text">${signup_span_value}</span>
