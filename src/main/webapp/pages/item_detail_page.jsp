@@ -43,10 +43,6 @@
 
         <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
 
-<%--        <input required type="number" step="1"--%>
-<%--                   class="form-control" name="amount" min="1"--%>
-<%--                   max="${storage.count}"--%>
-<%--                   placeholder="${locale_order_amount}"/>--%>
         <c:if test="${storage.count > 0}">
             <input required type="number" step="1"
                    class="form-control" name="amount" min="1"

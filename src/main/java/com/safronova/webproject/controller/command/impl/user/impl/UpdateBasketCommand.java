@@ -26,7 +26,7 @@ public class UpdateBasketCommand extends UserCommand {
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
 
         try {
-           basketDessertService.updateBasketDessert(basketDessertId, count);
+            basketDessertService.updateBasketDessert(basketDessertId, count);
             router = new Router(PagePath.GO_TO_BASKET_PAGE, RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.error("Error at UpdateBasketCommand", e);

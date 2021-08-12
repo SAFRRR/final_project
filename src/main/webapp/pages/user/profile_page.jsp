@@ -24,6 +24,10 @@
 <fmt:message key="signup.new.password.confirm" var="signup_new_password_confirm_value"/>
 <fmt:message key="profile.save.changes" var="profile_save_changes_value"/>
 <fmt:message key="profile.settings" var="profile_settings_value"/>
+<fmt:message key="edit.passwords" var="edit_passwords_value"/>
+<fmt:message key="edit.password" var="edit_password_value"/>
+<fmt:message key="edit.result" var="edit_result_value"/>
+
 
 
 <!DOCTYPE html>
@@ -36,67 +40,69 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form id="form-signIn" class="form-horizontal" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post" novalidate >
+                    <form id="form-signIn" class="form-horizontal" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post">
                         <input type="hidden" name="command" value="settings_edit_command">
                         <div class="heading" style="margin-top: -20px">${profile_settings_value}</div>
 
                         <div class="form-group">
                                 <input class="form-control" style="margin-top: -10px" type="text" id="firstName" name="firstName"
                                        placeholder="${signup_name_value}"
-                                   pattern="${attribute_regexp_fio}" value="${user.firstName}"/>
+                                   pattern="${attribute_regexp_fio}" value="${user.firstName}" required>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="lastName" name="lastName"
                                    placeholder="${signup_surname_value}"
-                                   pattern="${attribute_regexp_fio}" value="${user.lastName}"/>
+                                   pattern="${attribute_regexp_fio}" value="${user.lastName}" required>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="username" name="username"
                                    placeholder="${signup_username_value}"
-                                   pattern="${attribute_regexp_username}" value="${user.username}"/>
+                                   pattern="${attribute_regexp_username}" value="${user.username}" required>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="phone" name="phone"
                                    placeholder="${signup_phone_value}"
-                                   pattern="${attribute_regexp_phone_number}" value="${user.phone}"/>
+                                   pattern="${attribute_regexp_phone_number}" value="${user.phone}" required>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="address" name="address"
                                    placeholder="${signup_address_value}"
-                                   value="${user.address}"/>
+                                   value="${user.address}" required />
                         </div>
 
                         <div class="form-group">
-<%--                            <c:if test="${currentPasswordNotEquals}">--%>
-<%--                                <div class="alert alert-danger">Current password is wrong!</div>--%>
-<%--                            </c:if>--%>
-                            <input required type="password" class="form-control" id="currentPassword"
+                            <input  type="password" class="form-control" id="currentPassword"
                                    placeholder="${signup_current_password_value}"
-                                   name="currentPassword" pattern="${attribute_regexp_password}"/>
+                                   name="currentPassword" pattern="${attribute_regexp_password}" required>
                         </div>
 
                         <div class="form-group">
-                            <c:if test="${passwordNotEquals}">
-                                <div class="alert alert-danger">${signup_password_notequal_value}
-                                    fields
-                                </div>
+                            <c:if test="${currentPasswordNotEquals}">
+                                <p style="color: red">${edit_password_value}</p>
                             </c:if>
 
                             <input type="password" class="form-control" id="newPassword"
                                    placeholder="${signup_new_password_value}"
-                                   name="newPassword" pattern="${attribute_regexp_password}"/>
+                                   name="newPassword" pattern="${attribute_regexp_password}" required>
                         </div>
 
                         <div class="form-group">
                             <input type="password" class="form-control" id="confirmPassword"
                                    placeholder="${signup_new_password_confirm_value}"
-                                   name="confirmPassword" pattern="${attribute_regexp_password}"/>
+                                   name="confirmPassword" pattern="${attribute_regexp_password}" required>
                         </div>
+                        <c:if test="${passwordNotEquals}">
+                            <p style="color: red">${edit_passwords_value}</p>
+                        </c:if>
 
-                        <button type="submit" style="width: 200px;" class="btn btn-default">${profile_save_changes_value}</button>
+                        <c:if test="${updateUserInfo}">
+                            <p style="color: green">${edit_result_value}</p>
+                        </c:if>
+
+                        <button type="submit" style="width: 300px; margin-left: 30px" class="btn btn-default">${profile_save_changes_value}</button>
                         <div class="form-footer">
                         </div>
                     </form>
