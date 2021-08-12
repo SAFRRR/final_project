@@ -43,24 +43,24 @@
 
         <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
 
-        <input required type="number" step="1"
+<%--        <input required type="number" step="1"--%>
+<%--                   class="form-control" name="amount" min="1"--%>
+<%--                   max="${storage.count}"--%>
+<%--                   placeholder="${locale_order_amount}"/>--%>
+        <c:if test="${storage.count > 0}">
+            <input required type="number" step="1"
                    class="form-control" name="amount" min="1"
                    max="${storage.count}"
                    placeholder="${locale_order_amount}"/>
-
-        <c:if test="${storage.count >= 11}">
-            <h4 style="color: green">${locale_storage_dessert}</h4>
-        </c:if>
-        <c:if test="${storage.count < 11 && storage.count > 0}">
             <p style="color: red; margin-left: 20px;">
                 <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
             </p>
         </c:if>
         <c:if test="${storage.count==0}">
-            <h4 style="color: darkred">${locale_dessert_unavailable}</h4>
+            <p style="color: red; text-align: center">${locale_dessert_unavailable}</p>
         </c:if>
 
-        <button type="submit"  class="btn btn-default">${locale_basket_add}</button>
+        <button type="submit" style="margin-left: 108px" class="btn btn-default">${locale_basket_add}</button>
         <div class="form-footer" style="padding-top: 1px"></div>
     </form>
 </div>

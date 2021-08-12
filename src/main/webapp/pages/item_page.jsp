@@ -14,7 +14,7 @@
     <div class="container" style=" display: flex; flex-direction: row; flex-wrap: wrap;  align-items: center; justify-content: center;">
         <c:forEach var="dessert" items="${dessertList}">
         <c:if test="${dessert != null}">
-            <form class="form-horizontal" style="width: 400px; height:600px; margin-top: 50px; margin-left: 0;margin-right: 20px; " >
+            <form class="form-horizontal" style="width: 400px; height:600px; margin: 20px 20px 10px 0;" >
                 <input type="hidden" value="${dessert.id}" name="dessertId">
                 <a href="${pageContext.request.contextPath}/controller?command=go_to_dessert_detail_page_command&dessertId=${dessert.id}">
                     <img class="img-responsive" src="./static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>

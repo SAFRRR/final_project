@@ -33,7 +33,7 @@ public class SignUpCommand implements Command {
 
         signUpData.setPassword(password);
         signUpData.setEmail(email);
-
+        router = new Router(PagePath.GO_TO_SIGNUP_PAGE, RouterType.FORWARD);
         try {
             ResultCode resultCode = userService.signUp(signUpData);
             switch (resultCode) {
@@ -43,9 +43,9 @@ public class SignUpCommand implements Command {
                 case SUCCESS:
                     MailSender.send(email, MailSender.messageEmailUser(username, password));
                     request.setAttribute(RequestAttribute.EMAIL_SENT, true);
+                    router = new Router(PagePath.EMAIL_PAGE, RouterType.FORWARD);
                     break;
             }
-            router = new Router(PagePath.GO_TO_SIGNUP_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at SignUpServlet", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
