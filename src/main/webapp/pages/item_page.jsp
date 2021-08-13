@@ -17,7 +17,7 @@
             <form class="form-horizontal" style="width: 400px; height:600px; margin: 20px 20px 10px 0;" >
                 <input type="hidden" value="${dessert.id}" name="dessertId">
                 <a href="${pageContext.request.contextPath}/controller?command=go_to_dessert_detail_page_command&dessertId=${dessert.id}">
-                    <img class="img-responsive" src="./static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>
+                    <img class="img-responsive" src="static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>
                 </a>
                 <h4 style="text-align: center; margin-top: 15px">${dessert.name}</h4>
 <%--                <p style="text-align: center;margin-top: 10px">${dessert.price} BYN</p>--%>

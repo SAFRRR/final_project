@@ -47,6 +47,8 @@ public final class RequestAttribute {
     public static final String EXCEPTION_CLASS = "javax.servlet.error.exception";
     public static final String ORDER_LIST = "orderList";
     public static final String CURRENT_PAGE = "currentPage";
+    public static final String IMAGE = "image";
+
 
     private RequestAttribute() {
     }

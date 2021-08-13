@@ -26,7 +26,14 @@
     <br/>
     <!--Table Header-->
     <div class="table-responsive" >
-        <table class="table table-bordered table-hover table-striped">
+        <table class="table table-bordered table-hover">
+            <style>
+                tr:hover {
+                    background: #ffe1be; /* Цвет фона под ссылкой */
+                    /*color: #ffe; !* Цвет ссылки *!*/
+                }
+            </style>
+<%--            <table class="table">--%>
             <thead>
             <tr>
                 <th style="text-align: center; color: #e1791a;">${locale_main_name}</th>
@@ -48,7 +55,7 @@
 
                     <td>${dessert.weight}</td>
 
-                    <td>${dessert.description}</td>
+                    <td style="width: 450px">${dessert.description}</td>
 
                     <td>${dessert.price}</td>
 
@@ -58,13 +65,13 @@
                         <form action="controller" method="post">
                             <input type="hidden" name="command" value="go_to_update_dessert_page_command"/>
                             <input type="hidden" name="dessertId" value="${dessert.id}"/>
-                            <button class="btn btn-default" type="submit">${locale_common_edit}</button>
+                            <button style="color:  #e1791a; text-decoration: underline" class="btn btn-default" type="submit">${locale_common_edit}</button>
                         </form>
 
                         <form action="controller" method="post">
                             <input type="hidden" name="command" value="delete_dessert_command"/>
                             <input type="hidden" name="dessertId" value="${dessert.id}"/>
-                            <button type="submit" class="btn btn-default">${locale_operation_delete}</button>
+                            <button style="color:  #e1791a; text-decoration: underline" type="submit" class="btn btn-default">${locale_operation_delete}</button>
                         </form>
                     </td>
                 </tr>
