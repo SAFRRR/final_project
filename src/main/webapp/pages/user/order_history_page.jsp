@@ -26,11 +26,10 @@
 <div class="container">
     <div class="panel-group">
         <div class="panel panel-default">
-            <div class="panel-body" style="background-color: #f3f3f3;; margin-top: 20px;">
-<%--                <table class="table table-sm table-inverse">--%>
+            <div class="panel-body" style="margin-top: 20px;">
                     <table style="text-align: center; border-color: #e1791a;" class="table table-bordered table-hover">
                     <thead>
-                    <tr>
+                    <tr style="background-color: rgb(251,241,233)">
                         <th>${locale_order_date}</th>
                         <th>${locale_order_number}</th>
                         <th>${locale_order_total}</th>
@@ -68,9 +67,3 @@
 </div>
 </body>
 </html>
-
-
-<!--Order Info-->
-
-
-
