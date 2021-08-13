@@ -11,6 +11,8 @@ public interface BasketDessertDao {
 
     List<BasketDessert> findByBasketId(Integer id) throws DaoException;
 
+    List<BasketDessert> findByDessertId(Integer id) throws DaoException;
+
     void updateSubTotal(BasketDessert basketDessert) throws DaoException;
 
     void updateCount(BasketDessert basketDessert) throws DaoException;

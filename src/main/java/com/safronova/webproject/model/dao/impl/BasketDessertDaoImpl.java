@@ -40,6 +40,13 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
                     "INNER JOIN storages ON desserts.d_id = storages.st_dessert_id "+
                     "WHERE (bd_basket_id = ?)";
 
+    private static final String SELECT_ITEMS_BY_DESSERT_ID_SQL =
+            "SELECT bd_id, bd_basket_id, bd_dessert_id, bd_count, bd_sub_total, d_image, d_name, d_price, st_count "+
+                    "FROM basket_desserts "+
+                    "INNER JOIN desserts ON bd_dessert_id = desserts.d_id "+
+                    "INNER JOIN storages ON desserts.d_id = storages.st_dessert_id "+
+                    "WHERE (bd_dessert_id = ?)";
+
     private static final String ADD_ITEM_SQL =
             "INSERT INTO basket_desserts (bd_basket_id, bd_dessert_id, bd_count, bd_sub_total)"+
                     "VALUES(?,?,?,?)";
@@ -132,6 +139,40 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
         }
         return basketDessertList;
     }
+
+
+    @Override
+    public List<BasketDessert> findByDessertId(Integer id) throws DaoException {
+        List<BasketDessert> basketDessertList = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ITEMS_BY_DESSERT_ID_SQL)) {
+            statement.setInt(BasketDessertDaoImpl.ItemIndex.BASKET_ID, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                BasketDessert basketDessert = new BasketDessert();
+                Dessert dessert = new Dessert();
+                Basket basket = new Basket();
+                Storage storage = new Storage();
+                basketDessert.setId(resultSet.getInt(BASKET_DESSERT_ID));
+                basketDessert.setBasket(basket);
+                basketDessert.setDessert(dessert);
+                basketDessert.setSubTotal(resultSet.getBigDecimal(BASKET_DESSERT_SUB_TOTAL));
+                basketDessert.setCount(resultSet.getInt(BASKET_DESSERT_COUNT));
+                dessert.setId(resultSet.getInt(BASKET_DESSERT_DESSERT_ID));
+                dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
+                dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setStorage(storage);
+                dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
+                basket.setId(resultSet.getInt(BASKET_DESSERT_BASKET_ID));
+                storage.setCount(resultSet.getInt(STORAGE_COUNT));
+                basketDessertList.add(basketDessert);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle BasketDessertDao.findByBasketId request", e);
+        }
+        return basketDessertList;
+    }
+
 
     @Override
     public void updateSubTotal(BasketDessert basketDessert) throws DaoException {

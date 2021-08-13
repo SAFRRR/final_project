@@ -33,6 +33,12 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
                     "JOIN desserts ON ordered_desserts.od_dessert_id = desserts.d_id "+
                     "WHERE od_order_id = ?";
 
+    private static final String SELECT_ORDER_DESSERT_BY_DESSERT_SQL =
+            "SELECT d_name, d_price, od_count, od_sub_total "+
+                    "FROM ordered_desserts "+
+                    "JOIN desserts ON ordered_desserts.od_dessert_id = desserts.d_id "+
+                    "WHERE od_dessert_id = ?";
+
     @Override
     public void saveOrderDessert(OrderDessert orderDessert) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -45,6 +51,29 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         } catch (SQLException e) {
             throw new DaoException("Can't handle OrderDessertDao.saveOrderDessert request", e);
         }
+    }
+
+    @Override
+    public List<OrderDessert> findByDessertId(Integer id) throws DaoException {
+        List<OrderDessert> orderDessertList = new ArrayList<>();
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(SELECT_ORDER_DESSERT_BY_DESSERT_SQL)) {
+            statement.setInt(OrderDessertDaoImpl.SelectOrderDessertByDesseertIndex.DESSERT_ID, id);
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                OrderDessert orderDessert = new OrderDessert();
+                Dessert dessert = new Dessert();
+                dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
+                orderDessert.setCount(resultSet.getInt(ORDER_DESSERT_COUNT));
+                orderDessert.setSubTotal(resultSet.getBigDecimal(ORDER_DESSERT_SUB_TOTAL));
+                orderDessert.setDessert(dessert);
+                orderDessertList.add(orderDessert);
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle OrderDessertDao.findByOrder request", e);
+        }
+        return orderDessertList;
     }
 
     @Override
@@ -79,5 +108,9 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
 
     private static class SelectOrderDessertIndex {
         private static final int ORDER_ID = 1;
+    }
+
+    private static class SelectOrderDessertByDesseertIndex {
+        private static final int DESSERT_ID = 1;
     }
 }

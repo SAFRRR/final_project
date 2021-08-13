@@ -38,6 +38,8 @@ public class FindDessertByCategoryCommand implements Command {
                 request.setAttribute(RequestAttribute.DESSERT_LIST, dessertList);
             }
             session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
+            session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
+            session.setAttribute(RequestAttribute.ADD_FAILED, false);
             router = new Router(PagePath.ITEM_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at FindDessertByCategoryCommand", e);

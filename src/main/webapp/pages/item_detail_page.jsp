@@ -15,6 +15,10 @@
 <fmt:message key="user.basket.add" var="locale_basket_add"/>
 <fmt:message key="main.add.basket" var="locale_add_basket"/>
 <fmt:message key="main.problem.basket" var="locale_problem_basket"/>
+<fmt:message key="add.unable" var="locale_add_unable"/>
+<fmt:message key="add.already" var="locale_add_already"/>
+<fmt:message key="not.enough" var="not_enough_value"/>
+
 
 <!doctype html>
 <html lang="en">
@@ -51,22 +55,32 @@
             <p style="color: red; margin-left: 20px;">
                 <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
             </p>
+            <button type="submit" style="margin-left: 108px;" class="btn btn-default">${locale_basket_add}</button>
+
         </c:if>
         <c:if test="${storage.count==0}">
             <p style="color: red; text-align: center">${locale_dessert_unavailable}</p>
         </c:if>
 
-        <button type="submit" style="margin-left: 108px;" class="btn btn-default">${locale_basket_add}</button>
 
         <c:if test="${addDessertSuccess}">
             <div class="form-group">
-                <p id='app' style="margin-top: -15px;margin-left: 115px; text-align: center; opacity: 1;height: 30px; width: 200px; transition: opacity 500ms;  color:#14AC2E; border-style: solid;border-radius: 15px">${locale_add_basket}</p>
+                <p id='app' style="margin-top: -15px;margin-left: 115px; text-align: center; opacity: 1;height: 30px; width: 200px; transition: opacity 500ms;  color:#14AC2E; ">${locale_add_basket}</p>
             </div>
 
         </c:if>
-        <c:if test="${notEnoughStorage}">
+        <c:if test="${addDessertFailed}">
             <div class="form-group">
-                <p style="color: red; text-align: center">${locale_problem_basket}</p>
+                <p id="fail" style="color: red; margin-top: -20px;margin-left: -8px; text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
+                    ${locale_add_unable} ${addedCount} ${dessert.name} ${locale_add_already} ${basketCount}</p>
+            </div>
+        </c:if>
+
+        <c:if test="${notEnoughStorage}">
+
+            <div class="form-group">
+                <p id="notEnough" style="color: red; margin-top: -20px;margin-left: -8px; text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
+                      ${not_enough_value}</p>
             </div>
         </c:if>
         <div class="form-footer" style="padding-top: 1px"></div>
@@ -81,10 +95,17 @@
                 document.getElementById('app').style.opacity = '0';
             }, 2000);
         }
+        if (document.getElementById('fail') != null) {
+            setTimeout(function() {
+                document.getElementById('fail').style.opacity = '0';
+            }, 3000);
+        }
+        if (document.getElementById('notEnough') != null) {
+            setTimeout(function() {
+                document.getElementById('notEnough').style.opacity = '0';
+            }, 3000);
+        }
     }
 
     initialSetup();
-
-
 </script>
-

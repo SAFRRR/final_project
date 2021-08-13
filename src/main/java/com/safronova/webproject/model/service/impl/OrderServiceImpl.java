@@ -83,6 +83,17 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
+    public List<OrderDessert> findByDessert(int id) throws ServiceException {
+        List<OrderDessert> orderDessertList;
+        try {
+            orderDessertList = orderDessertDao.findByDessertId(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Can't handle findByDessertId request at OrderService", e);
+        }
+        return orderDessertList;
+    }
+
+    @Override
     public void changeStatus(String orderStatus, String orderId) throws ServiceException {
         try {
             int id = Integer.parseInt(orderId);

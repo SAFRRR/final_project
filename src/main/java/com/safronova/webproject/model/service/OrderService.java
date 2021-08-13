@@ -11,6 +11,8 @@ public interface OrderService {
 
     List<OrderDessert> createOrderDessertByOrder(Order order, List<BasketDessert> basketDessertList) throws ServiceException;
 
+    List<OrderDessert> findByDessert(int id) throws ServiceException;
+
     Order saveOrder(Order order) throws ServiceException;
 
     List<Order> findByUser(Integer id) throws ServiceException;

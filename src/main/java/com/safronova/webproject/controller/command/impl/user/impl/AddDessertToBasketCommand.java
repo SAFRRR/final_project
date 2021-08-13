@@ -7,14 +7,16 @@ import com.safronova.webproject.controller.command.Router;
 import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.controller.command.impl.user.UserCommand;
 import com.safronova.webproject.exception.ServiceException;
-import com.safronova.webproject.model.entity.Basket;
-import com.safronova.webproject.model.entity.User;
+import com.safronova.webproject.model.entity.*;
 import com.safronova.webproject.model.service.BasketDessertService;
+import com.safronova.webproject.model.service.OrderService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import java.util.List;
 
 public class AddDessertToBasketCommand extends UserCommand {
     private static final Logger logger = LogManager.getLogger();
@@ -35,12 +37,46 @@ public class AddDessertToBasketCommand extends UserCommand {
         try {
             Basket basket = user.getBasket();
             if (Integer.parseInt(count) > Integer.parseInt(storageAmount)) {
-                request.setAttribute(RequestAttribute.NOT_ENOUGH, true);
-                router = new Router(PagePath.GO_TO_DESSERT_DETAIL, RouterType.FORWARD);
+                session.setAttribute(RequestAttribute.NOT_ENOUGH, true);
+                session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
+                session.setAttribute(RequestAttribute.ADD_FAILED , false);
+                String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
+                router = new Router(page, RouterType.REDIRECT);
             } else {
-                basketDessertService.addToBasket(basket.getId(), dessertId, count, price);
-//                request.setAttribute(RequestAttribute.ADD_SUCCESS, true);
-                session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
+//                List<OrderDessert> orderDesserts = orderService.findByDessert(Integer.parseInt(dessertId));
+                List<BasketDessert> basketDesserts = basketDessertService.findByDessertId(Integer.parseInt(dessertId));
+                if (basketDesserts.isEmpty()){
+                    basketDessertService.addToBasket(basket.getId(), dessertId, count, price);
+                    session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
+                    session.setAttribute(RequestAttribute.ADD_FAILED , false);
+                    session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
+                    String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
+                    router = new Router(page, RouterType.REDIRECT);
+                }
+                else{
+                    int existCount = basketDesserts.get(0).getCount();
+                    if (Integer.parseInt(count) + existCount > Integer.parseInt(storageAmount)){
+                        session.setAttribute(RequestAttribute.ADD_FAILED , true);
+                        session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
+                        session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
+                        session.setAttribute(RequestAttribute.ADDED_COUNT, count);
+                        session.setAttribute(RequestAttribute.BASKET_COUNT, existCount);
+                        String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
+                        router = new Router(page, RouterType.REDIRECT);
+                    }else{
+                       int newCount = Integer.parseInt(count) + existCount;
+                       int basketDessertId = basketDesserts.get(0).getId();
+                       basketDessertService.updateBasketDessert(String.valueOf(basketDessertId), String.valueOf(newCount));
+                       session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
+                        session.setAttribute(RequestAttribute.ADD_FAILED , false);
+                        session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
+                       String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
+                       router = new Router(page, RouterType.REDIRECT);
+                    }
+
+                }
+//                basketDessertService.addToBasket(basket.getId(), dessertId, count, price);
+//                session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
                 String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
                 router = new Router(page, RouterType.REDIRECT);
             }

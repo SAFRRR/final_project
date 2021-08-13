@@ -43,6 +43,17 @@ public class BasketDessertServiceImpl implements BasketDessertService {
     }
 
     @Override
+    public List<BasketDessert> findByDessertId(int id) throws ServiceException {
+        List<BasketDessert> basketDessertList;
+        try {
+            basketDessertList = basketDessertDao.findByDessertId(id);
+        } catch (DaoException e) {
+            throw new ServiceException("Can't handle findByDessertId request at BasketDessertService", e);
+        }
+        return basketDessertList;
+    }
+
+    @Override
     public void updateBasketDessert(String basketDessertId, String count) throws ServiceException {
         if (!DessertValidator.validateQuantity(count)) {
             throw new ServiceException("Data didn't passed validation");

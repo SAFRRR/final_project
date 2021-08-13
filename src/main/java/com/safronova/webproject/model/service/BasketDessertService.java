@@ -11,6 +11,8 @@ public interface BasketDessertService {
 
     List<BasketDessert> findByBasketId(int id) throws ServiceException;
 
+    List<BasketDessert> findByDessertId(int id) throws ServiceException;
+
     void updateBasketDessert(String basketDessertId, String count) throws ServiceException;
 
     void deleteBasketDessert(String basketDessertId) throws ServiceException;
