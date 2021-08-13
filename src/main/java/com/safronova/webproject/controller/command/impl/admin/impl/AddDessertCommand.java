@@ -7,12 +7,14 @@ import com.safronova.webproject.controller.command.Router;
 import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.controller.command.impl.admin.AdminCommand;
 import com.safronova.webproject.exception.ServiceException;
+import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
 import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.DessertTypeService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import com.safronova.webproject.model.service.StorageService;
+import com.safronova.webproject.model.util.MailSender;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
@@ -49,21 +51,45 @@ public class AddDessertCommand extends AdminCommand {
 
         try {
             DessertType dessertType = dessertTypeService.findById(category);
-            Dessert dessert = dessertService.createDessert(nameDessert, description, price,  weight,  dessertType);
-            storageService.createStorage(dessert, count);
-            inputFile = request.getPart(RequestParameter.IMAGE);
-            inputStream = inputFile.getInputStream();
-            byte[] buffer = new byte[inputStream.available()];
-            inputStream.read(buffer);
-            final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
-            File imageFile = new File(path + dessert.getDessertImage());
-            if (!imageFile.exists()) {
-                imageFile.createNewFile();
+
+            ResultCode resultCode = dessertService.findDessertByName(nameDessert);
+            if (resultCode == ResultCode.ERROR_DUPLICATE_NAME){
+                request.getSession().setAttribute(RequestAttribute.DUPLICATE_NAME, true);
+                router = new Router(PagePath. GO_TO_ADD_DESSERT_PAGE_COMMAND, RouterType.REDIRECT);
+            }else{
+                Dessert dessert = dessertService.createDessert(nameDessert, description, price,  weight,  dessertType);
+                storageService.createStorage(dessert, count);
+                inputFile = request.getPart(RequestParameter.IMAGE);
+                inputStream = inputFile.getInputStream();
+                byte[] buffer = new byte[inputStream.available()];
+                inputStream.read(buffer);
+                final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
+                File imageFile = new File(path + dessert.getDessertImage());
+                if (!imageFile.exists()) {
+                    imageFile.createNewFile();
+                }
+                outStream = new FileOutputStream(imageFile);
+                outStream.write(buffer);
+                outStream.close();
+                router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
             }
-            outStream = new FileOutputStream(imageFile);
-            outStream.write(buffer);
-            outStream.close();
-            router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
+
+
+//            Dessert dessert = dessertService.createDessert(nameDessert, description, price,  weight,  dessertType);
+//            storageService.createStorage(dessert, count);
+//            inputFile = request.getPart(RequestParameter.IMAGE);
+//            inputStream = inputFile.getInputStream();
+//            byte[] buffer = new byte[inputStream.available()];
+//            inputStream.read(buffer);
+//            final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
+//            File imageFile = new File(path + dessert.getDessertImage());
+//            if (!imageFile.exists()) {
+//                imageFile.createNewFile();
+//            }
+//            outStream = new FileOutputStream(imageFile);
+//            outStream.write(buffer);
+//            outStream.close();
+//            router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
         } catch (ServiceException | IOException | ServletException e) {
             logger.error("Error at AddItemCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);

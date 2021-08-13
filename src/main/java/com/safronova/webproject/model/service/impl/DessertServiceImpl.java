@@ -4,10 +4,13 @@ import com.safronova.webproject.exception.DaoException;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.dao.DaoProvider;
 import com.safronova.webproject.model.dao.DessertDao;
+import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
+import com.safronova.webproject.model.entity.SignUpData;
 import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.validator.DessertValidator;
+import com.safronova.webproject.model.validator.UserValidator;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -54,6 +57,20 @@ public class DessertServiceImpl implements DessertService {
             throw new ServiceException("Can't handle findById request at DessertService", e);
         }
         return dessert;
+    }
+
+
+    @Override
+    public ResultCode findDessertByName(String name) throws ServiceException {
+        if(!DessertValidator.validateName(name)){
+            throw new ServiceException("Dessert name didn't passed validation");
+        }else{
+            try {
+                return dessertDao.findDessertByName(name);
+            } catch (DaoException e) {
+                throw new ServiceException("Can't handle findDessertByName request at DessertService", e);
+            }
+        }
     }
 
     @Override

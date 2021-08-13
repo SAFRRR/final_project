@@ -6,6 +6,7 @@ public final class RequestAttribute {
     public static final String EXCEPTION = "exception";
     public static final String ROLE = "role";
     public static final String DUPLICATE_EMAIL = "duplicateEmail";
+    public static final String DUPLICATE_NAME = "duplicateName";
     public static final String EMAIL_SENT = "emailSent";
     public static final String WRONG_DATA = "wrongData";
     public static final String USER = "user";

@@ -2,11 +2,11 @@ package com.safronova.webproject.model.dao.impl;
 
 import com.safronova.webproject.exception.DaoException;
 import com.safronova.webproject.model.dao.DessertDao;
-import com.safronova.webproject.model.entity.Dessert;
-import com.safronova.webproject.model.entity.DessertCategory;
-import com.safronova.webproject.model.entity.DessertType;
-import com.safronova.webproject.model.entity.Storage;
+import com.safronova.webproject.model.dao.ResultCode;
+import com.safronova.webproject.model.entity.*;
 import com.safronova.webproject.model.pool.ConnectionPool;
+import com.safronova.webproject.model.util.PasswordEncryptor;
+
 import static com.safronova.webproject.model.dao.ColumnName.*;
 
 import java.sql.*;
@@ -24,7 +24,7 @@ public class DessertDaoImpl implements DessertDao {
     }
 
     private static final String SELECT_ALL_DESSERT_SQL =
-            "SELECT d_id, d_name, d_description, d_price, d_image " +
+            "SELECT d_id, d_name, d_description, d_price, d_weight,  d_image " +
                     "FROM desserts";
 
     private static final String SELECT_ALL_DESSERT_LIST_SQL =
@@ -35,7 +35,7 @@ public class DessertDaoImpl implements DessertDao {
 
 
     private static final String FIND_DESSERT_BY_CATEGORY =
-            "SELECT d_id, d_name, d_description, d_price, d_image "+
+            "SELECT d_id, d_name, d_description,  d_price, d_weight, d_image "+
                     "FROM desserts " +
                     "JOIN dessert_types ON desserts.d_dessert_type_id = dessert_types.dt_id "+
                     "WHERE (d_dessert_type_id = ?)";
@@ -66,6 +66,28 @@ public class DessertDaoImpl implements DessertDao {
             "DELETE FROM desserts "+
                     "WHERE d_id = ?";
 
+    private static final String SELECT_NAME_SQL =
+            "SELECT d_name " +
+                    "FROM desserts " +
+                    "WHERE (d_name=?)";
+
+
+
+    @Override
+    public ResultCode findDessertByName(String name) throws DaoException {
+       try (Connection connection = ConnectionPool.getInstance().getConnection();
+                 PreparedStatement statement = connection.prepareStatement(SELECT_NAME_SQL)) {
+                statement.setString(1, name);
+                ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                return ResultCode.ERROR_DUPLICATE_NAME;
+            }else {
+                return ResultCode.SUCCESS;
+            }
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle DessertDao.findDessertByName request", e);
+        }
+    }
 
     @Override
     public Dessert createDessert(Dessert dessert) throws DaoException {
@@ -127,6 +149,7 @@ public class DessertDaoImpl implements DessertDao {
                 dessert.setId(resultSet.getInt(DESSERT_ID));
                 dessert.setName(resultSet.getString(DESSERT_NAME));
                 dessert.setDescription(resultSet.getString(DESSERT_DESCRIPTION));
+                dessert.setWeight(resultSet.getInt(DESSERT_WEIGHT));
                 dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
                 dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
                 dessertList.add(dessert);

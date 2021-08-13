@@ -21,6 +21,7 @@
 <fmt:message key="admin.dessert.image" var="locale_dessert_image"/>
 <fmt:message key="main.add.item" var="locale_add_item"/>
 <fmt:message key="main.cancel" var="locale_main_cancel"/>
+<fmt:message key="main.exist" var="locale_main_exist"/>
 
 
 
@@ -41,20 +42,21 @@
                 <input type="hidden" name="command" value="add_dessert_command"/>
                 <legend class="center-block">${locale_add_dessert}</legend>
 
-                <!--Name of Item-->
                 <div class="form-group">
-                        <input type="text" class="form-control" id="name" max="50"
+                        <input type="text" class="form-control" id="name" max="45"
                                name="name"
                                placeholder="${locale_main_name}"
-                               pattern="${attribute_regexp_name}" required/>
+                               pattern="${attribute_regexp_name}" required>
                 </div>
 
-                <!--Description-->
+                <c:if test="${duplicateName}">
+                    <p style="margin-left: 30px;color: red">${locale_main_exist}</p>
+                </c:if>
+
                 <div class="form-group">
-                    <textarea rows="5" class="form-control" id="description" name="description" maxlength="700" minlength="5" placeholder="${locale_main_description}" required></textarea>
+                    <textarea rows="5" class="form-control" id="description" name="description" maxlength="300" minlength="5" placeholder="${locale_main_description}" required></textarea>
                 </div>
 
-                <!--Category-->
                 <div class="form-group">
                         <select required id="category" name="category" class="form-control">
                             <option value="" selected="selected" disabled="disabled">${locale_category_enter}</option>
@@ -64,43 +66,32 @@
                         </select>
                 </div>
 
-                <!--Weight-->
                 <div class="form-group">
                         <input required type="text" min="0"
                                class="form-control" id="weight" name="weight"
                                placeholder="${locale_dessert_weight}" pattern="${attribute_regexp_weight}"/>
                 </div>
 
-                <!--Price-->
                 <div class="form-group">
                             <input required type="text" step="0.1" min="1"
                                    class="form-control" id="price" name="price"
                                    placeholder="${locale_price_name}" pattern="${attribute_regexp_price}"/>
                 </div>
 
-                <!--In storage-->
                 <div class="form-group">
-                        <input required type="text" min="1" max="99"
+                        <input required type="text" min="1" max="100"
                                class="form-control" id="count" name="count"
                                placeholder="${locale_storage_name}" pattern="${attribute_regexp_count}"/>
                 </div>
 
-                <!--Upload image-->
-
-                    <div class="form-group">
-
-                            <i class="fas fa-paperclip" style="margin-top:-10px;  padding-left: 25px; display:block;font-size:22px;"></i>
-                           <label style="margin-top:-50px; margin-left: 55px">${locale_dessert_image}</label>
-
-<%--                    <div class="col-md-8">--%>
-                            <input style="margin-left: -130px;opacity:0;" id="image" type="file" name="image" accept=".jpg, .jpeg, .png"/>
-
+                <div class="form-group">
+                    <i class="fas fa-paperclip" style="margin-top:-10px;  padding-left: 25px; display:block;font-size:22px;"></i>
+                    <label style="margin-top:-50px; margin-left: 55px">${locale_dessert_image}</label>
+                     <input style="margin-left: -130px;opacity:0;" id="image" type="file" name="image" accept=".jpg, .png"/>
                 </div>
-
 
                 <div class="form-group" style="margin-left: 150px">
                         <button type="submit" class="btn btn-success">${locale_add_item}</button>
-                        <a class="btn btn-danger" href="controller?command=go_to_dessert_page_command">${locale_main_cancel}</a>
                 </div>
             </fieldset>
         </form>

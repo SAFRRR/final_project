@@ -10,6 +10,8 @@ public interface DessertDao {
 
     List<Dessert> findByCategory(String category) throws DaoException;
 
+    ResultCode findDessertByName(String name) throws DaoException;
+
     Dessert findById(Integer dessertId) throws DaoException;
 
     Dessert createDessert(Dessert dessert) throws DaoException;

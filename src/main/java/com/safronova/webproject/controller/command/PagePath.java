@@ -27,6 +27,7 @@ public final class PagePath {
     public static final String GO_TO_DESSERT_DETAIL = "controller?command=go_to_flower_detail_page_command";
     public static final String GO_TO_BASKET_PAGE = "controller?command=go_to_basket_page_command";
     public static final String GO_TO_CHECKOUT_PAGE = "controller?command=go_to_check_out_page_command";
+    public static final String GO_TO_ADD_DESSERT_PAGE_COMMAND = "controller?command=go_to_add_dessert_page_command";
     public static final String DESSERT_DETAIL_BY_ID = "controller?command=go_to_dessert_detail_page_command&dessertId=";
 
     private PagePath() {

@@ -4,6 +4,7 @@ import com.safronova.webproject.controller.command.*;
 import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.entity.Basket;
+import com.safronova.webproject.model.entity.Role;
 import com.safronova.webproject.model.entity.SignInData;
 import com.safronova.webproject.model.entity.User;
 import com.safronova.webproject.model.service.BasketService;

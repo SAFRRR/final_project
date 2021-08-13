@@ -1,6 +1,7 @@
 package com.safronova.webproject.model.service;
 
 import com.safronova.webproject.exception.ServiceException;
+import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
 
@@ -12,6 +13,8 @@ public interface DessertService {
     List<Dessert> findByCategory(String category) throws ServiceException;
 
     Dessert findById(String dessertId) throws ServiceException;
+
+    ResultCode findDessertByName(String name) throws ServiceException;
 
     List<Dessert> findAllDessertList() throws ServiceException;
 

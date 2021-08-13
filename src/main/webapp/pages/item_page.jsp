@@ -20,7 +20,8 @@
                     <img class="img-responsive" src="./static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>
                 </a>
                 <h4 style="text-align: center; margin-top: 15px">${dessert.name}</h4>
-                <p style="text-align: center;margin-top: 10px">${dessert.price} BYN</p>
+<%--                <p style="text-align: center;margin-top: 10px">${dessert.price} BYN</p>--%>
+                <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
                 <p style="width: 313px;text-align: center;">${fn:substring(dessert.description, 0, 300)}</p>
          </form>
         </c:if>
