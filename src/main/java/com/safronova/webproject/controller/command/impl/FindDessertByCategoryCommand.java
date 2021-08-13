@@ -9,6 +9,7 @@ import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.DessertTypeService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,6 +21,7 @@ public class FindDessertByCategoryCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+        HttpSession session = request.getSession(true);
         final String category = request.getParameter(RequestParameter.CATEGORY);
 
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
@@ -35,6 +37,7 @@ public class FindDessertByCategoryCommand implements Command {
             } else {
                 request.setAttribute(RequestAttribute.DESSERT_LIST, dessertList);
             }
+            session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
             router = new Router(PagePath.ITEM_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at FindDessertByCategoryCommand", e);

@@ -37,6 +37,11 @@
 <%--                Remember: watering, price and count in storage should have positive amount--%>
 <%--            </div>--%>
 <%--        </c:if>--%>
+    <div class="back" style="float: left">
+        <a style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_dessert_list_page_command">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+    </div>
         <form class="form-horizontal" style="margin-top: 10px; margin-left: 220px" action="controller" method="post" enctype="multipart/form-data">
             <fieldset>
                 <input type="hidden" name="command" value="add_dessert_command"/>

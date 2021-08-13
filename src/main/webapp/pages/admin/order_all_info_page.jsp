@@ -85,7 +85,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#buttonClear').click(function () {
-            window.location = "Controller?command=go_to_dessert_list_page_command";
+            window.location = "controller?command=go_to_dessert_list_page_command";
         })
     })
 </script>

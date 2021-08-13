@@ -23,9 +23,6 @@
 <fmt:message key="admin.dessert.image" var="locale_dessert_image"/>
 <fmt:message key="admin.update.item" var="locale_update_item"/>
 <fmt:message key="main.cancel" var="locale_main_cancel"/>
-<%--<fmt:message key="admin.soil.podzolic" var="locale_soil_podzolic"/>--%>
-<%--<fmt:message key="admin.soil.sodpodzolic" var="locale_soil_sodpodzolic"/>--%>
-<%--<fmt:message key="admin.soil.unpaved" var="locale_soil_unpaved"/>--%>
 
 <fmt:message key="main.edit.dessert" var="locale_edit_dessert"/>
 <fmt:message key="admin.dessert.name" var="locale_dessert_name"/>
@@ -55,6 +52,11 @@
 <%--                Remember: watering, price and count in storage should have positive amount--%>
 <%--            </div>--%>
 <%--        </c:if>--%>
+    <div class="back" style="float: left">
+        <a style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_dessert_list_page_command">
+            <i class="fas fa-chevron-left"></i>
+        </a>
+    </div>
         <form class="form-horizontal" style="margin-top: 10px; margin-left: 220px"  action="controller" method="post" enctype="multipart/form-data">
             <fieldset>
                 <input type="hidden" name="command" value="update_dessert_command"/>
@@ -108,7 +110,6 @@
 
                 <div class="form-group" style="margin-left: 150px">
                         <button type="submit" class="btn btn-success">${locale_update_item}</button>
-                        <a class="btn btn-danger" href=""${pageContext.request.contextPath}/сontroller?command=go_to_dessert_page_command">${locale_main_cancel}</a>
                 </div>
             </fieldset>
         </form>

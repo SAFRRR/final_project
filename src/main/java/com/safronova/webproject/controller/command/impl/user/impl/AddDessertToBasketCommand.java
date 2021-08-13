@@ -39,6 +39,7 @@ public class AddDessertToBasketCommand extends UserCommand {
                 router = new Router(PagePath.GO_TO_DESSERT_DETAIL, RouterType.FORWARD);
             } else {
                 basketDessertService.addToBasket(basket.getId(), dessertId, count, price);
+//                request.setAttribute(RequestAttribute.ADD_SUCCESS, true);
                 session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
                 String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
                 router = new Router(page, RouterType.REDIRECT);

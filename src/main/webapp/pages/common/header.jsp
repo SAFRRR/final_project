@@ -65,7 +65,7 @@
 
                             <c:if test="${user.role == 'ADMIN'}">
                                 <li><a class="dropdown-item" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_add_dessert_page_command">${locale_main_add_item}</a></li>
-                                <li><a class="dropdown-item" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_dessert_list_page_command " >${locale_main_admin_desserts}</a></li>
+                                <li><a class="dropdown-item" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_dessert_list_page_command" >${locale_main_admin_desserts}</a></li>
                             </c:if>
                         </ul>
                     </li>

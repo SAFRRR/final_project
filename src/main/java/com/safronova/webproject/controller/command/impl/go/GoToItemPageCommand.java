@@ -12,6 +12,7 @@ import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.DessertTypeService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
