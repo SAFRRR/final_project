@@ -40,7 +40,7 @@
            <img style="width: 200px" class="img-responsive dessert" src="./static/images/${basketDessert.dessert.dessertImage}">
             <h4 style="text-align: center; margin-top: 15px">${basketDessert.dessert.name}</h4>
             <p style="text-align: center;margin-top: 10px">${basketDessert.dessert.price} BYN</p>
-            <c:if test="${basketDessert.dessert.storage.count < 11 && basketDessert.dessert.storage.count > 0}">
+            <c:if test="${basketDessert.dessert.storage.count > 0}">
             <p style="color: red; text-align: center">
                 <span>${locale_storage_only}  ${basketDessert.dessert.storage.count} ${locale_storage_dessert}</span>
             </p>
@@ -52,22 +52,23 @@
             <form action="controller" method="post">
                 <input type="hidden" name="command" value="update_basket_command"/>
                 <input hidden="hidden" name="id" value="${basketDessert.id}"/>
-                <button style="margin-left: 50px" type="submit" class="btn btn-warning btn-xs">${locale_common_update}</button>
+                <button style="margin-left: 40px; width: 120px" type="submit" class="btn btn-warning btn-xs">${locale_common_update}</button>
             </form>
         </form>
         </div>
     </c:forEach>
     </div>
 
-    <form class="form-horizontal" style="width: 500px; height:80px; margin-top: 5px; margin-left: 48px;margin-right: 20px;">
+    <form class="form-horizontal" style="width: 450px; height:80px; margin-top: 5px; margin-left: 18px;margin-right: 20px;">
             <h4 style="float: left; margin-top: -15px"><strong style="font-size: large">${locale_total_price}</strong>
-                <span style="color: orangered; font-size: large"><span>${basket.totalCost}</span>BYN&nbsp;&nbsp;</span></h4>
-        <form action="controller" method="post">
-            <input type="hidden" name="command" value="go_to_check_out_page_command">
-            <input type="hidden" name="id" value="${basket.id}">
-            <button style="margin-top: -20px; width: 150px; height: 40px; margin-left: 20px; text-align: center;" class="btn btn-default" type="submit">${locale_order_check}</button>
-        </form>
-
+                <span style="color: orangered; font-size: large"><span>${basket.totalCost}</span>&nbsp;BYN&nbsp;&nbsp;</span></h4>
+            <c:if test="${!emptyBasket}">
+                <form action="controller" method="post">
+                    <input type="hidden" name="command" value="go_to_check_out_page_command">
+                    <input type="hidden" name="id" value="${basket.id}">
+                    <button style="margin-top: -20px; width: 150px; height: 40px; margin-left: 20px; text-align: center;" class="btn btn-default" type="submit">${locale_order_check}</button>
+                </form>
+            </c:if>
     </form>
 
 

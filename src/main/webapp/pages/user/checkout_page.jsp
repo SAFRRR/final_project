@@ -31,34 +31,37 @@
 <fmt:message key="user.order.amount" var="locale_order_amount"/>
 <fmt:message key="user.total.price" var="locale_total_price"/>
 <fmt:message key="admin.operation.delete" var="locale_operation_delete"/>
+<fmt:message key="order.info" var="order_info_value"/>
+<fmt:message key="signup.address" var="signup_address_value"/>
+<fmt:message key="admin.order.cash" var="cash_value"/>
+<fmt:message key="admin.order.card" var="card_value"/>
+
+
 
 <!doctype html>
 <html>
 <body>
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
-    <form class="form-horizontal" style="margin-left: 400px;margin-top: 10px; width: 500px" action="controller" method="post">
+    <form class="form-horizontal" style="margin-left: 400px;margin-top: 40px; width: 500px" action="controller" method="post">
         <input type="hidden" name="command" value="place_order_command"/>
-        <div class="heading">Order information</div>
+        <div class="heading">${order_info_value}</div>
         <fieldset>
-            <%--address--%>
             <div class="panel-heading">
                 <div class="form-group">
-<%--                    <label for="address">${locale_address_detail}</label>--%>
                     <i class="fas fa-map-marker-alt"></i>
-                    <input required type="text" class="form-control" id="address" name="address"
+                    <input required type="text" class="form-control" id="address" name="address" placeholder="${signup_address_value}"
                            value="${user.address}"/>
                 </div>
 
+
                 <div class="form-group">
-<%--                            <label for="date">${locale_order_delivery}</label>--%>
                             <i class="fas fa-calendar-day"></i>
-                            <input required type="date" class="form-control" id="date" name="date"
-                                   max="2022-10-15" min="2021-06-20"/>
+                            <input required type="date" class="form-control" id="date" name="date" value=""
+                                   max="2022-08-14" min="2021-08-14"/>
                 </div>
 
                 <div class="form-group">
-<%--                            <label for="time">${locale_order_time}</label>--%>
                             <i class="far fa-clock"></i>
                             <select required id="time" name="time" class="form-control">
                                 <option value="" selected="selected"
@@ -72,15 +75,13 @@
 
             </div>
 
-            <!--2. Payment information-->
                 <div class="form-group">
                     <p style="color: #e1791a;"><b>${locale_payment_cash}</b></p>
-                    <p><input name="cash" type="radio" value="true" checked/>&nbsp; Cash</p>
-                    <p><input name="cash" type="radio" value="false"/>&nbsp; Card</p>
+                    <p><input name="cash" type="radio" value="true" checked/>&nbsp ${cash_value}</p>
+                    <p><input name="cash" type="radio" value="false"/>&nbsp; ${card_value}</p>
                 </div>
 
 
-            <!--3. Review Items and Address-->
                 <div class="form-group">
                     <hr/>
                     <h4 class="col-xs-12 text-right"><strong
