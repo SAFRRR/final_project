@@ -24,19 +24,12 @@
 <fmt:message key="main.exist" var="locale_main_exist"/>
 
 
-
 <!doctype html>
 <html>
 <body>
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
     <div class="row">
-<%--        <c:if test="${wrongInput}">--%>
-<%--            <div class="alert alert-danger">--%>
-<%--                Oooops, some fields have incorrect input.--%>
-<%--                Remember: watering, price and count in storage should have positive amount--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
     <div class="back" style="float: left">
         <a style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_dessert_list_page_command">
             <i class="fas fa-chevron-left"></i>

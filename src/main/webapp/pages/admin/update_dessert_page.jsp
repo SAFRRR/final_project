@@ -46,12 +46,7 @@
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
     <div class="row">
-<%--        <c:if test="${wrongInput}">--%>
-<%--            <div class="alert alert-danger">--%>
-<%--                Oooops, some fields have incorrect input.--%>
-<%--                Remember: watering, price and count in storage should have positive amount--%>
-<%--            </div>--%>
-<%--        </c:if>--%>
+
     <div class="back" style="float: left">
         <a style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_dessert_list_page_command">
             <i class="fas fa-chevron-left"></i>
@@ -60,21 +55,19 @@
         <form class="form-horizontal" style="margin-top: 10px; margin-left: 220px"  action="controller" method="post" enctype="multipart/form-data">
             <fieldset>
                 <input type="hidden" name="command" value="update_dessert_command"/>
-                <legend class="center-block">${locale_edit_dessert}</legend>
+                <legend class="center-block" style="color: #e1791a;margin-left: 29px">${locale_edit_dessert}</legend>
                 <input type="hidden" name="dessertId" value="${dessert.id}"/>
-                        <!--Name of Item-->
+
                 <div class="form-group">
-                        <input required type="text" class="form-control" id="name" max="50"
+                        <input required type="text" class="form-control" id="name" max="45"
                                name="name" value="${dessert.name}"
                                placeholder="${locale_main_name}" pattern="${attribute_regexp_name}"/>
                 </div>
 
-                <!--Description-->
                 <div class="form-group">
-                    <textarea required rows="5" class="form-control" id="description" name="description" maxlength="1000" minlength="5" placeholder="${locale_main_description}">${dessert.description}</textarea>
+                    <textarea required rows="5" class="form-control" id="description" name="description" maxlength="300" minlength="5" placeholder="${locale_main_description}">${dessert.description}</textarea>
                 </div>
 
-                <!--Category-->
                 <div class="form-group">
                         <select required title="${dessert.dessertType}" id="category" name="category" class="form-control">
                             <option value="" selected="selected" disabled="disabled">${locale_category_enter}</option>
@@ -86,27 +79,23 @@
                         </select>
                 </div>
 
-                <!--Weight-->
                 <div class="form-group">
                         <input required value="${dessert.weight}" type="text" min="0"
                                class="form-control" id="weight" name="weight"
                                placeholder="${locale_dessert_weight}" pattern="${attribute_regexp_weight}"/>
                 </div>
 
-                <!--Price-->
                 <div class="form-group">
                             <input required value="${dessert.price}" type="text" step="0.1" min="1"
                                    class="form-control" id="price" name="price"
                                    placeholder="${locale_price_name}" pattern="${attribute_regexp_price}"/>
                 </div>
 
-                <!--In storage-->
                 <div class="form-group">
-                       <input required value="${dessert.storage.count}" type="text" min="1" max="99"
+                       <input required value="${dessert.storage.count}" type="text" min="1" max="100"
                                class="form-control" id="count" name="count"
                                placeholder="${locale_storage_dessert}" pattern="${attribute_regexp_count}"/>
                 </div>
-
 
                 <div class="form-group" style="margin-left: 150px">
                         <button type="submit" class="btn btn-success">${locale_update_item}</button>

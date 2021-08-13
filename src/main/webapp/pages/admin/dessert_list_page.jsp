@@ -29,11 +29,9 @@
         <table class="table table-bordered table-hover">
             <style>
                 tr:hover {
-                    background: #ffe1be; /* Цвет фона под ссылкой */
-                    /*color: #ffe; !* Цвет ссылки *!*/
+                    background: #ffe1be;
                 }
             </style>
-<%--            <table class="table">--%>
             <thead>
             <tr>
                 <th style="text-align: center; color: #e1791a;">${locale_main_name}</th>
@@ -45,21 +43,20 @@
                 <th style="text-align: center; color: #e1791a;">${locale_choose_operation}</th>
             </tr>
             </thead>
-            <!--Table body-->
             <tbody>
             <c:forEach items="${dessertList}" var="dessert">
                 <tr>
-                    <td>${dessert.name}</td>
+                    <td style="text-align: center">${dessert.name}</td>
 
-                    <td>${dessert.dessertType.description}</td>
+                    <td style="text-align: center">${dessert.dessertType.description}</td>
 
-                    <td>${dessert.weight}</td>
+                    <td style="text-align: center">${dessert.weight}</td>
 
                     <td style="width: 450px">${dessert.description}</td>
 
-                    <td>${dessert.price}</td>
+                    <td style="text-align: center">${dessert.price}</td>
 
-                    <td>${dessert.storage.count}</td>
+                    <td style="text-align: center">${dessert.storage.count}</td>
 
                     <td>
                         <form action="controller" method="post">

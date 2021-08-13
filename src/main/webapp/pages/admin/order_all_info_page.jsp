@@ -28,7 +28,12 @@
 <div class="container">
     <br/>
     <div class="table-responsive">
-        <table class="table table-bordered table-hover table-striped">
+            <table style="text-align: center;" class="table table-bordered table-hover">
+                <style>
+                    tr:hover {
+                        background: #ffe1be;
+                    }
+                </style>
             <thead>
             <tr>
                 <th style="text-align: center; color: #e1791a;">${locale_order_address}</th>
@@ -72,7 +77,7 @@
                         <form action="controller" method="post">
                             <input type="hidden" name="command" value="go_to_order_detail_page_command"/>
                             <input type="hidden" name="orderId" value="${order.id}"/>
-                            <button type="submit" class="btn btn-link">${locale_common_detail}</button>
+                            <button type="submit" style="color:  #e1791a;" class="btn btn-link">${locale_common_detail}</button>
                         </form>
                         <br/>
                     </td>
@@ -82,12 +87,6 @@
         </table>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#buttonClear').click(function () {
-            window.location = "controller?command=go_to_dessert_list_page_command";
-        })
-    })
-</script>
+
 </body>
 </html>
