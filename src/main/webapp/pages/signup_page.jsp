@@ -18,7 +18,13 @@
 <fmt:message key="signup.span" var="signup_span_value"/>
 <fmt:message key="signup.signin" var="signup_signin_value"/>
 <fmt:message key="signup.error.email" var="signup_error_email_value"/>
+<fmt:message key="signup.valid.email" var="signup_valid_email_value"/>
+<fmt:message key="signup.valid.phone" var="signup_valid_phone_value"/>
+<fmt:message key="signup.valid.username" var="signup_valid_username_value"/>
 
+<fmt:message key="signup.valid.name" var="signup_valid_name_value"/>
+<fmt:message key="signup.valid.surname" var="signup_valid_surname_value"/>
+<fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
 
 
 <!doctype html>
@@ -90,7 +96,28 @@
 </html>
 
 
+<script>
 
+    var input = document.getElementById('form-signUp-email');
+    input.oninvalid = function(event) {
+       event.target.setCustomValidity('${signup_valid_email_value}');
+    };
+    document.getElementById('form-signUp-login').oninvalid = function(event) {
+        event.target.setCustomValidity('${signup_valid_username_value}');
+    };
+    document.getElementById('form-signUp-name').oninvalid = function(event) {
+        event.target.setCustomValidity('${signup_valid_name_value}');
+    };
+    document.getElementById('form-signUp-surname').oninvalid = function(event) {
+        event.target.setCustomValidity('${signup_valid_surname_value}');
+    }
 
+    document.getElementById('form-signUp-phone').oninvalid = function(event) {
+        event.target.setCustomValidity('${signup_valid_phone_value}');
+    }
+    document.getElementById('form-signUp-address').oninvalid = function(event) {
+        event.target.setCustomValidity('${signup_valid_address_value}');
+    }
+</script>
 
 
