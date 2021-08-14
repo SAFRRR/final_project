@@ -48,7 +48,7 @@ public class PlaceOrderCommand extends UserCommand {
                 orderService.createOrderDessertByOrder(savedOrder, basketDessertList);
                 Basket clearedBasket = basketDessertService.clearBasket(basket);
                 basketService.updateTotalCost(clearedBasket);
-                router = new Router(PagePath.ORDER_HISTORY_PAGE, RouterType.REDIRECT);
+                router = new Router(PagePath.GO_TO_ORDER_HISTORY_PAGE, RouterType.REDIRECT);
             } else {
                 request.setAttribute(RequestAttribute.MISS_REQUIRED_FIELDS, true);
                 router = new Router(PagePath.GO_TO_CHECKOUT_PAGE, RouterType.REDIRECT);

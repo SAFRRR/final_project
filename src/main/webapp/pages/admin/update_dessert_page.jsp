@@ -38,7 +38,11 @@
 <fmt:message key="admin.dessert.image" var="locale_dessert_image"/>
 <fmt:message key="main.add.item" var="locale_add_item"/>
 <fmt:message key="main.cancel" var="locale_main_cancel"/>
-
+<fmt:message key="update.name" var="update_name_value"/>
+<fmt:message key="update.description" var="update_description_value"/>
+<fmt:message key="update.price" var="update_price_value"/>
+<fmt:message key="update.weight" var="update_weight_value"/>
+<fmt:message key="update.quantity" var="update_quantity_value"/>
 
 <!doctype html>
 <html>
@@ -52,7 +56,7 @@
             <i class="fas fa-chevron-left"></i>
         </a>
     </div>
-        <form class="form-horizontal" style="margin-top: 10px; margin-left: 220px"  action="controller" method="post" enctype="multipart/form-data">
+        <form class="form-horizontal needs-validation" style="margin-top: 10px; margin-left: 220px"  action="controller" method="post" enctype="multipart/form-data" novalidate>
             <fieldset>
                 <input type="hidden" name="command" value="update_dessert_command"/>
                 <legend class="center-block" style="color: #e1791a;margin-left: 29px">${locale_edit_dessert}</legend>
@@ -62,10 +66,16 @@
                         <input required type="text" class="form-control" id="name" max="45"
                                name="name" value="${dessert.name}"
                                placeholder="${locale_main_name}" pattern="${attribute_regexp_name}"/>
+                    <div class="invalid-feedback">
+                        ${update_name_value}
+                    </div>
                 </div>
 
                 <div class="form-group">
                     <textarea required rows="5" class="form-control" id="description" name="description" maxlength="300" minlength="5" placeholder="${locale_main_description}">${dessert.description}</textarea>
+                    <div class="invalid-feedback">
+                        ${update_description_value}
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -77,24 +87,35 @@
                                         ${dessertType.description}</option>
                             </c:forEach>
                         </select>
+                    <div class="invalid-feedback">
+                    </div>
                 </div>
 
                 <div class="form-group">
                         <input required value="${dessert.weight}" type="text" min="0"
                                class="form-control" id="weight" name="weight"
                                placeholder="${locale_dessert_weight}" pattern="${attribute_regexp_weight}"/>
+                    <div class="invalid-feedback">
+                        ${update_weight_value}
+                    </div>
                 </div>
 
                 <div class="form-group">
                             <input required value="${dessert.price}" type="text" step="0.1" min="1"
                                    class="form-control" id="price" name="price"
                                    placeholder="${locale_price_name}" pattern="${attribute_regexp_price}"/>
+                    <div class="invalid-feedback">
+                        ${update_price_value}
+                    </div>
                 </div>
 
                 <div class="form-group">
                        <input required value="${dessert.storage.count}" type="text" min="1" max="100"
                                class="form-control" id="count" name="count"
                                placeholder="${locale_storage_dessert}" pattern="${attribute_regexp_count}"/>
+                    <div class="invalid-feedback">
+                        ${update_quantity_value}
+                    </div>
                 </div>
 
                 <div class="form-group" style="margin-left: 150px">
@@ -106,3 +127,20 @@
 </div>
 </body>
 </html>
+
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>

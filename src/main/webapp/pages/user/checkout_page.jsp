@@ -35,6 +35,7 @@
 <fmt:message key="signup.address" var="signup_address_value"/>
 <fmt:message key="admin.order.cash" var="cash_value"/>
 <fmt:message key="admin.order.card" var="card_value"/>
+<fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
 
 
 
@@ -43,7 +44,7 @@
 <body>
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
-    <form class="form-horizontal" style="margin-left: 400px;margin-top: 40px; width: 500px" action="controller" method="post">
+    <form class="form-horizontal needs-validation" style="margin-left: 400px;margin-top: 40px; width: 500px" action="controller" method="post" novalidate>
         <input type="hidden" name="command" value="place_order_command"/>
         <div class="heading">${order_info_value}</div>
         <fieldset>
@@ -52,11 +53,16 @@
                     <i class="fas fa-map-marker-alt"></i>
                     <input required type="text" class="form-control" id="address" name="address" placeholder="${signup_address_value}"
                            value="${user.address}"/>
+                    <div class="invalid-feedback">
+                        ${signup_valid_address_value}
+                    </div>
                 </div>
                 <div class="form-group">
                             <i class="fas fa-calendar-day"></i>
                             <input required type="date" class="form-control" id="date" name="date" value=""
                                    max="2022-08-14" min="2021-08-14"/>
+                    <div class="invalid-feedback">
+                    </div>
                 </div>
                 <div class="form-group">
                             <i class="far fa-clock"></i>
@@ -67,6 +73,8 @@
                                 <option value="15:00 - 18:00">15:00 - 18:00</option>
                                 <option value="18:00 - 21:00">18:00 - 21:00</option>
                             </select>
+                    <div class="invalid-feedback">
+                    </div>
                 </div>
                 <div class="form-group">
                     <p style="color: #e1791a;"><b>${locale_payment_cash}</b></p>
@@ -96,6 +104,21 @@
         var name_input = document.getElementById('date')
         name_input.value = day + "-" + month + "-" + year;
     });
+
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 </script>
 </body>
 </html>
