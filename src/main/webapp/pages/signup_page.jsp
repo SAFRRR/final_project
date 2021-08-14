@@ -38,38 +38,56 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form class="form-horizontal" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post"  id="form-signUp">
+                    <form class="form-horizontal needs-validation" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post"  id="form-signUp" novalidate>
                         <input type="hidden" name="command" value="sign_up_command"/>
                         <div class="heading">${signup_title_value}</div>
                         <div class="form-group">
                             <i class="fas fa-envelope"></i>
-                            <input class="form-control" type="email" id="form-signUp-email" name="email"
+                            <input class="form-control" type="email"
+<%--                                   id="form-signUp-email"--%>
+<%--                                   id="validationCustomUsername"--%>
+                                   name="email"
                                    placeholder="${signup_email_value}"
                                    pattern="${attribute_regexp_email}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_email_value}
+                            </div>
                         </div>
                         <div class="form-group">
                             <i class="fa fa-user"></i>
                             <input class="form-control" type="text" id="form-signUp-login" name="username"
                                    placeholder="${signup_username_value}"
                                    pattern="${attribute_regexp_username}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_username_value}
+                            </div>
                         </div>
                         <div class="form-group">
                             <i class="fas fa-id-card"></i>
                             <input class="form-control" type="text" id="form-signUp-name" name="firstName"
                                    placeholder="${signup_name_value}"
                                    pattern="${attribute_regexp_fio}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_name_value}
+                            </div>
                         </div>
                         <div class="form-group">
                             <i class="fas fa-id-card"></i>
                             <input class="form-control" type="text" id="form-signUp-surname" name="lastName"
                                    placeholder="${signup_surname_value}"
                                    pattern="${attribute_regexp_fio}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_surname_value}
+                            </div>
                         </div>
                         <div class="form-group">
                             <i class="fas fa-phone-alt"></i>
                             <input class="form-control" type="text" id="form-signUp-phone" name="phone"
                                    placeholder="${signup_phone_value}"
                                    pattern="${attribute_regexp_phone_number}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_phone_value}
+                            </div>
                         </div>
                         <div class="form-group">
                             <i class="fas fa-map-marker-alt"></i>
@@ -77,6 +95,9 @@
                                    placeholder="${signup_address_value}"
                                    pattern="${attribute_regexp_address}"
                                    required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_address_value}
+                            </div>
                         </div>
                         <c:if test="${duplicateEmail}">
                             <p style="color: red">${signup_error_email_value}</p>
@@ -97,27 +118,47 @@
 
 
 <script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function () {
+        'use strict'
 
-    var input = document.getElementById('form-signUp-email');
-    input.oninvalid = function(event) {
-       event.target.setCustomValidity('${signup_valid_email_value}');
-    };
-    document.getElementById('form-signUp-login').oninvalid = function(event) {
-        event.target.setCustomValidity('${signup_valid_username_value}');
-    };
-    document.getElementById('form-signUp-name').oninvalid = function(event) {
-        event.target.setCustomValidity('${signup_valid_name_value}');
-    };
-    document.getElementById('form-signUp-surname').oninvalid = function(event) {
-        event.target.setCustomValidity('${signup_valid_surname_value}');
-    }
+        // Fetch all the forms we want to apply custom Bootstrap validation styles to
+        var forms = document.querySelectorAll('.needs-validation')
 
-    document.getElementById('form-signUp-phone').oninvalid = function(event) {
-        event.target.setCustomValidity('${signup_valid_phone_value}');
-    }
-    document.getElementById('form-signUp-address').oninvalid = function(event) {
-        event.target.setCustomValidity('${signup_valid_address_value}');
-    }
+        // Loop over them and prevent submission
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    <%--var input = document.getElementById('form-signUp-email');--%>
+    <%--input.oninvalid = function(event) {--%>
+    <%--   event.target.setCustomValidity('${signup_valid_email_value}');--%>
+    <%--};--%>
+    <%--document.getElementById('form-signUp-login').oninvalid = function(event) {--%>
+    <%--    event.target.setCustomValidity('${signup_valid_username_value}');--%>
+    <%--};--%>
+    <%--document.getElementById('form-signUp-name').oninvalid = function(event) {--%>
+    <%--    event.target.setCustomValidity('${signup_valid_name_value}');--%>
+    <%--};--%>
+    <%--document.getElementById('form-signUp-surname').oninvalid = function(event) {--%>
+    <%--    event.target.setCustomValidity('${signup_valid_surname_value}');--%>
+    <%--}--%>
+
+    <%--document.getElementById('form-signUp-phone').oninvalid = function(event) {--%>
+    <%--    event.target.setCustomValidity('${signup_valid_phone_value}');--%>
+    <%--}--%>
+    <%--document.getElementById('form-signUp-address').oninvalid = function(event) {--%>
+    <%--    event.target.setCustomValidity('${signup_valid_address_value}');--%>
+    <%--}--%>
 </script>
 
 
