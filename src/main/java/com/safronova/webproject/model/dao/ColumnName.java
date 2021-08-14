@@ -47,6 +47,7 @@ public final class ColumnName {
     public static final String ORDER_STATUS = "o_status";
     public static final String ORDER_DATE_DELIVERY = "o_date_delivery";
     public static final String ORDER_TOTAL_COST = "o_total_cost";
+    public static final String ORDER_USER_ID = "o_user_id";
 
     public static final String ORDER_TIME_ORDER = "o_time_order";
     public static final String ORDER_ADDRESS = "o_address";

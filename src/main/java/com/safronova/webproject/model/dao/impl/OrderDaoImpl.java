@@ -30,6 +30,7 @@ public class OrderDaoImpl implements OrderDao {
                     "WHERE orders.o_user_id = ?";
 
 
+
     private static final String SELECT_ORDERS_SQL =
             "SELECT o_id, o_address, o_cash, o_date_delivery, o_date_order, o_status "+
                     "FROM orders";
@@ -138,6 +139,7 @@ public class OrderDaoImpl implements OrderDao {
         }
         return order;
     }
+
 
     @Override
     public void updateStatusById(String orderStatus, Integer orderId) throws DaoException {

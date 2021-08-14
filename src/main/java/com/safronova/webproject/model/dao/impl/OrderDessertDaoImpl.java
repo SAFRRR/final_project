@@ -28,7 +28,7 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
                     "VALUES (?,?,?,?)";
 
     private static final String SELECT_ORDER_DESSERT_SQL =
-            "SELECT d_name, d_price, od_count, od_sub_total "+
+            "SELECT d_id, d_name, d_price, od_count, od_sub_total "+
                     "FROM ordered_desserts "+
                     "JOIN desserts ON ordered_desserts.od_dessert_id = desserts.d_id "+
                     "WHERE od_order_id = ?";
@@ -86,6 +86,7 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
             while (resultSet.next()) {
                 OrderDessert orderDessert = new OrderDessert();
                 Dessert dessert = new Dessert();
+                dessert.setId(resultSet.getInt(DESSERT_ID));
                 dessert.setName(resultSet.getString(DESSERT_NAME));
                 dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
                 orderDessert.setCount(resultSet.getInt(ORDER_DESSERT_COUNT));
