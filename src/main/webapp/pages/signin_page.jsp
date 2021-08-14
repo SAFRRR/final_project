@@ -14,6 +14,9 @@
 <fmt:message key="signin.span" var="signin_span_value"/>
 <fmt:message key="signin.signup" var="signin_signup_value"/>
 <fmt:message key="signin.error" var="signin_error_value"/>
+<fmt:message key="signup.valid.email" var="signup_valid_email_value"/>
+<fmt:message key="signup.valid.password" var="signup_valid_password_value"/>
+
 
 <!doctype html>
 <html lang="en">
@@ -24,7 +27,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form id="form-signIn" class="form-horizontal" action="${pageContext.request.contextPath}/controller" method="post">
+                    <form id="form-signIn" class="form-horizontal needs-validation" action="${pageContext.request.contextPath}/controller" method="post" novalidate>
                         <input type="hidden" name="command" value="sign_in_command">
 
                         <div class="heading">${signin_title_value}</div>
@@ -34,6 +37,9 @@
                                    placeholder="${signin_email_value}"
                                    pattern="${attribute_regexp_email}"
                                    required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_email_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
@@ -42,10 +48,13 @@
                                    placeholder="${signin_password_value}"
                                    pattern="${attribute_regexp_password}"
                                    required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_password_value}
+                            </div>
                         </div>
 
                         <c:if test="${wrongData}">
-                            <p style="color: red">${signin_error_value}</p>
+                            <p id="wrong" style="color: red;  opacity: 1; transition: opacity 500ms;">${signin_error_value}</p>
                         </c:if>
 
                         <button type="submit" class="btn btn-default">${signin_submit_value}</button>
@@ -62,3 +71,29 @@
 </div>
 </body>
 </html>
+
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+
+    function initialSetup() {
+        if (document.getElementById('wrong') != null) {
+            setTimeout(function() {
+                document.getElementById('wrong').style.opacity = '0';
+            }, 2000);
+        }
+    }
+    initialSetup();
+</script>

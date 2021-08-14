@@ -44,8 +44,6 @@
                         <div class="form-group">
                             <i class="fas fa-envelope"></i>
                             <input class="form-control" type="email"
-<%--                                   id="form-signUp-email"--%>
-<%--                                   id="validationCustomUsername"--%>
                                    name="email"
                                    placeholder="${signup_email_value}"
                                    pattern="${attribute_regexp_email}" required>
@@ -100,7 +98,8 @@
                             </div>
                         </div>
                         <c:if test="${duplicateEmail}">
-                            <p style="color: red">${signup_error_email_value}</p>
+                            <p id="wrong" style="color: red;  opacity: 1; transition: opacity 500ms;">${signup_error_email_value}</p>
+
                         </c:if>
                         <button type="submit"  class="btn btn-default">${signup_submit_value}</button>
                         <div class="form-footer">
@@ -118,14 +117,9 @@
 
 
 <script>
-    // Example starter JavaScript for disabling form submissions if there are invalid fields
     (function () {
         'use strict'
-
-        // Fetch all the forms we want to apply custom Bootstrap validation styles to
         var forms = document.querySelectorAll('.needs-validation')
-
-        // Loop over them and prevent submission
         Array.prototype.slice.call(forms)
             .forEach(function (form) {
                 form.addEventListener('submit', function (event) {
@@ -133,32 +127,19 @@
                         event.preventDefault()
                         event.stopPropagation()
                     }
-
                     form.classList.add('was-validated')
                 }, false)
             })
     })()
 
-    <%--var input = document.getElementById('form-signUp-email');--%>
-    <%--input.oninvalid = function(event) {--%>
-    <%--   event.target.setCustomValidity('${signup_valid_email_value}');--%>
-    <%--};--%>
-    <%--document.getElementById('form-signUp-login').oninvalid = function(event) {--%>
-    <%--    event.target.setCustomValidity('${signup_valid_username_value}');--%>
-    <%--};--%>
-    <%--document.getElementById('form-signUp-name').oninvalid = function(event) {--%>
-    <%--    event.target.setCustomValidity('${signup_valid_name_value}');--%>
-    <%--};--%>
-    <%--document.getElementById('form-signUp-surname').oninvalid = function(event) {--%>
-    <%--    event.target.setCustomValidity('${signup_valid_surname_value}');--%>
-    <%--}--%>
-
-    <%--document.getElementById('form-signUp-phone').oninvalid = function(event) {--%>
-    <%--    event.target.setCustomValidity('${signup_valid_phone_value}');--%>
-    <%--}--%>
-    <%--document.getElementById('form-signUp-address').oninvalid = function(event) {--%>
-    <%--    event.target.setCustomValidity('${signup_valid_address_value}');--%>
-    <%--}--%>
+    function initialSetup() {
+        if (document.getElementById('wrong') != null) {
+            setTimeout(function() {
+                document.getElementById('wrong').style.opacity = '0';
+            }, 2000);
+        }
+    }
+    initialSetup();
 </script>
 
 

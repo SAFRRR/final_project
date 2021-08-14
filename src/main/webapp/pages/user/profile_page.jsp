@@ -27,6 +27,14 @@
 <fmt:message key="edit.passwords" var="edit_passwords_value"/>
 <fmt:message key="edit.password" var="edit_password_value"/>
 <fmt:message key="edit.result" var="edit_result_value"/>
+<fmt:message key="signup.valid.phone" var="signup_valid_phone_value"/>
+<fmt:message key="signup.valid.username" var="signup_valid_username_value"/>
+
+<fmt:message key="signup.valid.name" var="signup_valid_name_value"/>
+<fmt:message key="signup.valid.surname" var="signup_valid_surname_value"/>
+<fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
+
+<fmt:message key="signup.valid.password" var="signup_valid_password_value"/>
 
 
 
@@ -40,7 +48,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-offset-3 col-md-6">
-                    <form id="form-signIn" class="form-horizontal" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post">
+                    <form id="form-signIn" class="form-horizontal needs-validation" style="margin-top: 20px" action="${pageContext.request.contextPath}/controller" method="post" novalidate>
                         <input type="hidden" name="command" value="settings_edit_command">
                         <div class="heading" style="margin-top: -20px">${profile_settings_value}</div>
 
@@ -48,58 +56,82 @@
                                 <input class="form-control" style="margin-top: -10px" type="text" id="firstName" name="firstName"
                                        placeholder="${signup_name_value}"
                                    pattern="${attribute_regexp_fio}" value="${user.firstName}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_name_value}
+                            </div>
                         </div>
                         <div class="form-group">
                             <input type="text" class="form-control" id="lastName" name="lastName"
                                    placeholder="${signup_surname_value}"
                                    pattern="${attribute_regexp_fio}" value="${user.lastName}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_surname_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="username" name="username"
                                    placeholder="${signup_username_value}"
                                    pattern="${attribute_regexp_username}" value="${user.username}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_username_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="phone" name="phone"
                                    placeholder="${signup_phone_value}"
                                    pattern="${attribute_regexp_phone_number}" value="${user.phone}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_phone_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <input type="text" class="form-control" id="address" name="address"
                                    placeholder="${signup_address_value}"
                                    value="${user.address}" required />
+                            <div class="invalid-feedback">
+                                ${signup_valid_address_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <input  type="password" class="form-control" id="currentPassword"
                                    placeholder="${signup_current_password_value}"
                                    name="currentPassword" pattern="${attribute_regexp_password}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_password_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <c:if test="${currentPasswordNotEquals}">
-                                <p style="color: red">${edit_password_value}</p>
+                                <p id="wrong" style="color: red;  opacity: 1; transition: opacity 500ms;" >${edit_password_value}</p>
                             </c:if>
 
                             <input type="password" class="form-control" id="newPassword"
                                    placeholder="${signup_new_password_value}"
                                    name="newPassword" pattern="${attribute_regexp_password}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_password_value}
+                            </div>
                         </div>
 
                         <div class="form-group">
                             <input type="password" class="form-control" id="confirmPassword"
                                    placeholder="${signup_new_password_confirm_value}"
                                    name="confirmPassword" pattern="${attribute_regexp_password}" required>
+                            <div class="invalid-feedback">
+                                ${signup_valid_password_value}
+                            </div>
                         </div>
                         <c:if test="${passwordNotEquals}">
-                            <p style="color: red">${edit_passwords_value}</p>
+                            <p id="wrong" style="color: red;  opacity: 1; transition: opacity 500ms;">${edit_passwords_value}</p>
                         </c:if>
 
                         <c:if test="${updateUserInfo}">
-                            <p style="color: green">${edit_result_value}</p>
+                            <p id="wrong" style="color: green;  opacity: 1; transition: opacity 500ms;">${edit_result_value}</p>
                         </c:if>
 
                         <button type="submit" style="width: 300px; margin-left: 30px" class="btn btn-default">${profile_save_changes_value}</button>
@@ -117,6 +149,29 @@
 
 
 
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
 
+    function initialSetup() {
+        if (document.getElementById('wrong') != null) {
+            setTimeout(function() {
+                document.getElementById('wrong').style.opacity = '0';
+            }, 2000);
+        }
 
-
+    }
+    initialSetup();
+</script>
