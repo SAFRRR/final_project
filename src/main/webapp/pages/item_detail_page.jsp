@@ -46,7 +46,7 @@
         <p style="width: 413px; text-align: center;">${fn:substring(dessert.description, 0, 300)}</p>
 
         <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
-
+    <c:if test="${user.role != 'ADMIN'}">
         <c:if test="${storage.count > 0}">
             <input required type="number" step="1"
                    class="form-control" name="amount" min="1"
@@ -58,6 +58,7 @@
             <button type="submit" style="margin-left: 108px;" class="btn btn-default">${locale_basket_add}</button>
 
         </c:if>
+    </c:if>
         <c:if test="${storage.count==0}">
             <p style="color: red; text-align: center">${locale_dessert_unavailable}</p>
         </c:if>
