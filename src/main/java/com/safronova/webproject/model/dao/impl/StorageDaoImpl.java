@@ -40,7 +40,6 @@ public class StorageDaoImpl implements StorageDao {
                     "SET st_count = ? " +
                     "WHERE st_dessert_id = ?";
 
-
     @Override
     public Storage findByDessertId(Integer dessertId) throws DaoException {
         Storage storage = new Storage();
@@ -74,8 +73,8 @@ public class StorageDaoImpl implements StorageDao {
     public void insertStorage(Storage storage) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(INSERT_STORAGE_SQL)) {
-            statement.setInt(InserStorage.COUNT, storage.getCount());
-            statement.setInt(InserStorage.DESSERT_ID, storage.getDessert().getId());
+            statement.setInt(InsertStorage.COUNT, storage.getCount());
+            statement.setInt(InsertStorage.DESSERT_ID, storage.getDessert().getId());
             statement.execute();
         } catch (SQLException e) {
             throw new DaoException("Can't handle StorageDao.insertStorage request", e);
@@ -103,9 +102,8 @@ public class StorageDaoImpl implements StorageDao {
         private static final int ID = 2;
     }
 
-    private static class InserStorage {
+    private static class InsertStorage {
         private static final int COUNT = 1;
         private static final int DESSERT_ID = 2;
     }
-
 }

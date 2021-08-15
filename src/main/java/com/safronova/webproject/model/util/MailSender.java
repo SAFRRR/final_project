@@ -13,7 +13,6 @@ public class MailSender {
     private static final String MAIL_SUBJECT = "Confectionery SignUp";
     private static final String MAIN_MESSAGE = "Hello, %s! \n" + "Welcome to Confectionery. \n" + "Your password is %s.";
 
-
     public static void send(String emailTo, String messageText){
         Properties properties = MailPropertiesReader.getProperties();
         final String userKey = "mail.smtp.user";
@@ -46,5 +45,4 @@ public class MailSender {
                 password
         );
     }
-
 }

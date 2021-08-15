@@ -7,10 +7,8 @@ import com.safronova.webproject.model.dao.DessertDao;
 import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
-import com.safronova.webproject.model.entity.SignUpData;
 import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.validator.DessertValidator;
-import com.safronova.webproject.model.validator.UserValidator;
 
 import java.math.BigDecimal;
 import java.util.List;

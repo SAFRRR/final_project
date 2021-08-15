@@ -20,19 +20,17 @@ public class RemoveDessertCommand extends UserCommand {
     protected Router handle(HttpServletRequest request) {
         Router router;
         final String basketDessertId = request.getParameter(RequestParameter.BASKET_DESSERT_ID);
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
 
         try {
             basketDessertService.deleteBasketDessert(basketDessertId);
-            router = new Router(PagePath.GO_TO_BASKET_PAGE, Router.RouterType.REDIRECT);
+            router = new Router(PagePath.GO_TO_BASKET_PAGE, RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.error("Error at UpdateBasketCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
-            router = new Router(PagePath.ERROR_PAGE, Router.RouterType.REDIRECT);
+            router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;
     }
 }
-

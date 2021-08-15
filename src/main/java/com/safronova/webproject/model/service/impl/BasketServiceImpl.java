@@ -72,7 +72,6 @@ public class BasketServiceImpl implements BasketService {
         }
     }
 
-
     @Override
     public void updateTotalCost(Basket basket) throws ServiceException {
         try {

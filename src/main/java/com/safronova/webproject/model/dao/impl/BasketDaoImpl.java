@@ -41,7 +41,6 @@ public class BasketDaoImpl implements BasketDao {
                     "SET b_total_cost = ? " +
                     "WHERE b_id = ?";
 
-
     @Override
     public Basket findById(Integer id) throws DaoException {
         Basket basket = new Basket();

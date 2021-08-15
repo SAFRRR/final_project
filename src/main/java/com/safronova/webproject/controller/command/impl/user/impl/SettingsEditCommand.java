@@ -17,13 +17,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class SettingsEditCommand extends UserCommand {
     private static final Logger logger = LogManager.getLogger();
+
     @Override
     protected Router handle(HttpServletRequest request) {
         Router router;
-
         final User user = (User) request.getSession().getAttribute(RequestAttribute.USER);
         final String firstName = request.getParameter(RequestParameter.FIRSTNAME);
         final String lastName = request.getParameter(RequestParameter.LASTNAME);
@@ -33,7 +32,6 @@ public class SettingsEditCommand extends UserCommand {
         final String currentPassword = request.getParameter(RequestParameter.CURRENT_PASSWORD);
         final String newPassword = request.getParameter(RequestParameter.NEW_PASSWORD);
         final String confirmPassword = request.getParameter(RequestParameter.CONFIRM_PASSWORD);
-
 
         final SignInData signInData = new SignUpData();
         signInData.setEmail(user.getEmail());
@@ -74,7 +72,7 @@ public class SettingsEditCommand extends UserCommand {
             }
             router = new Router(PagePath.GO_TO_PROFILE_PAGE, RouterType.REDIRECT);
         } catch (ServiceException e) {
-            logger.error("Error at PersonalEditCommand", e);
+            logger.error("Error at SettingsEditCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }

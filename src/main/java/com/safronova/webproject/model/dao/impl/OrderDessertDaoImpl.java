@@ -58,7 +58,7 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         List<OrderDessert> orderDessertList = new ArrayList<>();
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(SELECT_ORDER_DESSERT_BY_DESSERT_SQL)) {
-            statement.setInt(OrderDessertDaoImpl.SelectOrderDessertByDesseertIndex.DESSERT_ID, id);
+            statement.setInt(OrderDessertDaoImpl.SelectOrderDessertByDessertIndex.DESSERT_ID, id);
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 OrderDessert orderDessert = new OrderDessert();
@@ -71,7 +71,7 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
                 orderDessertList.add(orderDessert);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle OrderDessertDao.findByOrder request", e);
+            throw new DaoException("Can't handle OrderDessertDao.findByDessertId request", e);
         }
         return orderDessertList;
     }
@@ -111,7 +111,7 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         private static final int ORDER_ID = 1;
     }
 
-    private static class SelectOrderDessertByDesseertIndex {
+    private static class SelectOrderDessertByDessertIndex {
         private static final int DESSERT_ID = 1;
     }
 }

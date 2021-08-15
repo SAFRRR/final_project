@@ -21,6 +21,7 @@ public class CommandProvider {
         commands.put(CommandType.GO_TO_SIGNUP_PAGE_COMMAND, new GoToSignupPageCommand());
         commands.put(CommandType.SIGN_IN_COMMAND, new SignInCommand());
         commands.put(CommandType.SIGN_UP_COMMAND, new SignUpCommand());
+        commands.put(CommandType.DEFAULT, new DefaultCommand());
         commands.put(CommandType.GO_TO_PROFILE_PAGE_COMMAND, new GoToProfilePageCommand());
         commands.put(CommandType.GO_TO_ORDER_HISTORY_PAGE_COMMAND, new GoToOrderHistoryPageCommand());
         commands.put(CommandType.SETTINGS_EDIT_COMMAND, new SettingsEditCommand());
@@ -44,7 +45,6 @@ public class CommandProvider {
         commands.put(CommandType.DELETE_DESSERT_COMMAND, new DeleteDessertCommand());
         commands.put(CommandType.UPDATE_DESSERT_COMMAND, new UpdateDessertCommand());
         commands.put(CommandType.GO_TO_DESSERT_DETAIL_PAGE_COMMAND, new GoToDessertDetailPageCommand());
-
     }
 
     public static CommandProvider getInstance() {

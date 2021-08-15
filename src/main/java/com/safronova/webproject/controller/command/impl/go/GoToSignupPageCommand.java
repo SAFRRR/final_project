@@ -6,7 +6,6 @@ import com.safronova.webproject.controller.command.RequestAttribute;
 import com.safronova.webproject.controller.command.Router;
 import com.safronova.webproject.model.util.RegexpPropertiesReader;
 import jakarta.servlet.http.HttpServletRequest;
-
 import java.util.Properties;
 
 public class GoToSignupPageCommand implements Command {

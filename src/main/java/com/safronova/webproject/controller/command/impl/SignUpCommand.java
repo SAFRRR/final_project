@@ -15,6 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 public class SignUpCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
+
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
@@ -47,12 +48,10 @@ public class SignUpCommand implements Command {
                     break;
             }
         } catch (ServiceException e) {
-            logger.error("Error at SignUpServlet", e);
+            logger.error("Error at SignUpCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;
-
     }
 }
-

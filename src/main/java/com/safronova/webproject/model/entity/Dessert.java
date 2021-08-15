@@ -107,7 +107,6 @@ public class Dessert {
     @Override
     public int hashCode() {
         int result;
-        long temp;
         result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);

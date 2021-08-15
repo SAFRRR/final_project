@@ -42,7 +42,7 @@ public class UpdateDessertCommand extends AdminCommand {
             storageService.updateStorage(dessertId, count);
             router = new Router(PagePath.GO_TO_DESSERT_LIST,RouterType.REDIRECT);
         } catch (ServiceException e) {
-            logger.error("Error at UpdateItemCommand", e);
+            logger.error("Error at UpdateDessertCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }

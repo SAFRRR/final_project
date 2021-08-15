@@ -12,7 +12,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 
 public class FindDessertByCategoryCommand implements Command {
@@ -47,6 +46,5 @@ public class FindDessertByCategoryCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;
-
     }
 }

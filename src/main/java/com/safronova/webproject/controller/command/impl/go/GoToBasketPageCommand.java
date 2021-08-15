@@ -20,11 +20,11 @@ import java.util.List;
 
 public class GoToBasketPageCommand extends UserCommand {
     private static final Logger logger = LogManager.getLogger();
+
     @Override
     protected Router handle(HttpServletRequest request) {
         Router router;
         final User user = (User) request.getSession().getAttribute(RequestAttribute.USER);
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final BasketService basketService = serviceProvider.getBasketService();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
@@ -38,7 +38,6 @@ public class GoToBasketPageCommand extends UserCommand {
             }
             request.setAttribute(RequestAttribute.BASKET, basket);
             router = new Router(PagePath.BASKET_PAGE, RouterType.FORWARD);
-
         }catch (ServiceException e) {
             logger.error("Error at GoToBasketPageCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);

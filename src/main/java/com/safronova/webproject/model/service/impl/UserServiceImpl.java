@@ -9,7 +9,6 @@ import com.safronova.webproject.model.entity.SignInData;
 import com.safronova.webproject.model.entity.SignUpData;
 import com.safronova.webproject.model.entity.User;
 import com.safronova.webproject.model.service.UserService;
-import com.safronova.webproject.model.util.PasswordEncryptor;
 import com.safronova.webproject.model.validator.UserValidator;
 
 import java.util.Optional;
@@ -17,7 +16,6 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final UserDao userDao = daoProvider.getUserDao();
-
 
     @Override
     public ResultCode signUp(SignUpData signUpData) throws ServiceException {

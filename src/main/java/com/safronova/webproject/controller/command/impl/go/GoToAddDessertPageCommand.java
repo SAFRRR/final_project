@@ -1,5 +1,4 @@
 package com.safronova.webproject.controller.command.impl.go;
-
 import com.safronova.webproject.controller.command.PagePath;
 import com.safronova.webproject.controller.command.RequestAttribute;
 import com.safronova.webproject.controller.command.Router;
@@ -13,7 +12,6 @@ import com.safronova.webproject.model.util.RegexpPropertiesReader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 import java.util.Properties;
 
@@ -41,7 +39,7 @@ public class GoToAddDessertPageCommand extends AdminCommand {
             request.setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY);
             router = new Router(PagePath.ADD_DESSERT_PAGE, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
-            logger.error("Error at GoToAddItemCommand", e);
+            logger.error("Error at GoToAddDessertCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }

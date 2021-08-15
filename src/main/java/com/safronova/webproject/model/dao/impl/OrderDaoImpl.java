@@ -6,7 +6,6 @@ import com.safronova.webproject.model.entity.Order;
 import com.safronova.webproject.model.entity.Status;
 import com.safronova.webproject.model.pool.ConnectionPool;
 import static com.safronova.webproject.model.dao.ColumnName.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,8 +28,6 @@ public class OrderDaoImpl implements OrderDao {
                     "FROM orders " +
                     "WHERE orders.o_user_id = ?";
 
-
-
     private static final String SELECT_ORDERS_SQL =
             "SELECT o_id, o_address, o_cash, o_date_delivery, o_date_order, o_status "+
                     "FROM orders";
@@ -44,7 +41,6 @@ public class OrderDaoImpl implements OrderDao {
             "UPDATE orders " +
                     "SET o_status = ? " +
                     "WHERE o_id = ?";
-
 
     @Override
     public Order saveOrder(Order order) throws DaoException {
@@ -140,7 +136,6 @@ public class OrderDaoImpl implements OrderDao {
         return order;
     }
 
-
     @Override
     public void updateStatusById(String orderStatus, Integer orderId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -172,5 +167,4 @@ public class OrderDaoImpl implements OrderDao {
         private static final int STATUS = 1;
         private static final int ID = 2;
     }
-
 }

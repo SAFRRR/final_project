@@ -12,7 +12,6 @@ public final class PagePath {
     public static final String ITEM_PAGE = "pages/item_page.jsp";
     public static final String BASKET_PAGE = "pages/user/basket_page.jsp";
     public static final String CHECKOUT_PAGE = "pages/user/checkout_page.jsp";
-    public static final String ORDER_SUBMIT = "order_submitted.jsp";
     public static final String DESSERT_DETAIL_PAGE = "pages/item_detail_page.jsp";
     public static final String ADD_DESSERT_PAGE = "pages/admin/add_item_page.jsp";
     public static final String UPDATE_DESSERT_PAGE = "pages/admin/update_dessert_page.jsp";
@@ -24,7 +23,7 @@ public final class PagePath {
     public static final String GO_TO_PROFILE_PAGE = "controller?command=go_to_profile_page_command";
     public static final String GO_TO_ORDER_LIST = "controller?command=go_to_orders_page_command";
     public static final String GO_TO_DESSERT_LIST = "controller?command=go_to_dessert_list_page_command";
-    public static final String GO_TO_DESSERT_DETAIL = "controller?command=go_to_flower_detail_page_command";
+//    public static final String GO_TO_DESSERT_DETAIL = "controller?command=go_to_flower_detail_page_command";
     public static final String GO_TO_BASKET_PAGE = "controller?command=go_to_basket_page_command";
     public static final String GO_TO_CHECKOUT_PAGE = "controller?command=go_to_check_out_page_command";
     public static final String GO_TO_ADD_DESSERT_PAGE_COMMAND = "controller?command=go_to_add_dessert_page_command";

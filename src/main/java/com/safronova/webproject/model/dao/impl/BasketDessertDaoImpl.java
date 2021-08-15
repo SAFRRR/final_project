@@ -31,8 +31,6 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
                     "FROM basket_desserts " +
                     "WHERE (bd_id = ?)";
 
-
-
     private static final String SELECT_ITEMS_BY_BASKET_ID_SQL =
             "SELECT bd_id, bd_basket_id, bd_dessert_id, bd_count, bd_sub_total, d_image, d_name, d_price, st_count "+
                     "FROM basket_desserts "+
@@ -140,7 +138,6 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
         return basketDessertList;
     }
 
-
     @Override
     public List<BasketDessert> findByDessertId(Integer id) throws DaoException {
         List<BasketDessert> basketDessertList = new ArrayList<>();
@@ -168,7 +165,7 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
                 basketDessertList.add(basketDessert);
             }
         } catch (SQLException e) {
-            throw new DaoException("Can't handle BasketDessertDao.findByBasketId request", e);
+            throw new DaoException("Can't handle BasketDessertDao.findByDessertId request", e);
         }
         return basketDessertList;
     }
@@ -182,7 +179,7 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
             statement.setInt(BasketDessertDaoImpl.SetSubTotalIndex.ID, basketDessert.getId());
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle BasketDessertDao.updateBasketDessert request", e);
+            throw new DaoException("Can't handle BasketDessertDao.updateSubTotal request", e);
         }
     }
 
@@ -194,7 +191,7 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
             statement.setInt(BasketDessertDaoImpl.SetSubTotalIndex.ID, basketDessert.getId());
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle BasketDessertDao.setCountBasketDessert request", e);
+            throw new DaoException("Can't handle BasketDessertDao.updateCount request", e);
         }
     }
 
@@ -214,4 +211,3 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
         private static final int ID = 2;
     }
 }
-

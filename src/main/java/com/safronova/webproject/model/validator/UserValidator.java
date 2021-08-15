@@ -14,7 +14,6 @@ public class UserValidator {
     private static final String REGEXP_EMAIL = properties.getProperty("regexp.email");
     private static final String REGEXP_PASSWORD = properties.getProperty("regexp.password");
 
-
     public static boolean validate(SignUpData signUpData) {
         return validateData(signUpData.getUsername(), signUpData.getFirstName(), signUpData.getLastName(), signUpData.getPhoneNumber(), signUpData.getEmail());
     }

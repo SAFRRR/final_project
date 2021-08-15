@@ -14,7 +14,6 @@ import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.DessertTypeService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import com.safronova.webproject.model.service.StorageService;
-import com.safronova.webproject.model.util.MailSender;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.Part;
@@ -27,6 +26,7 @@ import java.util.ResourceBundle;
 public class AddDessertCommand extends AdminCommand {
     private static final Logger logger = LogManager.getLogger();
     private static final String BUNDLE_NAME = "imagePath";
+    private static final String PATH_IMG2 = "path.image2";
     private static final String PATH_IMG = "path.image";
 
     @Override
@@ -43,7 +43,6 @@ public class AddDessertCommand extends AdminCommand {
         final String price = request.getParameter(RequestParameter.PRICE);
         final String count = request.getParameter(RequestParameter.COUNT);
 
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final DessertService dessertService = serviceProvider.getDessertService();
         final DessertTypeService dessertTypeService = serviceProvider.getDessertTypeService();
@@ -51,7 +50,6 @@ public class AddDessertCommand extends AdminCommand {
 
         try {
             DessertType dessertType = dessertTypeService.findById(category);
-
             ResultCode resultCode = dessertService.findDessertByName(nameDessert);
             if (resultCode == ResultCode.ERROR_DUPLICATE_NAME){
                 request.getSession().setAttribute(RequestAttribute.DUPLICATE_NAME, true);
@@ -63,7 +61,7 @@ public class AddDessertCommand extends AdminCommand {
                 inputStream = inputFile.getInputStream();
                 byte[] buffer = new byte[inputStream.available()];
                 inputStream.read(buffer);
-                final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
+                final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG2);
                 File imageFile = new File(path + dessert.getDessertImage());
                 if (!imageFile.exists()) {
                     imageFile.createNewFile();
@@ -71,10 +69,19 @@ public class AddDessertCommand extends AdminCommand {
                 outStream = new FileOutputStream(imageFile);
                 outStream.write(buffer);
                 outStream.close();
+
+                final String path2 = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
+                File imageFile2 = new File(path2 + dessert.getDessertImage());
+                if (!imageFile2.exists()) {
+                    imageFile2.createNewFile();
+                }
+                outStream = new FileOutputStream(imageFile2);
+                outStream.write(buffer);
+                outStream.close();
                 router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
             }
         } catch (ServiceException | IOException | ServletException e) {
-            logger.error("Error at AddItemCommand", e);
+            logger.error("Error at AddDessertCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }

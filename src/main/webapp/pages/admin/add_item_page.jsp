@@ -8,19 +8,14 @@
 <fmt:setBundle basename="locale"/>
 
 <fmt:message key="main.add.dessert" var="locale_add_dessert"/>
-<fmt:message key="admin.dessert.name" var="locale_dessert_name"/>
 <fmt:message key="main.name" var="locale_main_name"/>
 <fmt:message key="main.description" var="locale_main_description"/>
-<fmt:message key="admin.description.item" var="locale_description_item"/>
-<fmt:message key="main.category" var="locale_main_category"/>
 <fmt:message key="main.category.enter" var="locale_category_enter"/>
 <fmt:message key="admin.dessert.weight" var="locale_dessert_weight"/>
-<fmt:message key="admin.dessert.price" var="locale_dessert_price"/>
 <fmt:message key="admin.price.name" var="locale_price_name"/>
 <fmt:message key="admin.storage.name" var="locale_storage_name"/>
 <fmt:message key="admin.dessert.image" var="locale_dessert_image"/>
 <fmt:message key="main.add.item" var="locale_add_item"/>
-<fmt:message key="main.cancel" var="locale_main_cancel"/>
 <fmt:message key="main.exist" var="locale_main_exist"/>
 <fmt:message key="update.name" var="update_name_value"/>
 <fmt:message key="update.description" var="update_description_value"/>

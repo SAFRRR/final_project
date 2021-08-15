@@ -23,5 +23,4 @@ public interface DessertDao {
     void updateDessert(Integer id, Dessert dessert) throws DaoException;
 
     void deleteById(Integer id) throws DaoException;
-
 }

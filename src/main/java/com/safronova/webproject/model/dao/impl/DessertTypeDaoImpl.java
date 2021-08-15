@@ -30,7 +30,6 @@ public class DessertTypeDaoImpl implements DessertTypeDao {
                     "FROM dessert_types " +
                     "WHERE (dt_id = ?)";
 
-
     @Override
     public List<DessertType> findAll() throws DaoException {
         List<DessertType> dessertTypeList = new ArrayList<>();

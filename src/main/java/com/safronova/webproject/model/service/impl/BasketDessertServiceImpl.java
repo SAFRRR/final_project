@@ -23,9 +23,9 @@ public class BasketDessertServiceImpl implements BasketDessertService {
         }
         try {
             BigDecimal subTotal = new BigDecimal(price).multiply(new BigDecimal(count));
-            int dessertrCount = Integer.parseInt(count);
+            int dessertCount = Integer.parseInt(count);
             int id = Integer.parseInt(dessertId);
-            basketDessertDao.addItemToBasket(basketId, id, dessertrCount, subTotal);
+            basketDessertDao.addItemToBasket(basketId, id, dessertCount, subTotal);
         } catch (DaoException e) {
             throw new ServiceException("Can't handle addToBasket request at BasketDessertService", e);
         }

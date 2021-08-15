@@ -12,7 +12,6 @@ import com.safronova.webproject.model.service.ServiceProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 
 public class GoToOrdersPageCommand extends AdminCommand {
@@ -21,7 +20,6 @@ public class GoToOrdersPageCommand extends AdminCommand {
     @Override
     protected Router handle(HttpServletRequest request) {
         Router router;
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final OrderService orderService = serviceProvider.getOrderService();
 

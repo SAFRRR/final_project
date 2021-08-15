@@ -4,7 +4,6 @@ import com.safronova.webproject.controller.command.*;
 import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.entity.Basket;
-import com.safronova.webproject.model.entity.Role;
 import com.safronova.webproject.model.entity.SignInData;
 import com.safronova.webproject.model.entity.User;
 import com.safronova.webproject.model.service.BasketService;
@@ -13,7 +12,6 @@ import com.safronova.webproject.model.service.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.Optional;
 
 public class SignInCommand implements Command {

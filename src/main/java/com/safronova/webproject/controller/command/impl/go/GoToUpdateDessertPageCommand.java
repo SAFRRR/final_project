@@ -16,7 +16,6 @@ import com.safronova.webproject.model.util.RegexpPropertiesReader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 import java.util.Properties;
 
@@ -31,12 +30,10 @@ public class GoToUpdateDessertPageCommand extends AdminCommand {
     @Override
     protected Router handle(HttpServletRequest request) {
         Router router;
-
         final String dessertId = request.getParameter(RequestParameter.DESSERT_ID);
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final DessertService dessertService = serviceProvider.getDessertService();
         final DessertTypeService dessertTypeService = serviceProvider.getDessertTypeService();
-
 
         try {
             Dessert dessert = dessertService.findById(dessertId);

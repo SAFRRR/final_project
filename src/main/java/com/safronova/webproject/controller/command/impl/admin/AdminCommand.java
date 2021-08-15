@@ -29,7 +29,7 @@ public abstract class AdminCommand implements Command {
         }
         return router;
     }
-    protected abstract Router handle(HttpServletRequest req);
+    protected abstract Router handle(HttpServletRequest request);
 }
 
 

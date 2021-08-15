@@ -7,7 +7,6 @@ import java.util.*;
 
 public class MailPropertiesReader {
     private static final Logger logger = LogManager.getLogger();
-
     private static ResourceBundle resourceBundle;
     private static Properties properties;
     private MailPropertiesReader(){}

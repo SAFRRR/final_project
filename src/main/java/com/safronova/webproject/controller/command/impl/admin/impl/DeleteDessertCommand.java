@@ -26,7 +26,7 @@ public class DeleteDessertCommand extends AdminCommand {
             dessertService.deleteDessertById(dessertId);
             router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
         } catch (ServiceException e) {
-            logger.error("Error at DeleteItemCommand", e);
+            logger.error("Error at DeleteDessertCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }

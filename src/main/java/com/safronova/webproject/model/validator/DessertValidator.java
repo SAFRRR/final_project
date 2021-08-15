@@ -27,7 +27,6 @@ public class DessertValidator {
         return validateWeight(weight);
     }
 
-
     public static boolean validateName(String name) {
         return isMatchFounded(name, REGEXP_DESSERT_NAME);
     }

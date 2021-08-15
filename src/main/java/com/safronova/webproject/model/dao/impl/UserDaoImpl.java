@@ -27,11 +27,9 @@ public class UserDaoImpl implements UserDao {
     private UserDaoImpl() {
     }
 
-
     private static final String SIGNUP_SQL =
             "INSERT INTO users (u_login, u_password, u_email, u_role, u_name, u_surname, u_address, u_phone)"+
                     " VALUES (?,?,?,?,?,?,?,?)";
-
 
     private static final String GET_USER_BY_EMAIL_SQL =
             "SELECT u_id, u_email, u_login, u_password, u_role, u_name, u_surname, u_address, u_phone "+
@@ -47,8 +45,6 @@ public class UserDaoImpl implements UserDao {
             "UPDATE users " +
                     "SET u_login = ?, u_password = ?, u_name = ?, u_surname = ?, u_address = ?, u_phone = ? " +
                     "WHERE u_id = ?";
-
-
 
     @Override
     public User findUserByEmail(String email) throws DaoException {
@@ -92,7 +88,7 @@ public class UserDaoImpl implements UserDao {
                 user.setAddress(resultSet.getString(USERS_ADDRESS));
                 user.setPhone(resultSet.getString(USERS_PHONE));
                 optionalUser = Optional.of(user);
-            }else {
+            } else {
                 return Optional.empty();
             }
         } catch (SQLException e) {
@@ -119,7 +115,6 @@ public class UserDaoImpl implements UserDao {
             statement.setString(UserDaoImpl.SignUpIndex.PHONE, signUpData.getPhoneNumber());
             statement.execute();
             return ResultCode.SUCCESS;
-
         } catch (SQLException e) {
             if (e.getErrorCode() == DUBLICATE_EMAIL_ERROR_CODE) {
                 return ResultCode.ERROR_DUPLICATE_EMAIL;
@@ -138,7 +133,7 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(UserDaoImpl.SetPasswordIndex.ID, id);
             statement.execute();
         } catch (SQLException e) {
-            throw new DaoException("Can't handle UserDao.setPasswordByID request", e);
+            throw new DaoException("Can't handle UserDao.setPasswordById request", e);
         }
     }
 

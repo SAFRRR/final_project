@@ -4,7 +4,6 @@ import com.safronova.webproject.exception.DaoException;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.dao.DaoProvider;
 import com.safronova.webproject.model.dao.DessertTypeDao;
-import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
 import com.safronova.webproject.model.service.DessertTypeService;
 import com.safronova.webproject.model.validator.DessertValidator;

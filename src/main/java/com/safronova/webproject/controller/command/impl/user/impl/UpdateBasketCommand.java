@@ -21,7 +21,6 @@ public class UpdateBasketCommand extends UserCommand {
         Router router;
         final String basketDessertId = request.getParameter(RequestParameter.BASKET_ID);
         final String count = request.getParameter(RequestParameter.COUNT);
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
 

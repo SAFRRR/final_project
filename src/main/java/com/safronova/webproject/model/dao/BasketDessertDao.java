@@ -20,7 +20,5 @@ public interface BasketDessertDao {
     BasketDessert findById(Integer id) throws DaoException;
 
     void deleteBasketDessert(Integer id) throws DaoException;
-
-
 }
 

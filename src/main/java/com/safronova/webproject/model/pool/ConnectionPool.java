@@ -82,7 +82,6 @@ public class ConnectionPool {
             } catch (SQLException e) {
                 logger.error("Unable to close connection in a proper way", e);
             }
-
         }
         deregisterDrivers();
     }

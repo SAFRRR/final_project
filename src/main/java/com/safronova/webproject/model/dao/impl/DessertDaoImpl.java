@@ -5,10 +5,7 @@ import com.safronova.webproject.model.dao.DessertDao;
 import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.*;
 import com.safronova.webproject.model.pool.ConnectionPool;
-import com.safronova.webproject.model.util.PasswordEncryptor;
-
 import static com.safronova.webproject.model.dao.ColumnName.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -33,7 +30,6 @@ public class DessertDaoImpl implements DessertDao {
                     "JOIN dessert_types ON desserts.d_dessert_type_id = dessert_types.dt_id " +
                     "JOIN storages ON desserts.d_id = storages.st_dessert_id";
 
-
     private static final String FIND_DESSERT_BY_CATEGORY =
             "SELECT d_id, d_name, d_description,  d_price, d_weight, d_image "+
                     "FROM desserts " +
@@ -46,7 +42,6 @@ public class DessertDaoImpl implements DessertDao {
                     "JOIN dessert_types ON desserts.d_dessert_type_id = dessert_types.dt_id "+
                     "JOIN storages ON desserts.d_id = storages.st_dessert_id "+
                     "WHERE (d_id = ?)";
-
 
     private static final String INSERT_DESSERT_SQL =
             "INSERT INTO desserts (d_name, d_description, d_price, d_weight, d_dessert_type_id)"+
@@ -71,22 +66,20 @@ public class DessertDaoImpl implements DessertDao {
                     "FROM desserts " +
                     "WHERE (d_name=?)";
 
-
-
     @Override
     public ResultCode findDessertByName(String name) throws DaoException {
        try (Connection connection = ConnectionPool.getInstance().getConnection();
-                 PreparedStatement statement = connection.prepareStatement(SELECT_NAME_SQL)) {
-                statement.setString(1, name);
-                ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                return ResultCode.ERROR_DUPLICATE_NAME;
-            }else {
-                return ResultCode.SUCCESS;
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Can't handle DessertDao.findDessertByName request", e);
-        }
+            PreparedStatement statement = connection.prepareStatement(SELECT_NAME_SQL)) {
+           statement.setString(1, name);
+           ResultSet resultSet = statement.executeQuery();
+           if (resultSet.next()) {
+               return ResultCode.ERROR_DUPLICATE_NAME;
+           } else {
+               return ResultCode.SUCCESS;
+           }
+       } catch (SQLException e) {
+           throw new DaoException("Can't handle DessertDao.findDessertByName request", e);
+       }
     }
 
     @Override
@@ -264,12 +257,10 @@ public class DessertDaoImpl implements DessertDao {
         private static final int INDEX = 1;
     }
 
-
     private static class UpdateImageIndex {
         private static final int IMAGE = 1;
         private static final int ID = 2;
     }
-
 
     private static class DessertIndex {
         private static final int NAME = 1;

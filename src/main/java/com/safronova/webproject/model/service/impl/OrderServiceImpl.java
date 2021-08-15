@@ -46,8 +46,6 @@ public class OrderServiceImpl implements OrderService {
         return orderList;
     }
 
-
-
     @Override
     public List<Order> findAll() throws ServiceException {
         List<Order> orderList;

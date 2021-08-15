@@ -18,7 +18,6 @@ import com.safronova.webproject.model.service.ServiceProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -33,7 +32,6 @@ public class PlaceOrderCommand extends UserCommand {
         final String cash = request.getParameter(RequestParameter.CASH);
         final String date = request.getParameter(RequestParameter.DATE);
         final String time = request.getParameter(RequestParameter.TIME);
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final OrderService orderService = serviceProvider.getOrderService();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
@@ -61,4 +59,3 @@ public class PlaceOrderCommand extends UserCommand {
         return router;
     }
 }
-

@@ -25,14 +25,13 @@ public class GoToCheckoutPageCommand extends UserCommand {
     protected Router handle(HttpServletRequest request) {
         Router router;
         final String basketId = request.getParameter(RequestParameter.BASKET_ID);
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final BasketService basketService = serviceProvider.getBasketService();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
         try{
             Basket basket = basketService.findById(basketId);
             List<BasketDessert> basketDessertList = basketDessertService.findByBasketId(Integer.parseInt(basketId));
-            if (basketDessertList.size() == 0) {
+            if (basketDessertList.isEmpty()) {
                 request.setAttribute(RequestAttribute.EMPTY_BASKET, true);
                 router = new Router(PagePath.BASKET_PAGE, Router.RouterType.FORWARD);
             } else {
