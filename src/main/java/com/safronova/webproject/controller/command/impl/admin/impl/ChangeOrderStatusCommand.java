@@ -47,7 +47,6 @@ public class ChangeOrderStatusCommand extends AdminCommand {
             if (orderStatus.equals(APPROVED) || orderStatus.equals(INPROCESS)){
                 List<OrderDessert> orderDessertList = orderService.findByOrder(Integer.parseInt(orderId));
                 for (OrderDessert orderDessert : orderDessertList){
-                    Storage storage = storageService.findByDessertId(String.valueOf(orderDessert.getDessert().getId()));
                     count = orderDessert.getDessert().getQuantity() - orderDessert.getCount();
                     storageService.updateStorage(String.valueOf(orderDessert.getDessert().getId()),String.valueOf(count));
                 }
