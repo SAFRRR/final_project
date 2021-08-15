@@ -17,14 +17,19 @@
             <form class="form-horizontal" style="width: 400px; height:600px; margin: 20px 20px 10px 0;" >
                 <input type="hidden" value="${dessert.id}" name="dessertId">
                 <a href="${pageContext.request.contextPath}/controller?command=go_to_dessert_detail_page_command&dessertId=${dessert.id}">
-                    <img class="img-responsive" src="static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>
-                </a>
-                <h4 style="text-align: center; margin-top: 15px">${dessert.name}</h4>
-                <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
-                <p style="width: 313px;text-align: center;">${fn:substring(dessert.description, 0, 300)}</p>
-         </form>
-        </c:if>
-        </c:forEach>
-    </div>
-</body>
-</html>
+<%--                    <img class="img-responsive" src="${pageContext.request.contextPath}/static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>--%>
+<%--                    <img class="img-responsive" src="static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>--%>
+            <img class="img-responsive" src="<%=request.getContextPath()%>/static/images/${dessert.dessertImage}" style="height: 313px;" alt=""/>
+
+<%--                                "<%=request.getContextPath()%>/--%>
+
+                            </a>
+                            <h4 style="text-align: center; margin-top: 15px">${dessert.name}</h4>
+                            <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
+                            <p style="width: 313px;text-align: center;">${fn:substring(dessert.description, 0, 300)}</p>
+                     </form>
+                    </c:if>
+                    </c:forEach>
+                </div>
+            </body>
+            </html>

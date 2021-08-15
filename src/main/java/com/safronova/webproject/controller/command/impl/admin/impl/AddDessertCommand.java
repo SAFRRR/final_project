@@ -73,23 +73,6 @@ public class AddDessertCommand extends AdminCommand {
                 outStream.close();
                 router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
             }
-
-
-//            Dessert dessert = dessertService.createDessert(nameDessert, description, price,  weight,  dessertType);
-//            storageService.createStorage(dessert, count);
-//            inputFile = request.getPart(RequestParameter.IMAGE);
-//            inputStream = inputFile.getInputStream();
-//            byte[] buffer = new byte[inputStream.available()];
-//            inputStream.read(buffer);
-//            final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
-//            File imageFile = new File(path + dessert.getDessertImage());
-//            if (!imageFile.exists()) {
-//                imageFile.createNewFile();
-//            }
-//            outStream = new FileOutputStream(imageFile);
-//            outStream.write(buffer);
-//            outStream.close();
-//            router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);
         } catch (ServiceException | IOException | ServletException e) {
             logger.error("Error at AddItemCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
