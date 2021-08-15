@@ -8,36 +8,15 @@
 </c:if>
 <fmt:setBundle basename="locale"/>
 
-<fmt:message key="user.account" var="locale_user_account"/>
 <fmt:message key="user.order.place" var="locale_order_place"/>
-<fmt:message key="user.order.confirm" var="locale_order_confirm"/>
-<fmt:message key="admin.order.sum" var="locale_order_sum"/>
-<fmt:message key="user.order.address" var="locale_order_address"/>
-<fmt:message key="common.address.detail" var="locale_address_detail"/>
-<fmt:message key="user.order.delivery" var="locale_order_delivery"/>
-<fmt:message key="user.order.time" var="locale_order_time"/>
 <fmt:message key="user.time.select" var="locale_time_select"/>
-<fmt:message key="common.next" var="locale_common_next"/>
-<fmt:message key="user.order.payment" var="locale_order_payment"/>
 <fmt:message key="user.payment.cash" var="locale_payment_cash"/>
-<fmt:message key="common.yes" var="locale_common_yes"/>
-<fmt:message key="common.no" var="locale_common_no"/>
-<fmt:message key="user.review.item" var="locale_review_item"/>
-<fmt:message key="admin.item.name" var="locale_item_name"/>
-<fmt:message key="admin.price.name" var="locale_item_price"/>
-<fmt:message key="user.storage.dessert" var="locale_storage_dessert"/>
-<fmt:message key="user.storage.only" var="locale_storage_only"/>
-<fmt:message key="user.dessert.unavailable" var="locale_dessert_unavailable"/>
-<fmt:message key="user.order.amount" var="locale_order_amount"/>
 <fmt:message key="user.total.price" var="locale_total_price"/>
-<fmt:message key="admin.operation.delete" var="locale_operation_delete"/>
 <fmt:message key="order.info" var="order_info_value"/>
 <fmt:message key="signup.address" var="signup_address_value"/>
 <fmt:message key="admin.order.cash" var="cash_value"/>
 <fmt:message key="admin.order.card" var="card_value"/>
 <fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
-
-
 
 <!doctype html>
 <html>

@@ -24,7 +24,6 @@
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
     <br/>
-    <!--Table Header-->
     <div class="table-responsive" >
         <table class="table table-bordered table-hover">
             <style>

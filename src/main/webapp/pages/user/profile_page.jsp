@@ -8,19 +8,13 @@
 </c:if>
 <fmt:setBundle basename="locale"/>
 
-<fmt:message key="signup.title" var="signup_title_value"/>
 <fmt:message key="signup.username" var="signup_username_value"/>
-<fmt:message key="signup.email" var="signup_email_value"/>
 <fmt:message key="signup.phone" var="signup_phone_value"/>
 <fmt:message key="signup.address" var="signup_address_value"/>
-<fmt:message key="signup.submit" var="signup_submit_value"/>
 <fmt:message key="signup.name" var="signup_name_value"/>
 <fmt:message key="signup.surname" var="signup_surname_value"/>
-<fmt:message key="signup.span" var="signup_span_value"/>
-<fmt:message key="signup.signin" var="signup_signin_value"/>
 <fmt:message key="signup.current.password" var="signup_current_password_value"/>
 <fmt:message key="signup.new.password" var="signup_new_password_value"/>
-<fmt:message key="password.feedbackInvalidPasswordsAreNotEqual" var="signup_password_notequal_value"/>
 <fmt:message key="signup.new.password.confirm" var="signup_new_password_confirm_value"/>
 <fmt:message key="profile.save.changes" var="profile_save_changes_value"/>
 <fmt:message key="profile.settings" var="profile_settings_value"/>
@@ -29,14 +23,10 @@
 <fmt:message key="edit.result" var="edit_result_value"/>
 <fmt:message key="signup.valid.phone" var="signup_valid_phone_value"/>
 <fmt:message key="signup.valid.username" var="signup_valid_username_value"/>
-
 <fmt:message key="signup.valid.name" var="signup_valid_name_value"/>
 <fmt:message key="signup.valid.surname" var="signup_valid_surname_value"/>
 <fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
-
 <fmt:message key="signup.valid.password" var="signup_valid_password_value"/>
-
-
 
 <!DOCTYPE html>
 <!doctype html>

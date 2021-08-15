@@ -24,11 +24,9 @@
 <!doctype html>
 <html>
 <body>
-
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
     <div class="container2" style=" display: flex; flex-direction: row; flex-wrap: wrap;  align-items: center; justify-content: center;">
-
     <c:forEach items="${basketDessertList}" var="basketDessert">
         <div class="my">
         <form action="controller" method="post">

@@ -19,7 +19,6 @@
 <html lang="en">
 <body>
 <jsp:include page="sign_header.jsp"/>
-
 <div class="content-section">
     <div class="form-bg">
         <div class="container">

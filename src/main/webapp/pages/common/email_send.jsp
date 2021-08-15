@@ -17,9 +17,7 @@
 <html lang="en">
 <body>
 <jsp:include page="sign_header.jsp"/>
-
 <div class="msg">
-
     <div class="form-bg">
         <div class="container">
             <div class="row">
@@ -36,7 +34,6 @@
         </div>
     </div>
 </div>
-
 <jsp:include page="footer.jsp"/>
 </body>
 </html>

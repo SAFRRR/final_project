@@ -21,7 +21,6 @@
 <fmt:message key="signup.valid.email" var="signup_valid_email_value"/>
 <fmt:message key="signup.valid.phone" var="signup_valid_phone_value"/>
 <fmt:message key="signup.valid.username" var="signup_valid_username_value"/>
-
 <fmt:message key="signup.valid.name" var="signup_valid_name_value"/>
 <fmt:message key="signup.valid.surname" var="signup_valid_surname_value"/>
 <fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
