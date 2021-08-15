@@ -55,7 +55,7 @@ public class AddDessertCommand extends AdminCommand {
                 request.getSession().setAttribute(RequestAttribute.DUPLICATE_NAME, true);
                 router = new Router(PagePath. GO_TO_ADD_DESSERT_PAGE_COMMAND, RouterType.REDIRECT);
             }else{
-                Dessert dessert = dessertService.createDessert(nameDessert, description, price,  weight,  dessertType);
+                Dessert dessert = dessertService.createDessert(nameDessert, description, price,  weight,  dessertType, count);
                 storageService.createStorage(dessert, count);
                 inputFile = request.getPart(RequestParameter.IMAGE);
                 inputStream = inputFile.getInputStream();

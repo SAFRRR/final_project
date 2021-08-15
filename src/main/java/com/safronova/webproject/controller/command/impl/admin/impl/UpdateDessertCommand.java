@@ -38,7 +38,7 @@ public class UpdateDessertCommand extends AdminCommand {
 
         try {
             DessertType dessertType = dessertTypeService.findById(category);
-            dessertService.updateDessert(dessertId, nameDessert, description, price, weight, dessertType);
+            dessertService.updateDessert(dessertId, nameDessert, description, price, weight, dessertType, count);
             storageService.updateStorage(dessertId, count);
             router = new Router(PagePath.GO_TO_DESSERT_LIST,RouterType.REDIRECT);
         } catch (ServiceException e) {

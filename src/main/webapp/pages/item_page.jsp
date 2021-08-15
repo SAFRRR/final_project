@@ -21,7 +21,7 @@
             </h2>
     </div>
     <c:if test="${emptyList}">
-        <h3>${locale_empty_list}</h3>
+        <h3 style="color: #e1791a; text-align: center; margin-top: 20px;">${locale_empty_list}</h3>
     </c:if>
     <div class="container" style=" display: flex; flex-direction: row; flex-wrap: wrap;  align-items: center; justify-content: center;">
         <c:forEach var="dessert" items="${dessertList}">

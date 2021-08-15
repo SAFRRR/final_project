@@ -37,6 +37,8 @@ public final class ColumnName {
 
     public static final String DESSERT_WEIGHT = "d_weight";
     public static final String DESSERT_IMAGE = "d_image";
+    public static final String DESSERT_QUANTITY = "d_quantity";
+
 
     /*Storage table*/
     public static final String STORAGE_ID = "st_id";

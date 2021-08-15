@@ -11,6 +11,16 @@ public class Dessert {
     private String dessertImage;
     private DessertType dessertType;
     private Storage storage;
+    private int quantity;
+
+    public Dessert(String name, String description, BigDecimal price,  int weight, DessertType dessertType, int quantity) {
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.weight = weight;
+        this.dessertType = dessertType;
+        this.quantity = quantity;
+    }
 
     public Dessert(String name, String description, BigDecimal price,  int weight, DessertType dessertType) {
         this.name = name;
@@ -19,6 +29,7 @@ public class Dessert {
         this.weight = weight;
         this.dessertType = dessertType;
     }
+
 
     public Dessert() {
     }
@@ -85,6 +96,14 @@ public class Dessert {
 
     public void setStorage(Storage storage) {
         this.storage = storage;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
     @Override

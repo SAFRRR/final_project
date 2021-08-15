@@ -8,6 +8,7 @@ import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.controller.command.impl.admin.AdminCommand;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.entity.OrderDessert;
+import com.safronova.webproject.model.entity.Storage;
 import com.safronova.webproject.model.service.OrderService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import com.safronova.webproject.model.service.StorageService;
@@ -26,7 +27,7 @@ public class ChangeOrderStatusCommand extends AdminCommand {
     @Override
     protected Router handle(HttpServletRequest request) {
         Router router;
-        final int defaultCount = 0;
+        int count = 0;
         final String orderStatus = request.getParameter(RequestParameter.ORDER_STATUS);
         final String orderId = request.getParameter(RequestParameter.ORDER_ID);
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
@@ -38,14 +39,17 @@ public class ChangeOrderStatusCommand extends AdminCommand {
             if (orderStatus.equals(REJECTED)){
                 List<OrderDessert> orderDessertList = orderService.findByOrder(Integer.parseInt(orderId));
                 for (OrderDessert orderDessert : orderDessertList){
-                    int count = orderDessert.getCount();
+                    Storage storage = storageService.findByDessertId(String.valueOf(orderDessert.getDessert().getId()));
+                    count = orderDessert.getCount() + storage.getCount();
                     storageService.updateStorage(String.valueOf(orderDessert.getDessert().getId()),String.valueOf(count));
                 }
             }
             if (orderStatus.equals(APPROVED) || orderStatus.equals(INPROCESS)){
                 List<OrderDessert> orderDessertList = orderService.findByOrder(Integer.parseInt(orderId));
                 for (OrderDessert orderDessert : orderDessertList){
-                    storageService.updateStorage(String.valueOf(orderDessert.getDessert().getId()),String.valueOf(defaultCount));
+                    Storage storage = storageService.findByDessertId(String.valueOf(orderDessert.getDessert().getId()));
+                    count = orderDessert.getDessert().getQuantity() - orderDessert.getCount();
+                    storageService.updateStorage(String.valueOf(orderDessert.getDessert().getId()),String.valueOf(count));
                 }
             }
             router = new Router(PagePath.GO_TO_ORDER_LIST, RouterType.REDIRECT);

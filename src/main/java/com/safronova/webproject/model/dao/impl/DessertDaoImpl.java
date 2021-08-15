@@ -44,17 +44,17 @@ public class DessertDaoImpl implements DessertDao {
                     "WHERE (d_id = ?)";
 
     private static final String INSERT_DESSERT_SQL =
-            "INSERT INTO desserts (d_name, d_description, d_price, d_weight, d_dessert_type_id)"+
-                    "VALUES (?,?,?,?,?)";
+            "INSERT INTO desserts (d_name, d_description, d_price, d_weight, d_dessert_type_id, d_quantity) "+
+                    "VALUES (?,?,?,?,?,?)";
 
     private static final String SET_IMAGE_SQL =
             "UPDATE desserts "+
-                    "SET d_image = ?"+
+                    "SET d_image = ? "+
                     "WHERE d_id = ?";
 
     private static final String UPDATE_DESSERT_SQL =
             "UPDATE desserts "+
-                    "SET d_name = ?, d_description = ?, d_price = ?, d_weight = ?, d_dessert_type_id = ? "+
+                    "SET d_name = ?, d_description = ?, d_price = ?, d_weight = ?, d_dessert_type_id = ?, d_quantity = ?  "+
                     "WHERE d_id =?";
 
     private static final String DELETE_DESSERT_SQL =
@@ -91,6 +91,7 @@ public class DessertDaoImpl implements DessertDao {
             statement.setBigDecimal(DessertDaoImpl.DessertIndex.PRICE, dessert.getPrice());
             statement.setInt(DessertDaoImpl.DessertIndex.WEIGHT, dessert.getWeight());
             statement.setInt(DessertDaoImpl.DessertIndex.TYPE_ID, dessert.getDessertType().getId());
+            statement.setInt(DessertDaoImpl.DessertIndex.QUANTITY, dessert.getQuantity());
 
             int affectedRows = statement.executeUpdate();
             if (affectedRows == 0) {
@@ -235,6 +236,7 @@ public class DessertDaoImpl implements DessertDao {
             statement.setBigDecimal(DessertDaoImpl.DessertIndex.PRICE, dessert.getPrice());
             statement.setInt(DessertDaoImpl.DessertIndex.WEIGHT, dessert.getWeight());
             statement.setInt(DessertDaoImpl.DessertIndex.TYPE_ID, dessert.getDessertType().getId());
+            statement.setInt(DessertDaoImpl.DessertIndex.QUANTITY, dessert.getQuantity());
             statement.setInt(DessertDaoImpl.DessertIndex.ID, id);
             statement.execute();
         } catch (SQLException e) {
@@ -268,6 +270,7 @@ public class DessertDaoImpl implements DessertDao {
         private static final int PRICE = 3;
         private static final int WEIGHT = 4;
         private static final int TYPE_ID = 5;
-        private static final int ID = 6;
+        private static final int QUANTITY = 6;
+        private static final int ID = 7;
     }
 }

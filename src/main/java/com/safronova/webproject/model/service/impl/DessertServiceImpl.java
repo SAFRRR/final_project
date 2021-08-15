@@ -72,14 +72,15 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
-    public Dessert createDessert(String nameDessert, String description, String price, String weight,  DessertType category) throws ServiceException {
+    public Dessert createDessert(String nameDessert, String description, String price, String weight,  DessertType category, String quantity) throws ServiceException {
         final String FORMAT_FILE_NAME = ".png";
         if (!DessertValidator.validateData(nameDessert, description, price, weight)) {
             throw new ServiceException("Flower data didn't passed validation");
         }
         BigDecimal dessertPrice = new BigDecimal(price);
         int dessertWeight = Integer.parseInt(weight);
-        Dessert dessert = new Dessert(nameDessert, description, dessertPrice, dessertWeight, category);
+        int dessertQuantity = Integer.parseInt(quantity);
+        Dessert dessert = new Dessert(nameDessert, description, dessertPrice, dessertWeight, category, dessertQuantity);
         Dessert dbDessert;
         try {
             dbDessert = dessertDao.createDessert(dessert);
@@ -93,14 +94,15 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
-    public void updateDessert(String dessertId, String nameDessert, String description, String price, String weight,  DessertType dessertType) throws ServiceException {
+    public void updateDessert(String dessertId, String nameDessert, String description, String price, String weight,  DessertType dessertType, String quantity) throws ServiceException {
         if (!DessertValidator.validateData(nameDessert, description, price, weight) || !DessertValidator.validateId(dessertId)) {
             throw new ServiceException("Dessert data didn't passed validation");
         }
         int id = Integer.parseInt(dessertId);
         BigDecimal dessertPrice = new BigDecimal(price);
         int dessertWeight = Integer.parseInt(weight);
-        Dessert dessert = new Dessert(nameDessert, description, dessertPrice,  dessertWeight, dessertType);
+        int dessertQuantity = Integer.parseInt(quantity);
+        Dessert dessert = new Dessert(nameDessert, description, dessertPrice,  dessertWeight, dessertType, dessertQuantity);
         try {
             dessertDao.updateDessert(id, dessert);
         } catch (DaoException e) {

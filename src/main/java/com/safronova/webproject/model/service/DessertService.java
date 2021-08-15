@@ -18,9 +18,9 @@ public interface DessertService {
 
     List<Dessert> findAllDessertList() throws ServiceException;
 
-    Dessert createDessert(String nameDessert, String description, String price,  String weight,  DessertType dessertType) throws ServiceException;
+    Dessert createDessert(String nameDessert, String description, String price,  String weight,  DessertType dessertType, String quantity) throws ServiceException;
 
-    void updateDessert(String dessertId, String nameDessert, String description, String price, String weight, DessertType dessertType) throws ServiceException;
+    void updateDessert(String dessertId, String nameDessert, String description, String price, String weight, DessertType dessertType, String quantity) throws ServiceException;
 
     void deleteDessertById(String dessertId) throws ServiceException;
 }
