@@ -29,6 +29,9 @@
                             <div>${error_title_value}</div>
                             <div>${error_description_value}</div>
                         </div>
+
+
+
                         <div class="form-footer">
                             <span class="span-text"></span>
                             <a href="${pageContext.request.contextPath}/controller?command=go_to_home_page_command"  class="signUp" style="text-transform: uppercase">${locale_email_home}</a>

@@ -8,6 +8,7 @@ public final class PagePath {
     public static final String PROFILE_PAGE = "pages/user/profile_page.jsp";
     public static final String ORDER_HISTORY_PAGE = "pages/user/order_history_page.jsp";
     public static final String ERROR_404_PAGE = "pages/common/404.jsp";
+
     public static final String ERROR_PAGE = "pages/common/error.jsp";
     public static final String ITEM_PAGE = "pages/item_page.jsp";
     public static final String BASKET_PAGE = "pages/user/basket_page.jsp";
