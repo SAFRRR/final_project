@@ -44,6 +44,7 @@ public final class RequestAttribute {
     public static final String REGEXP_PRICE = "attribute_regexp_price";
     public static final String REGEXP_WEIGHT = "attribute_regexp_weight";
     public static final String REGEXP_COUNT = "attribute_regexp_count";
+    public static final String REGEXP_DESCRIPTION = "attribute_regexp_description";
     public static final String EXCEPTION_CLASS = "javax.servlet.error.exception";
     public static final String ORDER_LIST = "orderList";
     public static final String CURRENT_PAGE = "currentPage";

@@ -105,7 +105,6 @@
                                 <i class="fas fa-lg fa-user"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-menu-end" style="min-width: 0px;" aria-labelledby="navbarDropdownMenuLink">
-                                <li><a class="dropdown-item" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=go_to_profile_page_command">${locale_main_profile_title}</a></li>
                                 <li>
                                     <a class="dropdown-item" style="color: #e1791a;" href="${pageContext.request.contextPath}/controller?command=log_out_command">${locale_main_logout}</a>
                                 </li>

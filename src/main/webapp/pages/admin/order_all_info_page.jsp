@@ -74,11 +74,7 @@
                         </td>
                     </c:if>
                     <td>
-                        <form action="controller" method="post">
-                            <input type="hidden" name="command" value="go_to_order_detail_page_command"/>
-                            <input type="hidden" name="orderId" value="${order.id}"/>
-                            <button type="submit" style="color:  #e1791a;" class="btn btn-link">${locale_common_detail}</button>
-                        </form>
+                         <a  style="color:  #e1791a; text-decoration: underline;" href="${pageContext.request.contextPath}/controller?command=go_to_order_detail_page_command&orderId=${order.id}">${locale_common_detail}</a>
                         <br/>
                     </td>
                 </tr>

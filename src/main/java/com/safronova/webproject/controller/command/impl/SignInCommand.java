@@ -39,7 +39,7 @@ public class SignInCommand implements Command {
                 user.setBasket(basket);
                 request.getSession().setAttribute(RequestAttribute.USER, user);
                 request.getSession().setAttribute(RequestAttribute.ROLE, user.getRole());
-                router = new Router(PagePath.GO_TO_PROFILE_PAGE, RouterType.REDIRECT);
+                router = new Router(PagePath.GO_TO_HOME_PAGE, RouterType.REDIRECT);
             } else {
                 request.getSession().setAttribute(RequestAttribute.WRONG_DATA, true);
                 router = new Router(PagePath.GO_TO_SIGNIN_PAGE, RouterType.REDIRECT);

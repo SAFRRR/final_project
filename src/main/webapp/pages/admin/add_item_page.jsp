@@ -55,7 +55,12 @@
                 </c:if>
 
                 <div class="form-group">
-                    <textarea rows="5" class="form-control" id="description" name="description" maxlength="300" minlength="5" placeholder="${locale_main_description}" required></textarea>
+                    <input class="form-control"
+                           type="text"
+                           id="description" name="description"
+                           max="300" min="5"
+                           pattern="${attribute_regexp_description}"
+                           placeholder="${locale_main_description}" required>
                     <div class="invalid-feedback">
                         ${update_description_value}
                     </div>

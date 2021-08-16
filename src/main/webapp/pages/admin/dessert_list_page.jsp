@@ -58,16 +58,12 @@
                     <td style="text-align: center">${dessert.storage.count}</td>
 
                     <td>
-                        <form action="controller" method="post">
-                            <input type="hidden" name="command" value="go_to_update_dessert_page_command"/>
-                            <input type="hidden" name="dessertId" value="${dessert.id}"/>
-                            <button style="color:  #e1791a; text-decoration: underline" class="btn btn-default" type="submit">${locale_common_edit}</button>
-                        </form>
+                        <a  style="color:  #e1791a; text-decoration: underline; margin-left: 12px;" href="${pageContext.request.contextPath}/controller?command=go_to_update_dessert_page_command&dessertId=${dessert.id}">${locale_common_edit}</a>
 
                         <form action="controller" method="post">
-                            <input type="hidden" name="command" value="delete_dessert_command"/>
-                            <input type="hidden" name="dessertId" value="${dessert.id}"/>
-                            <button style="color:  #e1791a; text-decoration: underline" type="submit" class="btn btn-default">${locale_operation_delete}</button>
+                            <input type="hidden" name="command" value="delete_dessert_command">
+                            <input type="hidden" name="dessertId" value="${dessert.id}">
+                            <button style="color:  #e1791a; text-decoration: underline; " type="submit" class="btn btn-default">${locale_operation_delete}</button>
                         </form>
                     </td>
                 </tr>

@@ -6,12 +6,13 @@ import com.safronova.webproject.controller.command.RequestParameter;
 import com.safronova.webproject.controller.command.Router;
 import com.safronova.webproject.controller.command.Router.RouterType;
 import com.safronova.webproject.controller.command.impl.admin.AdminCommand;
+import com.safronova.webproject.controller.command.impl.user.UserCommand;
 import com.safronova.webproject.exception.ServiceException;
+import com.safronova.webproject.model.entity.Basket;
+import com.safronova.webproject.model.entity.BasketDessert;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
-import com.safronova.webproject.model.service.DessertService;
-import com.safronova.webproject.model.service.DessertTypeService;
-import com.safronova.webproject.model.service.ServiceProvider;
+import com.safronova.webproject.model.service.*;
 import com.safronova.webproject.model.util.RegexpPropertiesReader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
@@ -25,6 +26,7 @@ public class GoToUpdateDessertPageCommand extends AdminCommand {
     private static final String REGEXP_NAME = properties.getProperty("regexp.dessert.name");
     private static final String REGEXP_PRICE = properties.getProperty("regexp.dessert.price");
     private static final String REGEXP_WEIGHT = properties.getProperty("regexp.dessert.weight");
+    private static final String REGEXP_DESCRIPTION = properties.getProperty("regexp.dessert.description");
     private static final String REGEXP_QUANTITY = properties.getProperty( "regexp.dessert.quantity");
 
     @Override
@@ -43,6 +45,7 @@ public class GoToUpdateDessertPageCommand extends AdminCommand {
             request.setAttribute(RequestAttribute.REGEXP_NAME,REGEXP_NAME);
             request.setAttribute(RequestAttribute.REGEXP_PRICE,REGEXP_PRICE);
             request.setAttribute(RequestAttribute.REGEXP_WEIGHT, REGEXP_WEIGHT);
+            request.setAttribute(RequestAttribute.REGEXP_DESCRIPTION, REGEXP_DESCRIPTION);
             request.setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY );
             router = new Router(PagePath.UPDATE_DESSERT_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {

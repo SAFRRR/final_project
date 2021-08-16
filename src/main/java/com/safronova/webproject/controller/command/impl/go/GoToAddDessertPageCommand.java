@@ -20,6 +20,7 @@ public class GoToAddDessertPageCommand extends AdminCommand {
     private static final Properties properties = RegexpPropertiesReader.getProperties();
     private static final String REGEXP_NAME = properties.getProperty("regexp.dessert.name");
     private static final String REGEXP_PRICE = properties.getProperty("regexp.dessert.price");
+    private static final String REGEXP_DESCRIPTION = properties.getProperty("regexp.dessert.description");
     private static final String REGEXP_WEIGHT = properties.getProperty("regexp.dessert.weight");
     private static final String REGEXP_QUANTITY = properties.getProperty( "regexp.dessert.quantity");
 
@@ -36,6 +37,7 @@ public class GoToAddDessertPageCommand extends AdminCommand {
             request.setAttribute(RequestAttribute.REGEXP_NAME, REGEXP_NAME);
             request.setAttribute(RequestAttribute.REGEXP_PRICE, REGEXP_PRICE);
             request.setAttribute(RequestAttribute.REGEXP_WEIGHT, REGEXP_WEIGHT);
+            request.setAttribute(RequestAttribute.REGEXP_DESCRIPTION, REGEXP_DESCRIPTION);
             request.setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY);
             router = new Router(PagePath.ADD_DESSERT_PAGE, Router.RouterType.FORWARD);
         } catch (ServiceException e) {
