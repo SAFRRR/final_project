@@ -17,7 +17,6 @@
 <fmt:message key="signup.valid.email" var="signup_valid_email_value"/>
 <fmt:message key="signup.valid.password" var="signup_valid_password_value"/>
 
-
 <!doctype html>
 <html lang="en">
 <body>

@@ -2,12 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
 <fmt:setBundle basename="locale"/>
-
 
 <fmt:message key="user.continue.shopping" var="locale_continue_shopping"/>
 <fmt:message key="user.order.check" var="locale_order_check"/>
@@ -56,7 +54,6 @@
         </div>
     </c:forEach>
     </div>
-
     <form class="form-horizontal" style="width: 450px; height:80px; margin-top: 5px; margin-left: 18px;margin-right: 20px;">
             <h4 style="float: left; margin-top: -15px"><strong style="font-size: large">${locale_total_price}</strong>
                 <span style="color: orangered; font-size: large"><span>${basket.totalCost}</span>&nbsp;BYN&nbsp;&nbsp;</span></h4>
@@ -68,8 +65,6 @@
                 </form>
             </c:if>
     </form>
-
-
 </div>
 </body>
 </html>

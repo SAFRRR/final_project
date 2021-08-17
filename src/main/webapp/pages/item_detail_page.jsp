@@ -3,7 +3,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
@@ -19,7 +18,6 @@
 <fmt:message key="add.already" var="locale_add_already"/>
 <fmt:message key="not.enough" var="not_enough_value"/>
 
-
 <!doctype html>
 <html lang="en">
 <body>
@@ -30,7 +28,6 @@
             <i class="fas fa-chevron-left"></i>
         </a>
     </div>
-
 
     <form class="form-horizontal" action="controller" method="post" style="width: 500px; margin-top: 10px; margin-left: 400px;margin-right: 20px; " >
         <input type="hidden" name="command" value="add_dessert_to_basket_command">
@@ -46,29 +43,27 @@
         <p style="width: 413px; text-align: center;">${fn:substring(dessert.description, 0, 300)}</p>
 
         <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
-    <c:if test="${user.role != 'ADMIN'}">
-        <c:if test="${storage.count > 0}">
-            <input required type="number" step="1"
+        <c:if test="${user.role != 'ADMIN'}">
+            <c:if test="${storage.count > 0}">
+                <input required type="number" step="1"
                    class="form-control" name="amount" min="1"
                    max="${storage.count}"
+                   pattern="${attribute_regexp_count}"
                    placeholder="${locale_order_amount}" style="margin-top: -20px">
-            <p style="color: red; margin-left: 20px;">
-                <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
-            </p>
-            <button type="submit" style="margin-left: 108px;" class="btn btn-default">${locale_basket_add}</button>
-
+                <p style="color: red; margin-left: 20px;">
+                    <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
+                </p>
+                <button type="submit" style="margin-left: 108px;" class="btn btn-default">${locale_basket_add}</button>
+            </c:if>
         </c:if>
-    </c:if>
         <c:if test="${storage.count==0}">
             <p style="color: red; text-align: center">${locale_dessert_unavailable}</p>
         </c:if>
-
 
         <c:if test="${addDessertSuccess}">
             <div class="form-group">
                 <p id='app' style="margin-top: -15px;margin-left: 115px; text-align: center; opacity: 1;height: 30px; width: 200px; transition: opacity 500ms;  color:#14AC2E; ">${locale_add_basket}</p>
             </div>
-
         </c:if>
         <c:if test="${addDessertFailed}">
             <div class="form-group">
@@ -78,7 +73,6 @@
         </c:if>
 
         <c:if test="${notEnoughStorage}">
-
             <div class="form-group">
                 <p id="notEnough" style="color: red; margin-top: -20px;margin-left: -8px; text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
                       ${not_enough_value}</p>
@@ -89,6 +83,7 @@
 </div>
 </body>
 </html>
+
 <script>
     function initialSetup() {
         if (document.getElementById('app') != null) {
@@ -107,6 +102,5 @@
             }, 3000);
         }
     }
-
     initialSetup();
 </script>

@@ -11,8 +11,6 @@
 <fmt:message key="email.msg" var="locale_email_msg"/>
 <fmt:message key="email.home" var="locale_email_home"/>
 
-
-<!DOCTYPE html>
 <!doctype html>
 <html lang="en">
 <body>

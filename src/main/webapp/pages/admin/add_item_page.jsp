@@ -23,7 +23,6 @@
 <fmt:message key="update.weight" var="update_weight_value"/>
 <fmt:message key="update.quantity" var="update_quantity_value"/>
 
-
 <!doctype html>
 <html>
 <body>
@@ -119,7 +118,6 @@
 </div>
 </body>
 </html>
-
 
 <script>
     (function () {

@@ -8,12 +8,17 @@ import com.safronova.webproject.model.entity.Storage;
 import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import com.safronova.webproject.model.service.StorageService;
+import com.safronova.webproject.model.util.RegexpPropertiesReader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.util.Properties;
+
 public class GoToDessertDetailPageCommand implements Command {
     private static final Logger logger = LogManager.getLogger();
+    private static final Properties properties = RegexpPropertiesReader.getProperties();
+    private static final String REGEXP_QUANTITY = properties.getProperty( "regexp.dessert.quantity");
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -28,6 +33,7 @@ public class GoToDessertDetailPageCommand implements Command {
             Storage storage = storageService.findByDessertId(dessertId);
             request.setAttribute(RequestAttribute.DESSERT, dessert);
             request.setAttribute(RequestAttribute.STORAGE, storage);
+            request.setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY);
             request.getSession().setAttribute(RequestAttribute.CURRENT_PAGE, PagePath.DESSERT_DETAIL_BY_ID + dessertId);
             router = new Router(PagePath.DESSERT_DETAIL_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {

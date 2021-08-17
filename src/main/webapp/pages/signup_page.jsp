@@ -25,13 +25,10 @@
 <fmt:message key="signup.valid.surname" var="signup_valid_surname_value"/>
 <fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
 
-
 <!doctype html>
 <html lang="en">
 <body>
 <jsp:include page="common/sign_header.jsp"/>
-
-
 <div>
     <div class="form-bg">
         <div class="container">
@@ -114,7 +111,6 @@
 </body>
 </html>
 
-
 <script>
     (function () {
         'use strict'
@@ -140,5 +136,3 @@
     }
     initialSetup();
 </script>
-
-

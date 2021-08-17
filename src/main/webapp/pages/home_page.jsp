@@ -2,8 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
@@ -11,7 +9,6 @@
 
 <fmt:message key="main.intro" var="locale_main_intro"/>
 <fmt:message key="main.intro.second" var="locale_main_intro_second"/>
-
 
 <!doctype html>
 <html lang="en">

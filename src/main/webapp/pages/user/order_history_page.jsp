@@ -2,12 +2,10 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
 <fmt:setBundle basename="locale"/>
-
 
 <fmt:message key="user.order.date" var="locale_order_date"/>
 <fmt:message key="user.order.number" var="locale_order_number"/>
@@ -17,12 +15,10 @@
 <fmt:message key="admin.order.inprocess" var="locale_order_inprocess"/>
 <fmt:message key="admin.order.rejected" var="locale_order_rejected"/>
 
-<!DOCTYPE html>
 <!doctype html>
 <html lang="en">
 <body>
 <jsp:include page="../common/header.jsp"/>
-
 <div class="container">
     <div class="panel-group">
         <div class="panel panel-default">

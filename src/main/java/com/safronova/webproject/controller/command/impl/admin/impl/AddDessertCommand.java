@@ -26,7 +26,7 @@ import java.util.ResourceBundle;
 public class AddDessertCommand extends AdminCommand {
     private static final Logger logger = LogManager.getLogger();
     private static final String BUNDLE_NAME = "imagePath";
-    private static final String PATH_IMG2 = "path.image2";
+    private static final String PATH_DIR = "path.dir";
     private static final String PATH_IMG = "path.image";
 
     @Override
@@ -61,8 +61,9 @@ public class AddDessertCommand extends AdminCommand {
                 inputStream = inputFile.getInputStream();
                 byte[] buffer = new byte[inputStream.available()];
                 inputStream.read(buffer);
-                final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG2);
-                File imageFile = new File(path + dessert.getDessertImage());
+                final String dir = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_DIR);
+                final String path = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
+                File imageFile = new File(dir + dessert.getDessertImage());
                 if (!imageFile.exists()) {
                     imageFile.createNewFile();
                 }
@@ -70,12 +71,11 @@ public class AddDessertCommand extends AdminCommand {
                 outStream.write(buffer);
                 outStream.close();
 
-                final String path2 = ResourceBundle.getBundle(BUNDLE_NAME).getString(PATH_IMG);
-                File imageFile2 = new File(path2 + dessert.getDessertImage());
-                if (!imageFile2.exists()) {
-                    imageFile2.createNewFile();
+                File output = new File(path + dessert.getDessertImage());
+                if (!output.exists()) {
+                    output.createNewFile();
                 }
-                outStream = new FileOutputStream(imageFile2);
+                outStream = new FileOutputStream(output);
                 outStream.write(buffer);
                 outStream.close();
                 router = new Router(PagePath.GO_TO_DESSERT_LIST, RouterType.REDIRECT);

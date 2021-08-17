@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
@@ -39,7 +38,7 @@
                 <div class="form-group">
                             <i class="fas fa-calendar-day"></i>
                             <input required type="date" class="form-control" id="date" name="date" value=""
-                                   max="2022-08-14" min="2021-08-14"/>
+                                   max="2022-08-14" min="2021-08-17"/>
                     <div class="invalid-feedback">
                     </div>
                 </div>

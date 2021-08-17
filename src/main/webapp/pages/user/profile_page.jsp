@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
@@ -28,7 +27,6 @@
 <fmt:message key="signup.valid.address" var="signup_valid_address_value"/>
 <fmt:message key="signup.valid.password" var="signup_valid_password_value"/>
 
-<!DOCTYPE html>
 <!doctype html>
 <html lang="en">
 <body>
@@ -124,7 +122,7 @@
                             <p id="wrong" style="color: green;  opacity: 1; transition: opacity 500ms;">${edit_result_value}</p>
                         </c:if>
 
-                        <button type="submit" style="width: 300px; margin-left: 30px" class="btn btn-default">${profile_save_changes_value}</button>
+                        <button type="submit"  class="btn btn-default">${profile_save_changes_value}</button>
                         <div class="form-footer">
                         </div>
                     </form>
@@ -135,9 +133,6 @@
 </div>
 </body>
 </html>
-
-
-
 
 <script>
     (function () {

@@ -10,7 +10,6 @@
 
 <fmt:message key="empty.list" var="locale_empty_list"/>
 
-
 <!doctype html>
 <html lang="en">
 <body >
@@ -37,7 +36,6 @@
                 </form>
             </c:if>
         </c:forEach>
-
     </div>
 </body>
 </html>

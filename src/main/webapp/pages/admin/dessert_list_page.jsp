@@ -19,18 +19,13 @@
 
 <!doctype html>
 <html lang="en">
-<link rel="stylesheet" href="../../static/css/dessert.css">
 <body>
 <jsp:include page="../common/header.jsp"/>
 <div class="container">
     <br/>
     <div class="table-responsive" >
         <table class="table table-bordered table-hover">
-            <style>
-                tr:hover {
-                    background: #ffe1be;
-                }
-            </style>
+            <style>tr:hover {background: #ffe1be;}</style>
             <thead>
             <tr>
                 <th style="text-align: center; color: #e1791a;">${locale_main_name}</th>

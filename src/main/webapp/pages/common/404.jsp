@@ -2,7 +2,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
-
 <c:if test="${not empty sessionScope.locale}">
     <fmt:setLocale value="${sessionScope.locale}"/>
 </c:if>
@@ -12,13 +11,10 @@
 <fmt:message key="error.page404NotFound" var="error_description_value"/>
 <fmt:message key="email.home" var="locale_email_home"/>
 
-
-<!DOCTYPE html>
 <!doctype html>
 <html lang="en">
 <body>
 <jsp:include page="sign_header.jsp"/>
-
 <div class="content-section">
     <div class="form-bg">
         <div class="container">
@@ -29,9 +25,6 @@
                             <div>${error_title_value}</div>
                             <div>${error_description_value}</div>
                         </div>
-
-
-
                         <div class="form-footer">
                             <span class="span-text"></span>
                             <a href="${pageContext.request.contextPath}/controller?command=go_to_home_page_command"  class="signUp" style="text-transform: uppercase">${locale_email_home}</a>
