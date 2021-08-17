@@ -11,25 +11,46 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of {@link DessertTypeDao}. Provides methods to interact with DessertType data from database.
+ * Methods connect to database using {@link Connection} from {@link ConnectionPool} and manipulate with data(save, edit, etc.).
+ */
 public class DessertTypeDaoImpl implements DessertTypeDao {
-
+    /**
+     * A single instance of the class (pattern Singleton)
+     */
     private static final DessertTypeDaoImpl instance = new DessertTypeDaoImpl();
 
-    public static DessertTypeDaoImpl getInstance() {
-        return instance;
-    }
-
-    private DessertTypeDaoImpl() {}
-
+    /** Query for database to get all record in dessert_type table */
     private static final String SELECT_ALL_DESSERT_TYPE_SQL =
             "SELECT dt_id, dt_category, dt_description "+
                     "FROM dessert_types";
 
+    /**Query for database to get all record in dessert_type table by ID*/
     private static final String SELECT_DESSERT_TYPE_BY_ID =
             "SELECT dt_id, dt_category, dt_description " +
                     "FROM dessert_types " +
                     "WHERE (dt_id = ?)";
 
+    /**
+     * Returns the instance of the class
+     * @return Object of {@link DessertTypeDaoImpl}
+     */
+    public static DessertTypeDaoImpl getInstance() {
+        return instance;
+    }
+
+    /**
+     * Private constructor without parameters
+     */
+    private DessertTypeDaoImpl() {}
+
+    /**
+     *  Connects to database and returns list of all dessert types.
+     *
+     * @return List of {@link DessertType} with all type of desserts.
+     * @throws DaoException  when problems with database connection occurs.
+     */
     @Override
     public List<DessertType> findAll() throws DaoException {
         List<DessertType> dessertTypeList = new ArrayList<>();
@@ -50,6 +71,13 @@ public class DessertTypeDaoImpl implements DessertTypeDao {
         return dessertTypeList;
     }
 
+    /**
+     * Connects to database and returns all info about dessert type by ID.
+     *
+     * @param id is type of dessert ID value.
+     * @return {@link DessertType} if type of dessert data found, null if not.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public DessertType findById(Integer id) throws DaoException {
         DessertType dessertType = new DessertType();
@@ -69,6 +97,9 @@ public class DessertTypeDaoImpl implements DessertTypeDao {
         return dessertType;
     }
 
+    /**
+     * Static class that contains parameter indexes for getting dessert type data by dessertType ID
+     */
     private static class FindDessertTypeIndexID {
         private static final int ID = 1;
     }

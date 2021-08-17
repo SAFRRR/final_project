@@ -14,31 +14,55 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of {@link OrderDessertDao}. Provides methods to interact with OrderDessert data from database.
+ * Methods connect to database using {@link Connection} from {@link ConnectionPool} and manipulate with data(save, edit, etc.).
+ */
 public class OrderDessertDaoImpl implements OrderDessertDao {
+    /**
+     * A single instance of the class (pattern Singleton)
+     */
     private static final OrderDessertDaoImpl instance = new OrderDessertDaoImpl();
 
-    public static OrderDessertDaoImpl getInstance() {
-        return instance;
-    }
-
-    private OrderDessertDaoImpl() {}
-
+    /** Query for database to add order dessert */
     private static final String INSERT_ORDER_DESSERT_SQL =
             "INSERT INTO ordered_desserts (od_dessert_id, od_count, od_order_id, od_sub_total) "+
                     "VALUES (?,?,?,?)";
 
+    /** Query for database to select order dessert data by order id */
     private static final String SELECT_ORDER_DESSERT_SQL =
             "SELECT d_id, d_name, d_price, od_count, od_sub_total, d_quantity "+
                     "FROM ordered_desserts "+
                     "JOIN desserts ON ordered_desserts.od_dessert_id = desserts.d_id "+
                     "WHERE od_order_id = ?";
 
+    /** Query for database to select order dessert data by dessert id */
     private static final String SELECT_ORDER_DESSERT_BY_DESSERT_SQL =
             "SELECT d_name, d_price, od_count, od_sub_total "+
                     "FROM ordered_desserts "+
                     "JOIN desserts ON ordered_desserts.od_dessert_id = desserts.d_id "+
                     "WHERE od_dessert_id = ?";
 
+    /**
+     * Returns the instance of the class
+     *
+     * @return Object of {@link OrderDessertDaoImpl}
+     */
+    public static OrderDessertDaoImpl getInstance() {
+        return instance;
+    }
+
+    /**
+     * Private constructor without parameters
+     */
+    private OrderDessertDaoImpl() {}
+
+    /**
+     * Connects to database and add new orderDessert.
+     *
+     * @param orderDessert is {@link OrderDessert} object that contains all info about orderDessert.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public void saveOrderDessert(OrderDessert orderDessert) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -53,6 +77,13 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         }
     }
 
+    /**
+     * Connects to database and return list of orderDessert that linked to the dessert by ID.
+     *
+     * @param id is dessert ID
+     * @return List of {@link OrderDessert} with all matching data.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public List<OrderDessert> findByDessertId(Integer id) throws DaoException {
         List<OrderDessert> orderDessertList = new ArrayList<>();
@@ -76,6 +107,13 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         return orderDessertList;
     }
 
+    /**
+     * Connects to database and return list of orderDessert that linked to the order by ID.
+     *
+     * @param id is order ID
+     * @return List of {@link OrderDessert} with all matching data.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public List<OrderDessert> findByOrder(Integer id) throws DaoException {
         List<OrderDessert> orderDessertList = new ArrayList<>();
@@ -101,6 +139,9 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         return orderDessertList;
     }
 
+    /**
+     * Static class that contains parameter indexes for inserting orderDessert
+     */
     private static class InsertOrderDessertIndex {
         private static final int DESSERT_ID = 1;
         private static final int COUNT = 2;
@@ -108,10 +149,16 @@ public class OrderDessertDaoImpl implements OrderDessertDao {
         private static final int SUB_TOTAL = 4;
     }
 
+    /**
+     * Static class that contains parameter indexes for selecting orderDessert by order ID
+     */
     private static class SelectOrderDessertIndex {
         private static final int ORDER_ID = 1;
     }
 
+    /**
+     * Static class that contains parameter indexes for selecting orderDessert by dessert ID
+     */
     private static class SelectOrderDessertByDessertIndex {
         private static final int DESSERT_ID = 1;
     }

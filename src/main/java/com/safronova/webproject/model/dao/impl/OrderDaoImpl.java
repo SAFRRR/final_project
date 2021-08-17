@@ -10,38 +10,66 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Implementation of {@link OrderDao}. Provides methods to interact with Order data from database.
+ * Methods connect to database using {@link Connection} from {@link ConnectionPool} and manipulate with data(save, edit, etc.).
+ */
 public class OrderDaoImpl implements OrderDao {
+    /**
+     * A single instance of the class (pattern Singleton)
+     */
     private static final OrderDaoImpl instance = new OrderDaoImpl();
 
-    public static OrderDaoImpl getInstance() {
-        return instance;
-    }
-
-    private OrderDaoImpl() {}
-
+    /** Query for database to add order */
     private static final String INSERT_ORDER_SQL =
             "INSERT INTO orders (o_status, o_date_delivery, o_user_id, o_total_cost, o_time, o_address, o_date_order, o_cash)" +
                     "VALUES (?,?,?,?,?,?,?,?)";
 
+    /** Query for database to select order by user */
     private static final String SELECT_ORDER_BY_USER_SQL =
             "SELECT o_id, o_status, o_date_order, o_total_cost " +
                     "FROM orders " +
                     "WHERE orders.o_user_id = ?";
 
+    /** Query for database to select all order data */
     private static final String SELECT_ORDERS_SQL =
             "SELECT o_id, o_address, o_cash, o_date_delivery, o_date_order, o_status "+
                     "FROM orders";
 
+    /** Query for database to select order data by id */
     private static final String SELECT_ORDER_BY_ID_SQL =
             "SELECT o_id, o_status, o_total_cost " +
                     "FROM orders " +
                     "WHERE o_id = ?";
 
+    /** Query for database to select order data by id */
     private static final String UPDATE_STATUS_SQL =
             "UPDATE orders " +
                     "SET o_status = ? " +
                     "WHERE o_id = ?";
 
+    /**
+     * Returns the instance of the class
+     *
+     * @return Object of {@link OrderDaoImpl}
+     */
+    public static OrderDaoImpl getInstance() {
+        return instance;
+    }
+
+    /**
+     * Private constructor without parameters
+     */
+    private OrderDaoImpl() {}
+
+
+    /**
+     * Connects to database and add new order.
+     *
+     * @param order is {@link Order} object that contains all info about order.
+     * @return {@link Order} object that was saved in database
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public Order saveOrder(Order order) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -72,6 +100,13 @@ public class OrderDaoImpl implements OrderDao {
         return order;
     }
 
+    /**
+     * Connects to database and return list of orders that linked to the user by ID.
+     *
+     * @param id is user ID
+     * @return List of {@link Order} with all matching orders.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public List<Order> findByUserId(Integer id) throws DaoException {
         List<Order> orderList = new ArrayList<>();
@@ -94,6 +129,12 @@ public class OrderDaoImpl implements OrderDao {
         return orderList;
     }
 
+    /**
+     * Connects to database and returns list of all orders.
+     *
+     * @return List of {@link Order} with all orders.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public List<Order> findAll() throws DaoException {
         List<Order> orderList = new ArrayList<>();
@@ -117,6 +158,13 @@ public class OrderDaoImpl implements OrderDao {
         return orderList;
     }
 
+    /**
+     * Connects to database and returns all info about order by ID.
+     *
+     * @param id is order ID value.
+     * @return {@link Order} if order's data found, null if not.
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public Order findById(Integer id) throws DaoException {
         Order order = new Order();
@@ -136,6 +184,13 @@ public class OrderDaoImpl implements OrderDao {
         return order;
     }
 
+    /**
+     * Connects to database and set order status to the order by ID.
+     *
+     * @param orderStatus is text that contains order's status.
+     * @param orderId is order ID value
+     * @throws DaoException when problems with database connection occurs.
+     */
     @Override
     public void updateStatusById(String orderStatus, Integer orderId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
@@ -148,6 +203,9 @@ public class OrderDaoImpl implements OrderDao {
         }
     }
 
+    /**
+     * Static class that contains parameter indexes for inserting order
+     */
     private static class InsertOrderIndex {
         private static final int STATUS_ORDER = 1;
         private static final int DATE_DELIVERY = 2;
@@ -159,10 +217,16 @@ public class OrderDaoImpl implements OrderDao {
         private static final int CASH = 8;
     }
 
+    /**
+     * Static class that contains parameter indexes for getting order data by user id
+     */
     private static class FindOrder {
         private static final int ID = 1;
     }
 
+    /**
+     * Static class that contains parameter indexes for updating status order
+     */
     private static class UpdateStatusIndex {
         private static final int STATUS = 1;
         private static final int ID = 2;
