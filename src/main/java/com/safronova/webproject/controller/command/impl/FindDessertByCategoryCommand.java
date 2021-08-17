@@ -22,7 +22,6 @@ public class FindDessertByCategoryCommand implements Command {
         Router router;
         HttpSession session = request.getSession(true);
         final String category = request.getParameter(RequestParameter.CATEGORY);
-
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final DessertService dessertService = serviceProvider.getDessertService();
         final DessertTypeService dessertTypeService = serviceProvider.getDessertTypeService();

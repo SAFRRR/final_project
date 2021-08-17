@@ -33,10 +33,11 @@ public class AddDessertToBasketCommand extends UserCommand {
 
         try {
             Basket basket = user.getBasket();
+            session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
+            session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
+            session.setAttribute(RequestAttribute.ADD_FAILED , false);
             if (Integer.parseInt(count) > Integer.parseInt(storageAmount)) {
                 session.setAttribute(RequestAttribute.NOT_ENOUGH, true);
-                session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
-                session.setAttribute(RequestAttribute.ADD_FAILED , false);
                 String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
                 router = new Router(page, RouterType.REDIRECT);
             } else {
@@ -44,14 +45,10 @@ public class AddDessertToBasketCommand extends UserCommand {
                 if (basketDesserts.isEmpty()){
                     basketDessertService.addToBasket(basket.getId(), dessertId, count, price);
                     session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
-                    session.setAttribute(RequestAttribute.ADD_FAILED , false);
-                    session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
                 } else {
                     int existCount = basketDesserts.get(0).getCount();
                     if (Integer.parseInt(count) + existCount > Integer.parseInt(storageAmount)){
                         session.setAttribute(RequestAttribute.ADD_FAILED , true);
-                        session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
-                        session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
                         session.setAttribute(RequestAttribute.ADDED_COUNT, count);
                         session.setAttribute(RequestAttribute.BASKET_COUNT, existCount);
                     } else {
@@ -59,8 +56,6 @@ public class AddDessertToBasketCommand extends UserCommand {
                         int basketDessertId = basketDesserts.get(0).getId();
                         basketDessertService.updateBasketDessert(String.valueOf(basketDessertId), String.valueOf(newCount));
                         session.setAttribute(RequestAttribute.ADD_SUCCESS, true);
-                        session.setAttribute(RequestAttribute.ADD_FAILED , false);
-                        session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
                     }
                 }
                 String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);

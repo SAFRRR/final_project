@@ -7,6 +7,7 @@ import java.util.List;
 
 public interface DessertTypeService {
     List<DessertType> findAll() throws ServiceException;
+
     DessertType findById(String id) throws ServiceException;
 }
 

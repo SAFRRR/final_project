@@ -23,11 +23,11 @@ public abstract class UserCommand implements Command {
             if (user.getRole() == Role.USER) {
                 return handle(request);
             } else {
-                router = new Router(PagePath.ERROR_404_PAGE, Router.RouterType.REDIRECT);
+                router = new Router(PagePath.ERROR_404_PAGE, RouterType.REDIRECT);
             }
         } else {
             request.setAttribute(RequestAttribute.MESSAGE, true);
-            router = new Router(PagePath.GO_TO_SIGNIN_PAGE, Router.RouterType.FORWARD);
+            router = new Router(PagePath.GO_TO_SIGNIN_PAGE, RouterType.FORWARD);
         }
         return router;
     }

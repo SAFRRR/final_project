@@ -46,6 +46,5 @@ public class GoToAddDessertPageCommand extends AdminCommand {
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;
-
     }
 }

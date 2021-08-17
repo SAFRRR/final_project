@@ -49,23 +49,20 @@ public class SettingsEditCommand extends UserCommand {
 
         try {
             ResultCode resultCode = userService.updateUser(signInData, user, newPassword, confirmPassword);
+            request.getSession().setAttribute(RequestAttribute.WRONG_PASSWORD, false);
+            request.getSession().setAttribute(RequestAttribute.SUCCESS_EDIT, false);
+            request.getSession().setAttribute(RequestAttribute.WRONG_CONFIRMATION, false);
             switch (resultCode) {
                 case WRONG_PASSWORD: {
                     request.getSession().setAttribute(RequestAttribute.WRONG_PASSWORD, true);
-                    request.getSession().setAttribute(RequestAttribute.SUCCESS_EDIT, false);
-                    request.getSession().setAttribute(RequestAttribute.WRONG_CONFIRMATION, false);
                     break;
                 }
                 case WRONG_CONFIRMATION: {
                     request.getSession().setAttribute(RequestAttribute.WRONG_CONFIRMATION, true);
-                    request.getSession().setAttribute(RequestAttribute.SUCCESS_EDIT, false);
-                    request.getSession().setAttribute(RequestAttribute.WRONG_PASSWORD, false);
                     break;
                 }
                 case SUCCESS: {
                     request.getSession().setAttribute(RequestAttribute.SUCCESS_EDIT, true);
-                    request.getSession().setAttribute(RequestAttribute.WRONG_PASSWORD, false);
-                    request.getSession().setAttribute(RequestAttribute.WRONG_CONFIRMATION, false);
                     request.getSession().setAttribute(RequestAttribute.USER, user);
                     break;
                 }

@@ -75,7 +75,7 @@ public class DessertServiceImpl implements DessertService {
     public Dessert createDessert(String nameDessert, String description, String price, String weight,  DessertType category, String quantity) throws ServiceException {
         final String FORMAT_FILE_NAME = ".png";
         if (!DessertValidator.validateData(nameDessert, description, price, weight)) {
-            throw new ServiceException("Flower data didn't passed validation");
+            throw new ServiceException("Dessert data didn't passed validation");
         }
         BigDecimal dessertPrice = new BigDecimal(price);
         int dessertWeight = Integer.parseInt(weight);
