@@ -12,8 +12,6 @@ public interface UserDao {
 
     ResultCode signUp(SignUpData signUpData) throws DaoException;
 
-    User findUserByEmail(String email) throws DaoException;
-
     void setPasswordById(Integer id, String password) throws DaoException;
 
     ResultCode updateUser(User user) throws DaoException;

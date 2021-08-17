@@ -47,24 +47,6 @@ public class UserDaoImpl implements UserDao {
                     "WHERE u_id = ?";
 
     @Override
-    public User findUserByEmail(String email) throws DaoException {
-        User user = new User();
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(GET_USER_BY_EMAIL_SQL)) {
-            statement.setString(UserDaoImpl.FindUserIndex.EMAIL, email);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                user.setId(resultSet.getInt(USERS_ID));
-                user.setUsername(resultSet.getString(USERS_USERNAME));
-                user.setPassword(resultSet.getString(USERS_PASSWORD));
-            }
-        } catch (SQLException e) {
-            throw new DaoException("Can't handle UserDao.findUserByEmail request", e);
-        }
-        return user;
-    }
-
-    @Override
     public Optional<User> signIn(SignInData signInData) throws DaoException {
         final PasswordEncryptor passwordEncryptor = PasswordEncryptor.getInstance();
         Optional<User> optionalUser;
