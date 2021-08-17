@@ -9,10 +9,9 @@
                  target="SYSTEM_OUT">
             <PatternLayout pattern="${pattern_layout_console}" />
         </Console>
-
         <RollingFile name="file"
-                     fileName="logs/webproject.log"
-                     filePattern="logs/$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
+                     fileName="${catalina.base}/logs/webproject.log"
+                     filePattern="${catalina.base}/logs/${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">
             <PatternLayout pattern="${pattern_layout_file}" />
             <Policies>
                 <TimeBasedTriggeringPolicy interval="1" />
