@@ -33,7 +33,7 @@ public class GoToDessertDetailPageCommand implements Command {
             Storage storage = storageService.findByDessertId(dessertId);
             request.setAttribute(RequestAttribute.DESSERT, dessert);
             request.setAttribute(RequestAttribute.STORAGE, storage);
-            request.setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY);
+            request.getSession().setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY);
             request.getSession().setAttribute(RequestAttribute.CURRENT_PAGE, PagePath.DESSERT_DETAIL_BY_ID + dessertId);
             router = new Router(PagePath.DESSERT_DETAIL_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {

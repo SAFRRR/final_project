@@ -17,6 +17,8 @@
 <fmt:message key="add.unable" var="locale_add_unable"/>
 <fmt:message key="add.already" var="locale_add_already"/>
 <fmt:message key="not.enough" var="not_enough_value"/>
+<fmt:message key="update.quantity" var="invalid_quantity"/>
+
 
 <!doctype html>
 <html lang="en">
@@ -29,7 +31,7 @@
         </a>
     </div>
 
-    <form class="form-horizontal" action="controller" method="post" style="width: 500px; margin-top: 10px; margin-left: 400px;margin-right: 20px; " >
+    <form class="form-horizontal needs-validation" action="controller" method="post" style="width: 500px; margin-top: 10px; margin-left: 400px;margin-right: 20px; " novalidate >
         <input type="hidden" name="command" value="add_dessert_to_basket_command">
         <input hidden="hidden" name="dessertId" value="${dessert.id}"/>
         <input hidden="hidden" name="dessertPrice" value="${dessert.price}"/>
@@ -45,11 +47,17 @@
         <p style="text-align: center;"><span > ${dessert.price} BYN (</span><span>${dessert.weight} g )</span></p>
         <c:if test="${user.role != 'ADMIN'}">
             <c:if test="${storage.count > 0}">
-                <input required type="number" step="1"
+                <input required
+                       type="number"
+                       step="1"
                    class="form-control" name="amount" min="1"
                    max="${storage.count}"
-                   pattern="${attribute_regexp_count}"
+                       pattern="/d+"
+<%--                   pattern="${attribute_regexp_count}"--%>
                    placeholder="${locale_order_amount}" style="margin-top: -20px">
+                <div class="invalid-feedback">
+                        ${invalid_quantity}
+                </div>
                 <p style="color: red; margin-left: 20px;">
                     <span>${locale_storage_only}  ${storage.count} ${locale_storage_dessert}</span>
                 </p>
@@ -85,6 +93,20 @@
 </html>
 
 <script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
     function initialSetup() {
         if (document.getElementById('app') != null) {
             setTimeout(function() {

@@ -35,7 +35,7 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
 
     /** Query for database to select items by basket id */
     private static final String SELECT_ITEMS_BY_BASKET_ID_SQL =
-            "SELECT bd_id, bd_basket_id, bd_dessert_id, bd_count, bd_sub_total, d_image, d_name, d_price, st_count "+
+            "SELECT bd_id, bd_basket_id, bd_dessert_id, bd_count, bd_sub_total, d_image, d_name, d_price, d_quantity, st_count "+
                     "FROM basket_desserts "+
                     "INNER JOIN desserts ON bd_dessert_id = desserts.d_id "+
                     "INNER JOIN storages ON desserts.d_id = storages.st_dessert_id "+
@@ -177,6 +177,7 @@ public class BasketDessertDaoImpl implements BasketDessertDao {
                 dessert.setId(resultSet.getInt(BASKET_DESSERT_DESSERT_ID));
                 dessert.setDessertImage(resultSet.getString(DESSERT_IMAGE));
                 dessert.setName(resultSet.getString(DESSERT_NAME));
+                dessert.setQuantity(resultSet.getInt(DESSERT_QUANTITY));
                 dessert.setStorage(storage);
                 dessert.setPrice(resultSet.getBigDecimal(DESSERT_PRICE));
                 basket.setId(resultSet.getInt(BASKET_DESSERT_BASKET_ID));

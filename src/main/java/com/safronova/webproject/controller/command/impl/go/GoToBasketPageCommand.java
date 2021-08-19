@@ -12,14 +12,18 @@ import com.safronova.webproject.model.entity.User;
 import com.safronova.webproject.model.service.BasketDessertService;
 import com.safronova.webproject.model.service.BasketService;
 import com.safronova.webproject.model.service.ServiceProvider;
+import com.safronova.webproject.model.util.RegexpPropertiesReader;
 import jakarta.servlet.http.HttpServletRequest;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.util.List;
+import java.util.Properties;
 
 public class GoToBasketPageCommand extends UserCommand {
     private static final Logger logger = LogManager.getLogger();
+    private static final Properties properties = RegexpPropertiesReader.getProperties();
+    private static final String REGEXP_QUANTITY = properties.getProperty( "regexp.dessert.quantity");
 
     @Override
     protected Router handle(HttpServletRequest request) {
@@ -31,6 +35,7 @@ public class GoToBasketPageCommand extends UserCommand {
         try {
             Basket basket = user.getBasket();
             List<BasketDessert> basketDessertList = basketDessertService.findByBasketId(basket.getId());
+            request.getSession().setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY);
             request.setAttribute(RequestAttribute.BASKET_DESSERT_LIST, basketDessertList);
             basketService.updateBasket(basket, basketDessertList);
             if (basketDessertList.isEmpty()) {

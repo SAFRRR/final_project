@@ -18,6 +18,7 @@
 <fmt:message key="admin.operation.delete" var="locale_operation_delete"/>
 <fmt:message key="common.update" var="locale_common_update"/>
 <fmt:message key="user.total.price" var="locale_total_price"/>
+<fmt:message key="update.quantity" var="invalid_quantity"/>
 
 <!doctype html>
 <html>
@@ -32,7 +33,7 @@
             <input type="hidden" name="basketDessertId" value="${basketDessert.id}"/>
             <button type="submit" style="margin-left: 243px"  class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
         </form>
-        <form class="form-horizontal" style="width: 280px; height:500px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;margin-right: 20px; " >
+        <form class="form-horizontal needs-validation" style="width: 280px; height:550px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;margin-right: 20px; " novalidate>
            <img style="width: 200px" class="img-responsive dessert" src="./static/images/${basketDessert.dessert.dessertImage}">
             <h4 style="text-align: center; margin-top: 15px">${basketDessert.dessert.name}</h4>
             <p style="text-align: center;margin-top: 10px">${basketDessert.dessert.price} BYN</p>
@@ -41,13 +42,17 @@
                 <span>${locale_storage_only}  ${basketDessert.dessert.storage.count} ${locale_storage_dessert}</span>
             </p>
             </c:if>
-            <input id="count" style="width: 70px; margin-left: 60px;margin-top: 0" name="count" type="number" min="1" max="${basketDessert.dessert.storage.count}"
-           <c:if test="${basketDessert.dessert.storage.count==0}">disabled</c:if>
-           class="form-control basketDessertCount" value="${basketDessert.count}"/>
+            <input id="count" style="width: 100px; margin-left: 60px;margin-top: 0" name="count" type="text" pattern="${attribute_regexp_count}" min="1" max="${basketDessert.dessert.storage.count}"
+                <c:if test="${basketDessert.dessert.storage.count==0}">disabled</c:if>
+                   class="form-control basketDessertCount" value="${basketDessert.count}"/>
+            <div class="invalid-feedback">
+                    ${invalid_quantity}
+            </div>
 
             <form action="controller" method="post">
                 <input type="hidden" name="command" value="update_basket_command"/>
                 <input hidden="hidden" name="id" value="${basketDessert.id}"/>
+                <input hidden="hidden" name="storageAmount" value="${basketDessert.dessert.quantity}"/>
                 <button style="margin-left: 40px; width: 120px" type="submit" class="btn btn-warning btn-xs">${locale_common_update}</button>
             </form>
         </form>
@@ -69,3 +74,20 @@
 </body>
 </html>
 
+
+<script>
+    (function () {
+        'use strict'
+        var forms = document.querySelectorAll('.needs-validation')
+        Array.prototype.slice.call(forms)
+            .forEach(function (form) {
+                form.addEventListener('submit', function (event) {
+                    if (!form.checkValidity()) {
+                        event.preventDefault()
+                        event.stopPropagation()
+                    }
+                    form.classList.add('was-validated')
+                }, false)
+            })
+    })()
+</script>
