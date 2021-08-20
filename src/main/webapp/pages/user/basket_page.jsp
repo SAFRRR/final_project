@@ -33,7 +33,7 @@
             <input type="hidden" name="basketDessertId" value="${basketDessert.id}"/>
             <button type="submit" style="margin-left: 243px"  class="btn btn-outline-danger"><i class="fas fa-times"></i></button>
         </form>
-        <form class="form-horizontal needs-validation" style="width: 280px; height:550px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;margin-right: 20px; " novalidate>
+        <form class="form-horizontal needs-validation" style="width: 280px; height:580px; margin-top: 5px; margin-bottom: 10px; margin-left: 0;margin-right: 20px; " novalidate>
            <img style="width: 200px" class="img-responsive dessert" src="./static/images/${basketDessert.dessert.dessertImage}">
             <h4 style="text-align: center; margin-top: 15px">${basketDessert.dessert.name}</h4>
             <p style="text-align: center;margin-top: 10px">${basketDessert.dessert.price} BYN</p>
@@ -42,12 +42,19 @@
                 <span>${locale_storage_only}  ${basketDessert.dessert.storage.count} ${locale_storage_dessert}</span>
             </p>
             </c:if>
-            <input id="count" style="width: 100px; margin-left: 60px;margin-top: 0" name="count" type="text" pattern="${attribute_regexp_count}" min="1" max="${basketDessert.dessert.storage.count}"
+            <input id="count" style="width: 100px; margin-left: 60px;margin-top: 0" name="count" type="number"
+                   step="1"  pattern="/d+" min="1" max="${basketDessert.dessert.storage.count}"
                 <c:if test="${basketDessert.dessert.storage.count==0}">disabled</c:if>
                    class="form-control basketDessertCount" value="${basketDessert.count}"/>
-            <div class="invalid-feedback">
+            <div class="invalid-feedback" style="margin-right: 5px">
                     ${invalid_quantity}
             </div>
+            <c:if test="${notEnoughStorage}">
+                <div class="form-group">
+                    <p id="fail" style="color: red; margin-top: -20px;margin-left: -8px; text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
+                            ${locale_add_unable}</p>
+                </div>
+            </c:if>
 
             <form action="controller" method="post">
                 <input type="hidden" name="command" value="update_basket_command"/>
@@ -76,6 +83,24 @@
 
 
 <script>
+    {
+        const
+            intRx = /\d/,
+            integerChange = (event) => {
+                if (
+                    (event.key.length > 1) ||
+                    ( (event.key === "-") && (!event.currentTarget.value.length) ) ||
+                    intRx.test(event.key)
+                ) return;
+                event.preventDefault();
+            };
+
+        for (let input of document.querySelectorAll(
+            'input[type="number"][step="1"]'
+        )) input.addEventListener("keydown", integerChange);
+
+    }
+
     (function () {
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')
@@ -90,4 +115,14 @@
                 }, false)
             })
     })()
+
+    function initialSetup() {
+        if (document.getElementById('fail') != null) {
+            setTimeout(function() {
+                document.getElementById('fail').style.opacity = '0';
+            }, 3000);
+        }
+    }
+    initialSetup();
+
 </script>

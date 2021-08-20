@@ -32,12 +32,10 @@ public class UpdateBasketCommand extends UserCommand {
         try {
             if (Integer.parseInt(count) > Integer.parseInt(storageAmount)) {
                 session.setAttribute(RequestAttribute.NOT_ENOUGH, true);
-                String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
-                router = new Router(page, RouterType.REDIRECT);
             } else {
                 basketDessertService.updateBasketDessert(basketDessertId, count);
-                router = new Router(PagePath.GO_TO_BASKET_PAGE, RouterType.REDIRECT);
             }
+            router = new Router(PagePath.GO_TO_BASKET_PAGE, RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.error("Error at UpdateBasketCommand", e);
             request.setAttribute(RequestAttribute.EXCEPTION, e);
