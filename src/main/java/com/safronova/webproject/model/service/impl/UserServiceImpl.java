@@ -13,6 +13,11 @@ import com.safronova.webproject.model.validator.UserValidator;
 
 import java.util.Optional;
 
+/**
+ * {@code UserServiceImpl} class is an implementation of {@link UserService} interface.
+ *
+ * @author Anna Safronova
+ */
 public class UserServiceImpl implements UserService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final UserDao userDao = daoProvider.getUserDao();

@@ -7,8 +7,14 @@ import com.safronova.webproject.model.dao.StorageDao;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.Storage;
 import com.safronova.webproject.model.service.StorageService;
+import com.safronova.webproject.model.service.UserService;
 import com.safronova.webproject.model.validator.DessertValidator;
 
+/**
+ * {@code StorageServiceImpl} class is an implementation of {@link StorageService} interface.
+ *
+ * @author Anna Safronova
+ */
 public class StorageServiceImpl implements StorageService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final StorageDao storageDao = daoProvider.getStorageDao();

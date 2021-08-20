@@ -8,11 +8,17 @@ import com.safronova.webproject.model.dao.ResultCode;
 import com.safronova.webproject.model.entity.Dessert;
 import com.safronova.webproject.model.entity.DessertType;
 import com.safronova.webproject.model.service.DessertService;
+import com.safronova.webproject.model.service.DessertTypeService;
 import com.safronova.webproject.model.validator.DessertValidator;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * {@code DessertServiceImpl class is an implementation of {@link DessertService} interface.
+ *
+ * @author Anna Safronova
+ */
 public class DessertServiceImpl implements DessertService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final DessertDao dessertDao = daoProvider.getDessertDao();

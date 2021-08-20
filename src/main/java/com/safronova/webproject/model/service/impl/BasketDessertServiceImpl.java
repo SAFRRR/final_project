@@ -7,11 +7,17 @@ import com.safronova.webproject.model.dao.DaoProvider;
 import com.safronova.webproject.model.entity.Basket;
 import com.safronova.webproject.model.entity.BasketDessert;
 import com.safronova.webproject.model.service.BasketDessertService;
+import com.safronova.webproject.model.service.BasketService;
 import com.safronova.webproject.model.validator.DessertValidator;
 
 import java.math.BigDecimal;
 import java.util.List;
 
+/**
+ * {@code BasketDessertServiceImpl  class is an implementation of {@link BasketDessertService} interface.
+ *
+ * @author Anna Safronova
+ */
 public class BasketDessertServiceImpl implements BasketDessertService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final BasketDessertDao basketDessertDao = daoProvider.getBasketDessertDao();

@@ -8,12 +8,18 @@ import com.safronova.webproject.model.dao.DaoProvider;
 import com.safronova.webproject.model.entity.Basket;
 import com.safronova.webproject.model.entity.BasketDessert;
 import com.safronova.webproject.model.service.BasketService;
+import com.safronova.webproject.model.service.DessertService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.List;
 
-public class BasketServiceImpl implements BasketService {
+/**
+ * {@code BasketServiceImpl  class is an implementation of {@link BasketService} interface.
+ *
+ * @author Anna Safronova
+ */
+public class BasketServiceImpl implements BasketService{
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final BasketDao basketDao = daoProvider.getBasketDao();
     private static final BasketDessertDao basketFlowerDao = daoProvider.getBasketDessertDao();

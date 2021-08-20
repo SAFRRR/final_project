@@ -8,6 +8,7 @@ import com.safronova.webproject.model.dao.OrderDessertDao;
 import com.safronova.webproject.model.dao.StorageDao;
 import com.safronova.webproject.model.entity.*;
 import com.safronova.webproject.model.service.OrderService;
+import com.safronova.webproject.model.service.StorageService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,6 +18,11 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
+/**
+ * {@code OrderServiceImpl} class is an implementation of {@link OrderService} interface.
+ *
+ * @author Anna Safronova
+ */
 public class OrderServiceImpl implements OrderService {
     private static final Logger logger = LogManager.getLogger();
     private static final DaoProvider daoProvider = DaoProvider.getInstance();

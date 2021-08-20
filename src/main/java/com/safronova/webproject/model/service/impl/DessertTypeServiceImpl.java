@@ -6,10 +6,16 @@ import com.safronova.webproject.model.dao.DaoProvider;
 import com.safronova.webproject.model.dao.DessertTypeDao;
 import com.safronova.webproject.model.entity.DessertType;
 import com.safronova.webproject.model.service.DessertTypeService;
+import com.safronova.webproject.model.service.OrderService;
 import com.safronova.webproject.model.validator.DessertValidator;
 
 import java.util.List;
 
+/**
+ * {@code DessertTypeServiceImpl class is an implementation of {@link DessertTypeService} interface.
+ *
+ * @author Anna Safronova
+ */
 public class DessertTypeServiceImpl implements DessertTypeService {
     private static final DaoProvider daoProvider = DaoProvider.getInstance();
     private static final DessertTypeDao dessertTypeDao = daoProvider.getDessertTypeDao();
