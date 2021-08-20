@@ -6,7 +6,6 @@
     <error-page>
         <error-code>500</error-code>
         <location>/pages/common/error.jsp</location>
-
     </error-page>
 
     <error-page>
