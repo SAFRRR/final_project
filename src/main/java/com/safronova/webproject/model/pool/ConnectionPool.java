@@ -58,18 +58,22 @@ public class ConnectionPool {
         return proxyConnection;
     }
 
-    public void releaseConnection(Connection connection){
+    public boolean releaseConnection(Connection connection){
+        boolean result;
         if (!(connection instanceof ProxyConnection)){
+            result = false;
             logger.error(connection + " doesn't belong to the pool, illegal connection type");
-            throw new RuntimeException( connection + " doesn't belong to the pool, illegal connection type");
+        } else {
+            usedConnections.remove(connection);
+            try {
+                freeConnections.put((ProxyConnection) connection);
+            } catch (InterruptedException e) {
+                logger.error("Process was interrupted", e);
+                Thread.currentThread().interrupt();
+            }
+            result = true;
         }
-        usedConnections.remove(connection);
-        try {
-            freeConnections.put((ProxyConnection) connection);
-        } catch (InterruptedException e) {
-            logger.warn("Process was interrupted", e);
-            Thread.currentThread().interrupt();
-        }
+        return result;
     }
 
     public void destroyPool(){
@@ -77,7 +81,7 @@ public class ConnectionPool {
             try{
                 freeConnections.take().reallyClose();
             } catch (InterruptedException e) {
-                logger.warn("Process was interrupted", e);
+                logger.error("Process was interrupted", e);
                 Thread.currentThread().interrupt();
             } catch (SQLException e) {
                 logger.error("Unable to close connection in a proper way", e);

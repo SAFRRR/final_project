@@ -11,7 +11,7 @@ public class DessertValidator {
     private static final String REGEXP_DESSERT_NAME = properties.getProperty("regexp.dessert.name");
     private static final String REGEXP_DESSERT_DESCRIPTION = properties.getProperty("regexp.dessert.description");
     private static final String REGEXP_DESSERT_PRICE = properties.getProperty("regexp.dessert.price");
-    private static final String REGEXP_DESSERT_QUANTITY = properties.getProperty("regexp.dessert.quantity");
+    private static final String REGEXP_DESSERT_QUANTITY = properties.getProperty("regexp.dessert.count");
     private static final String REGEXP_DESSERT_WEIGHT = properties.getProperty("regexp.dessert.weight");
 
     public static boolean validateData(String nameDessert, String description, String price,  String weight) {
