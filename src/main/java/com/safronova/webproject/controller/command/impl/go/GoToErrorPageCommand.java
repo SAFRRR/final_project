@@ -12,7 +12,7 @@ public class GoToErrorPageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Throwable throwable = (Throwable) request.getAttribute(RequestAttribute.EXCEPTION_CLASS);
         if (throwable != null && request.getAttribute(RequestAttribute.EXCEPTION_CLASS) != null) {
-            request.setAttribute(RequestAttribute.EXCEPTION, throwable);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, throwable);
         }
         return new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
     }

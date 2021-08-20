@@ -30,7 +30,7 @@ public class GoToOrderHistoryPageCommand extends UserCommand{
             router = new Router(PagePath.ORDER_HISTORY_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at GoToHistoryPageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.FORWARD);
         }
         return router;

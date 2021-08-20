@@ -47,7 +47,7 @@ public class GoToCheckoutPageCommand extends UserCommand {
             }
         }catch (ServiceException e) {
             logger.error("Error at GoToCheckoutPageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.FORWARD);
         }
         return router;

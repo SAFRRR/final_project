@@ -9,6 +9,7 @@ import com.safronova.webproject.controller.command.impl.user.UserCommand;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.entity.*;
 import com.safronova.webproject.model.service.BasketDessertService;
+import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -30,13 +31,15 @@ public class AddDessertToBasketCommand extends UserCommand {
         final String storageAmount = request.getParameter(RequestParameter.STORAGE_AMOUNT);
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
+        final DessertService dessertService = serviceProvider.getDessertService();
+
 
         try {
             Basket basket = user.getBasket();
             session.setAttribute(RequestAttribute.NOT_ENOUGH, false);
             session.setAttribute(RequestAttribute.ADD_SUCCESS, false);
             session.setAttribute(RequestAttribute.ADD_FAILED , false);
-            if (Integer.parseInt(count) > Integer.parseInt(storageAmount)) {
+            if (dessertService.checkQuantity(count) > Integer.parseInt(storageAmount)) {
                 session.setAttribute(RequestAttribute.NOT_ENOUGH, true);
                 String page = (String) session.getAttribute(RequestAttribute.CURRENT_PAGE);
                 router = new Router(page, RouterType.REDIRECT);
@@ -63,7 +66,7 @@ public class AddDessertToBasketCommand extends UserCommand {
             }
         } catch (ServiceException e) {
             logger.error("Error at AddDessertToBasketCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

@@ -72,6 +72,16 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
+    public int checkQuantity(String quantity) throws ServiceException {
+        if(!DessertValidator.validateQuantity(quantity)){
+            throw new ServiceException("Dessert quantity didn't passed validation");
+        }else{
+            return Integer.parseInt(quantity);
+        }
+    }
+
+
+    @Override
     public Dessert createDessert(String nameDessert, String description, String price, String weight,  DessertType category, String quantity) throws ServiceException {
         final String FORMAT_FILE_NAME = ".png";
         if (!DessertValidator.validateData(nameDessert, description, price, weight)) {

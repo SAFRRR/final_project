@@ -30,7 +30,7 @@ public class GoToDessertListPageCommand extends AdminCommand {
             router = new Router(PagePath.DESSERT_LIST_PAGE,RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at GoToDessertListPageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

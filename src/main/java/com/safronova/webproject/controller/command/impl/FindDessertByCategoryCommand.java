@@ -41,7 +41,7 @@ public class FindDessertByCategoryCommand implements Command {
             router = new Router(PagePath.ITEM_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at FindDessertByCategoryCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

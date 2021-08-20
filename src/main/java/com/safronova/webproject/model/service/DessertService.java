@@ -20,6 +20,8 @@ public interface DessertService {
 
     Dessert createDessert(String nameDessert, String description, String price,  String weight,  DessertType dessertType, String quantity) throws ServiceException;
 
+    int checkQuantity(String quantity) throws ServiceException;
+
     void updateDessert(String dessertId, String nameDessert, String description, String price, String weight, DessertType dessertType, String quantity) throws ServiceException;
 
     void deleteDessertById(String dessertId) throws ServiceException;

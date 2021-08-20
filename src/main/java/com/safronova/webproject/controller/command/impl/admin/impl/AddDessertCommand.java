@@ -82,7 +82,7 @@ public class AddDessertCommand extends AdminCommand {
             }
         } catch (ServiceException | IOException | ServletException e) {
             logger.error("Error at AddDessertCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

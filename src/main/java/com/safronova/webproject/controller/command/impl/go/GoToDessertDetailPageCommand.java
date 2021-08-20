@@ -38,7 +38,7 @@ public class GoToDessertDetailPageCommand implements Command {
             router = new Router(PagePath.DESSERT_DETAIL_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at DessertDetailCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

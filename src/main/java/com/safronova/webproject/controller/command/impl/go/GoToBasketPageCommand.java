@@ -45,7 +45,7 @@ public class GoToBasketPageCommand extends UserCommand {
             router = new Router(PagePath.BASKET_PAGE, RouterType.FORWARD);
         }catch (ServiceException e) {
             logger.error("Error at GoToBasketPageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, Router.RouterType.FORWARD);
         }
         return router;

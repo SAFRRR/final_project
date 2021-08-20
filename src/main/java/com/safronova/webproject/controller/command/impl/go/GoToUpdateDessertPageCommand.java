@@ -42,12 +42,13 @@ public class GoToUpdateDessertPageCommand extends AdminCommand {
             request.setAttribute(RequestAttribute.REGEXP_NAME,REGEXP_NAME);
             request.setAttribute(RequestAttribute.REGEXP_PRICE,REGEXP_PRICE);
             request.setAttribute(RequestAttribute.REGEXP_WEIGHT, REGEXP_WEIGHT);
+            request.getSession().setAttribute(RequestAttribute.NOT_ENOUGH, false);
             request.setAttribute(RequestAttribute.REGEXP_DESCRIPTION, REGEXP_DESCRIPTION);
             request.setAttribute(RequestAttribute.REGEXP_COUNT, REGEXP_QUANTITY );
             router = new Router(PagePath.UPDATE_DESSERT_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at GoToUpdateDessertPageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

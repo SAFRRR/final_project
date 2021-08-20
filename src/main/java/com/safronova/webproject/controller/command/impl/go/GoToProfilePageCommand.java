@@ -44,7 +44,7 @@ public class GoToProfilePageCommand extends UserCommand {
             router = new Router(PagePath.PROFILE_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at GoToProfilePageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.FORWARD);
         }
         return router;

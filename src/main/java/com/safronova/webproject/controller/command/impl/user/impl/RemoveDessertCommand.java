@@ -28,7 +28,7 @@ public class RemoveDessertCommand extends UserCommand {
             router = new Router(PagePath.GO_TO_BASKET_PAGE, RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.error("Error at UpdateBasketCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

@@ -70,7 +70,7 @@ public class SettingsEditCommand extends UserCommand {
             router = new Router(PagePath.GO_TO_PROFILE_PAGE, RouterType.REDIRECT);
         } catch (ServiceException e) {
             logger.error("Error at SettingsEditCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

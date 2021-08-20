@@ -49,7 +49,7 @@ public class SignUpCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Error at SignUpCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

@@ -35,7 +35,7 @@ public class GoToOrderDetailPageCommand extends AdminCommand {
             router = new Router(PagePath.ORDER_DETAIL_PAGE, RouterType.FORWARD);
         } catch (ServiceException e) {
             logger.error("Error at GoToOrderDetailPageCommand", e);
-            request.setAttribute(RequestAttribute.EXCEPTION, e);
+            request.getSession().setAttribute(RequestAttribute.EXCEPTION, e);
             router = new Router(PagePath.ERROR_PAGE, RouterType.REDIRECT);
         }
         return router;

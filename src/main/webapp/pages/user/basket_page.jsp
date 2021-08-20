@@ -19,6 +19,7 @@
 <fmt:message key="common.update" var="locale_common_update"/>
 <fmt:message key="user.total.price" var="locale_total_price"/>
 <fmt:message key="update.quantity" var="invalid_quantity"/>
+<fmt:message key="add.unable" var="locale_add_unable"/>
 
 <!doctype html>
 <html>
@@ -42,8 +43,10 @@
                 <span>${locale_storage_only}  ${basketDessert.dessert.storage.count} ${locale_storage_dessert}</span>
             </p>
             </c:if>
-            <input id="count" style="width: 100px; margin-left: 60px;margin-top: 0" name="count" type="number"
-                   step="1"  pattern="/d+" min="1" max="${basketDessert.dessert.storage.count}"
+
+
+            <input required id="count" style="width: 100px; margin-left: 60px;margin-top: 0" name="count" type="text"
+                   pattern="${attribute_regexp_count}"
                 <c:if test="${basketDessert.dessert.storage.count==0}">disabled</c:if>
                    class="form-control basketDessertCount" value="${basketDessert.count}"/>
             <div class="invalid-feedback" style="margin-right: 5px">
@@ -51,7 +54,7 @@
             </div>
             <c:if test="${notEnoughStorage}">
                 <div class="form-group">
-                    <p id="fail" style="color: red; margin-top: -20px;margin-left: -8px; text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
+                    <p id="fail" style="color: red;  text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
                             ${locale_add_unable}</p>
                 </div>
             </c:if>
@@ -83,24 +86,6 @@
 
 
 <script>
-    {
-        const
-            intRx = /\d/,
-            integerChange = (event) => {
-                if (
-                    (event.key.length > 1) ||
-                    ( (event.key === "-") && (!event.currentTarget.value.length) ) ||
-                    intRx.test(event.key)
-                ) return;
-                event.preventDefault();
-            };
-
-        for (let input of document.querySelectorAll(
-            'input[type="number"][step="1"]'
-        )) input.addEventListener("keydown", integerChange);
-
-    }
-
     (function () {
         'use strict'
         var forms = document.querySelectorAll('.needs-validation')
