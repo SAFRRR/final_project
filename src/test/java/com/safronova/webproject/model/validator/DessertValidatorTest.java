@@ -9,10 +9,12 @@ public class DessertValidatorTest {
     public static Object[][] validName() {
         return new Object[][]{{"Cheesecake"}, {"Pecan tart"}, {"Dessert Pavlova cherry guava"}};
     }
+
     @DataProvider(name = "invalidName")
     public static Object[][] invalidName() {
         return new Object[][]{{"1"}, {null}, {"S#{/}f"}};
     }
+
     @DataProvider(name = "validDescription")
     public static Object[][] validDescription() {
         return new Object[][]{{"Swiss meringue, fresh cherries combined with guava puree, whipped cream with mascarpone cheese."},
@@ -69,7 +71,6 @@ public class DessertValidatorTest {
     public void validateDescriptionPositiveTest(String description) {
         Assert.assertTrue(DessertValidator.validateDescription(description));
     }
-
 
     @Test(dataProvider = "invalidDescription")
     public void validateDescriptionNegativeTest(String description) {
