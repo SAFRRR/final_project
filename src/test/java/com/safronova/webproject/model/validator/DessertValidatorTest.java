@@ -7,7 +7,7 @@ import org.testng.annotations.Test;
 public class DessertValidatorTest {
     @DataProvider(name = "validName")
     public static Object[][] validName() {
-        return new Object[][]{{"Cheesecake"}, {"Pecan tart"}, {"Dessert Pavlova cherry guava"}};
+        return new Object[][]{{"Cheesecake"}, {"Pecan tart"}, {"Dessert Pavlova"}};
     }
 
     @DataProvider(name = "invalidName")

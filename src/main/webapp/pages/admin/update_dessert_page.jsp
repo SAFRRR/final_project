@@ -22,6 +22,8 @@
 <fmt:message key="update.price" var="update_price_value"/>
 <fmt:message key="update.weight" var="update_weight_value"/>
 <fmt:message key="update.quantity" var="update_quantity_value"/>
+<fmt:message key="update.unable" var="update_unable_value"/>
+
 
 <!doctype html>
 <html>
@@ -102,6 +104,13 @@
                         ${update_quantity_value}
                     </div>
                 </div>
+
+                <c:if test="${notEnoughStorage}">
+                    <div class="form-group">
+                        <p id="fail" style="color: red;  text-align: center; opacity: 1;height: 30px; transition: opacity 500ms;">
+                                ${update_unable_value}</p>
+                    </div>
+                </c:if>
 
                 <div class="form-group" style="margin-left: 150px">
                         <button type="submit" class="btn btn-success">${locale_update_item}</button>

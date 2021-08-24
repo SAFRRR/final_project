@@ -22,16 +22,15 @@ public class UpdateBasketCommand extends UserCommand {
     @Override
     protected Router handle(HttpServletRequest request) {
         Router router;
-        HttpSession session = request.getSession(true);
         final String basketDessertId = request.getParameter(RequestParameter.BASKET_ID);
         final String storageAmount = request.getParameter(RequestParameter.STORAGE_AMOUNT);
-        request.getSession().setAttribute(RequestAttribute.NOT_ENOUGH, false);
         final String count = request.getParameter(RequestParameter.COUNT);
         final ServiceProvider serviceProvider = ServiceProvider.getInstance();
         final BasketDessertService basketDessertService = serviceProvider.getBasketDessertService();
         final DessertService dessertService = serviceProvider.getDessertService();
 
         try {
+            request.getSession().setAttribute(RequestAttribute.NOT_ENOUGH, false);
             if (dessertService.checkQuantity(count) > Integer.parseInt(storageAmount)) {
                 request.getSession().setAttribute(RequestAttribute.NOT_ENOUGH, true);
             } else {

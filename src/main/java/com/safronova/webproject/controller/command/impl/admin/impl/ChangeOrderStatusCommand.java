@@ -9,6 +9,7 @@ import com.safronova.webproject.controller.command.impl.admin.AdminCommand;
 import com.safronova.webproject.exception.ServiceException;
 import com.safronova.webproject.model.entity.OrderDessert;
 import com.safronova.webproject.model.entity.Storage;
+import com.safronova.webproject.model.service.DessertService;
 import com.safronova.webproject.model.service.OrderService;
 import com.safronova.webproject.model.service.ServiceProvider;
 import com.safronova.webproject.model.service.StorageService;
@@ -36,6 +37,7 @@ public class ChangeOrderStatusCommand extends AdminCommand {
 
         try {
             orderService.changeStatus(orderStatus, orderId);
+            request.getSession().setAttribute(RequestAttribute.NOT_ENOUGH, false);
             if (orderStatus.equals(REJECTED)){
                 List<OrderDessert> orderDessertList = orderService.findByOrder(Integer.parseInt(orderId));
                 for (OrderDessert orderDessert : orderDessertList){

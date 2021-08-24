@@ -29,7 +29,7 @@ public class UserValidatorTest {
 
     @DataProvider(name = "validFIO")
     public static Object[][] validFIO() {
-        return new Object[][]{{"Anna"}, {"Safronova"}, {"Сафронова"}};
+        return new Object[][]{{"Anna"}, {"Safronova"}, {"Vusevich"}};
     }
 
     @DataProvider(name = "invalidFIO")

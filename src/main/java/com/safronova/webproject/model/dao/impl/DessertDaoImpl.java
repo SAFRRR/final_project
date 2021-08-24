@@ -64,17 +64,24 @@ public class DessertDaoImpl implements DessertDao {
                     "SET d_name = ?, d_description = ?, d_price = ?, d_weight = ?, d_dessert_type_id = ?, d_quantity = ?  "+
                     "WHERE d_id =?";
 
+
     /** Query for database to delete dessert */
     private static final String DELETE_DESSERT_SQL =
             "DELETE FROM desserts "+
                     "WHERE d_id = ?";
+
+    /** Query for database to update quantity */
+    private static final String UPDATE_QUANTITY_SQL =
+            "UPDATE desserts "+
+                    "SET d_quantity = ? "+
+                    "WHERE d_id =?";
 
     /** Query for database to get name in dessert table */
     private static final String SELECT_NAME_SQL =
             "SELECT d_name " +
                     "FROM desserts " +
                     "WHERE (d_name=?)";
-    
+
     /**
      * Returns the instance of the class
      *
@@ -257,6 +264,25 @@ public class DessertDaoImpl implements DessertDao {
             statement.execute();
         } catch (SQLException e) {
             throw new DaoException("Can't handle DessertDao.updateDessertImage request", e);
+        }
+    }
+
+    /**
+     * Connects to database and update dessert quantity.
+     *
+     * @param id the id value
+     * @param quantity the quantity value
+     * @throws DaoException when problems with database connection occurs.
+     */
+    @Override
+    public void updateDessertQuantity(Integer id, Integer quantity) throws DaoException {
+        try (Connection connection = ConnectionPool.getInstance().getConnection();
+             PreparedStatement statement = connection.prepareStatement(UPDATE_QUANTITY_SQL)) {
+            statement.setInt(DessertIndex.NAME, quantity);
+            statement.setInt(DessertIndex.DESCRIPTION, id);
+            statement.execute();
+        } catch (SQLException e) {
+            throw new DaoException("Can't handle DessertDao.updateDessertQuantity request", e);
         }
     }
 

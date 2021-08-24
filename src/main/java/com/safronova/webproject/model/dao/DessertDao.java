@@ -80,6 +80,16 @@ public interface DessertDao {
      */
     void updateDessert(Integer id, Dessert dessert) throws DaoException;
 
+
+    /**
+     * Update dessert quantity.
+     *
+     * @param id the id value
+     * @param quantity the quantity value
+     * @throws DaoException when problems with database connection occurs.
+     */
+    void updateDessertQuantity(Integer id, Integer quantity) throws DaoException;
+
     /**
      * Connects to database and delete dessert by ID.
      *

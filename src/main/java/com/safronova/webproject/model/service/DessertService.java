@@ -94,6 +94,15 @@ public interface DessertService {
     void updateDessert(String dessertId, String nameDessert, String description, String price, String weight, DessertType dessertType, String quantity) throws ServiceException;
 
     /**
+     * Update dessert quantity.
+     *
+     * @param dessertId the dessert id value
+     * @param quantity  the quantity value
+     * @throws ServiceException if an error occurred executing the method.
+     */
+    void updateDessertQuantity(String dessertId, String quantity) throws ServiceException;
+
+    /**
      * Delete {@link Dessert} entity by id.
      *
      * @param dessertId value of dessert id

@@ -140,6 +140,20 @@ public class DessertServiceImpl implements DessertService {
     }
 
     @Override
+    public void updateDessertQuantity(String dessertId, String quantity) throws ServiceException {
+        if (!DessertValidator.validateId(dessertId)) {
+            throw new ServiceException("Dessert data didn't passed validation");
+        }
+        int id = Integer.parseInt(dessertId);
+        int dessertQuantity = Integer.parseInt(quantity);
+        try {
+            dessertDao.updateDessertQuantity(id, dessertQuantity);
+        } catch (DaoException e) {
+            throw new ServiceException("Can't handle updateDessert request at DessertService", e);
+        }
+    }
+
+    @Override
     public List<Dessert> findAllDessertList() throws ServiceException {
         List<Dessert> dessertList;
         try {
